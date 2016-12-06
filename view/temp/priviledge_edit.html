@@ -1,0 +1,233 @@
+﻿<% include includer.html %>
+<script src="/js/data.js"></script>
+<style>
+  table thead {
+  	background: #000000;
+  	color: white;
+  	font-size: 14px
+  }
+  /*.collapsible-body {
+  	padding-left: 30px;
+  }*/
+  label {
+  	color: white;
+  }
+  .table_tr_td_border {
+    border: 1px solid #000;
+    text-align: center;
+    background-color: #99CCCC;
+  }
+  .no_background {
+    background-color: #ffffff;
+  }
+  /*table, th, td {
+  	border: 1px solid #000;
+  	text-align: center;
+  }*/
+  /*input[type="checkbox"] {
+  	position: initial;
+  }*/
+  [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: initial;
+    opacity: initial;
+  }
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+  	<tr bgcolor='#cccccc'><td>
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">play_arrow</i>使用者設定</div>
+        <div class="collapsible-body" style="padding-left: 30px; text-align:center;">
+          <table id="priviledgeModal" class="bordered" border="0" cellpadding="0" cellspacing="0" style="width: 350px;" bgcolor='#ffffff'>
+            <tbody>
+                 <tr>
+                   <td>管理者分類： </td>
+                 </tr>
+                 <tr>
+                   <td><input type='text' id='account{{$index}}' name='{{item.account}}'></input></td>
+                   	<td>&nbsp;</td>
+                   <td><a class="waves-light btn blue" id="save" onclick="AddCancel(1)">確定</a></td>
+                 </tr>
+            </tbody>
+            <!--<tfoot>
+                 <tr>
+                   <td colspan=2 style='text-align: center;'>
+                   	<a class="waves-light btn blue" id="save" onclick="AddCancel(1)">確定</a>&nbsp;&nbsp;&nbsp;
+                    <a class="waves-light btn blue" id="cancel" onclick="AddCancel(2)">取消</a>	
+                   </td>
+                 </tr>
+            </tfoot>-->
+          </table>
+        <br />
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">play_arrow</i>報表欄位查看權限設定</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="priviledgeModal" class="bordered" border="0" cellpadding="0" cellspacing="0" style="width: 950px;" bgcolor='#ffffff'>
+            <thead>
+              <tr>
+              	<script>
+              	   document.write("<th colspan="+divider+" style='text-align:left;'>報表欄位查看權限</th>");
+              	</script>
+              </tr>
+            </thead>
+            <tbody>
+              <script>
+              	//alert(arrayFormFieldQueryPriv.length);
+                for(var i=0;i<arrayFormFieldQueryPriv.length;i+=divider)
+                //for(var i=0;i<divider;i++)
+                {
+                	var s='';
+                	if((i+divider)<arrayFormFieldQueryPriv.length)
+                	{
+           	           s+="<tr>";
+           	     	     s+="<td colspan="+divider+" style='text-align:center; padding:15px 15px 0 15px'>";
+           	     	     s+="<table class='bordered' border='0' cellpadding='0' cellspacing='0' style='width: 950px;' bgcolor='#ffffff'>";
+                       s+="<tr>";
+                       for(var j=0;j<divider;j++)
+                          s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+j].field+"</td>";
+                       s+="</tr>";
+                       s+="<tr>";
+                       for(var j=0;j<divider;j++)
+                          s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="</tr>";
+                       s+="</table>";
+                       s+="</td></tr>";
+                  }
+                  else
+                  {
+                  	//var k=i;
+           	           s+="<tr>";
+           	     	     s+="<td colspan="+divider+" style='text-align:center; padding:15px'>";
+           	     	     s+="<table class='bordered' border='0' cellpadding='0' cellspacing='0' style='width: 950px;' bgcolor='#ffffff'>";
+                       s+="<tr>";
+                       for(var k=i;k<arrayFormFieldQueryPriv.length;k++)
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[k].field+"</td>";
+                       /*s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+1].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+2].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+3].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+4].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+5].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+6].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+7].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+8].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+9].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+10].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+11].field+"</td>";
+                       s+="    <td class='table_tr_td_border'>"+arrayFormFieldQueryPriv[i+12].field+"</td>";*/
+                       s+="</tr>";
+                       s+="<tr>";
+                       for(var k=i;k<arrayFormFieldQueryPriv.length;k++)
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       /*s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";
+                       s+="    <td class='table_tr_td_border no_background'><input type=\"checkbox\" name=\"vehicle1\"></td>";*/
+                       s+="</tr>";
+                       s+="</table>";
+                       s+="</td></tr>";
+                  }
+                  document.write(s);
+                }
+              </script>
+            </tbody>
+          </table>
+          <table>
+            <tr>
+              <td style='text-align: center;'>
+              	<a class="waves-light btn blue" id="save" onclick="AddCancel(1)">確定</a>&nbsp;&nbsp;&nbsp;
+                <a class="waves-light btn blue" id="cancel" onclick="AddCancel(2)">取消</a>	
+              </td>
+            </tr>
+          </table>
+        <br />
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">play_arrow</i>頁面進入權限設定</div>
+        <div class="collapsible-body" style="padding-left: 30px; text-align:center;">
+          <table id="priviledgeModal" class="bordered" border="0" cellpadding="0" cellspacing="0" style="width: 350px;" bgcolor='#ffffff'>
+            <tbody>
+                 <tr>
+                   <td>管理者分類： </td>
+                 </tr>
+                 <tr>
+                   <td><input type='text' id='account{{$index}}' name='{{item.account}}'></input></td>
+                   	<td>&nbsp;</td>
+                   <td><a class="waves-light btn blue" id="save" onclick="AddCancel(1)">確定</a></td>
+                 </tr>
+            </tbody>
+            <!--<tfoot>
+                 <tr>
+                   <td colspan=2 style='text-align: center;'>
+                   	<a class="waves-light btn blue" id="save" onclick="AddCancel(1)">確定</a>&nbsp;&nbsp;&nbsp;
+                    <a class="waves-light btn blue" id="cancel" onclick="AddCancel(2)">取消</a>	
+                   </td>
+                 </tr>
+            </tfoot>-->
+          </table>
+        <br />
+        </div>
+      </li>
+    </ul>
+    </td>
+   </tr>
+  </table>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<!--<script src="/js/priviledge.js"></script>-->
+<!--  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  } );
+  </script>
+-->
+<!--
+<script>
+ 	function AddCancel(i)
+  {
+  	if(i==1)
+  	{
+  	  document.getElementById('addPriv').style.display='';
+  	  $("#new").addClass("disabled");
+  	  $("#cancel").removeClass("disabled");
+  	  document.getElementById('new').style.pointerEvents = 'none';
+  	  document.getElementById('cancel').style.pointerEvents = '';
+  	}
+  	if(i==2)
+  	{
+  	  document.getElementById('addPriv').style.display='none';
+  	  $("#new").removeClass("disabled");
+  	  $("#cancel").addClass("disabled");
+      document.getElementById('new').style.pointerEvents = '';
+  	  document.getElementById('cancel').style.pointerEvents = 'none';
+  	}
+  }
+  document.getElementById('cancel').style.pointerEvents = 'none';
+</script>
+-->
+</body>
+</html>

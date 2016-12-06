@@ -1,0 +1,122 @@
+﻿<% include includer.html %>
+<style>
+  table thead {
+  	background: #000000;
+  	color: white;
+  	font-size: 14px
+  }
+  .collapsible-body {
+  	padding-left: 30px;
+  }
+  label {
+  	color: white;
+  }
+  /*table, th, td {
+    border: 1px solid black;
+  }*/
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+  	<tr bgcolor='#cccccc'><td>
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">play_arrow</i>使用者設定</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="priviledgeModal" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width: 350px;" bgcolor='#ffffff'>
+            <thead>
+              <tr>
+              	<th colspan=2 style='text-align: center;'>
+              		<input name="group1" class="with-gap" type="radio" id="test1" /><label for="test1">帳號啟用</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              		<input name="group1" class="with-gap" type="radio" id="test2" /><label for="test2">帳號關閉</label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                 <!--<tr bgcolor='#0066CC'>
+                   <td><input name="group1" class="with-gap" type="radio" id="test1" />帳號啟用</td>
+                   <td><input name="group1" class="with-gap" type="radio" id="test2" />帳號關閉</td>
+                 </tr>-->
+                 <tr>
+                   <td>管理名稱： </td>
+                   <td>
+                   	 <!--<input type='text' id='managename{{$index}}' name='{{item.managename}}'></input>-->
+                     <select id='permission_{{$index}}' name='permission_{{$index}}'>
+                        <option value="superadmin">SuperAdmin</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                     </select>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>帳號：</td><td><input type='text' id='account{{$index}}' name='{{item.account}}'></input></td>
+                 </tr>
+                 <tr>
+                   <td>密碼：</td><td><input type='text' id='passwd{{$index}}' name='{{item.passwd}}'></input></td>
+                 </tr>
+                 <tr>
+                   <td>使用者：</td><td><input type='text' id='user{{$index}}' name='{{item.user}}'></input></td>
+                 </tr>
+            </tbody>
+            <tfoot>
+                 <tr>
+                   <td colspan=2 style='text-align: center;'>
+                   	<a class="waves-light btn blue" id="new" onclick="AddCancel(1)">確定</a>&nbsp;&nbsp;&nbsp;
+                    <a class="waves-light btn blue" id="cancel" onclick="AddCancel(2)">取消</a>	
+                   </td>
+                 </tr>
+            </tfoot>
+          </table>
+        <br />
+        </div>
+      </li>
+    </ul>
+  </td></tr>
+  </table>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/accountlists.js"></script>
+<!--  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  } );
+  </script>
+-->
+<!--
+<script>
+ 	function AddCancel(i)
+  {
+  	if(i==1)
+  	{
+  	  document.getElementById('addPriv').style.display='';
+  	  $("#new").addClass("disabled");
+  	  $("#cancel").removeClass("disabled");
+  	  document.getElementById('new').style.pointerEvents = 'none';
+  	  document.getElementById('cancel').style.pointerEvents = '';
+  	}
+  	if(i==2)
+  	{
+  	  document.getElementById('addPriv').style.display='none';
+  	  $("#new").removeClass("disabled");
+  	  $("#cancel").addClass("disabled");
+      document.getElementById('new').style.pointerEvents = '';
+  	  document.getElementById('cancel').style.pointerEvents = 'none';
+  	}
+  }
+  document.getElementById('cancel').style.pointerEvents = 'none';
+</script>
+-->
+</body>
+</html>

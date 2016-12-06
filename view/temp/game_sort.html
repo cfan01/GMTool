@@ -1,0 +1,201 @@
+﻿<% include includer.html %>
+<!--<script src="/js/data2.js"></script>-->
+<style>
+select {
+  border:2px solid #9A9A9A;
+}
+select option span {
+	color:red;
+}
+.redText {
+  color:red;
+}
+.greenText {
+  color:green;
+}
+.blueText {
+  color:blue;
+}
+[type="checkbox"]+label {
+  padding-left:0px;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div id="basicformModal" style="text-align:left"><%= Content %></div><!--<hr id="line-content">-->
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>轉輪館</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="basicReportFieldLists" class="bordered" border="1" cellpadding="0" cellspacing="0" style="padding-left:20px; width:700px;" bgcolor='#CCCCCC'>
+            <tbody>
+              <tr>
+                 <td style='width:30%'>新排序</td>
+                 <td>原排序</td>
+                 <td style='width:30%'>遊戲名稱</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td rowspan=4>
+                   <select id="avail_fields" name="new_order" multiple size="10"></select>
+                 </td>
+                 <td>&nbsp;</td>
+                 <td rowspan=4>
+                   <select id="selected_fields" name="selected_field" multiple size="10"></select>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="upup_action" name="upup_action" v-on:click="clickBasicReportMoveTop" v-on:keyup.enter="clickBasicReportMoveTop"><img src="/images/upup.png"></a>-->
+                 	 <a href="javascript:void(0);" id="upup_action" name="upup_action" onclick="moveOptionTop('selected_fields');genField('FilterLists');"><img src="/images/upup.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="right_action" name="right_action" v-on:click="clickBasicReportMoveRight" v-on:keyup.enter="clickBasicReportMoveRight"><img src="/images/right.png"></a>-->
+                 	 <a href="javascript:void(0);" id="right_action" name="right_action" onclick="moveSelectedOptions('avail_fields','selected_fields',false);genField('FilterLists');"><img src="/images/right.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="up_action" name="up_action" v-on:click="clickBasicReportMoveUp" v-on:keyup.enter="clickBasicReportMoveUp"><img src="/images/up.png"></a>-->
+                 	 <a href="javascript:void(0);" id="up_action" name="up_action" onclick="moveOptionUp('selected_fields');genField('FilterLists');"><img src="/images/up.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="left_action" name="left_action" v-on:click="clickBasicReportMoveLeft" v-on:keyup.enter="clickBasicReportMoveLeft"><img src="/images/left.png"></a>-->
+                 	 <a href="javascript:void(0);" id="left_action" name="left_action" onclick="moveSelectedOptions('selected_fields','avail_fields',false,'*');genField('FilterLists');"><img src="/images/left.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="down_action" name="down_action" v-on:click="clickBasicReportMoveDown" v-on:keyup.enter="clickBasicReportMoveDown"><img src="/images/down.png"></a>-->
+                 	 <a href="javascript:void(0);" id="down_action" name="down_action" onclick="moveOptionDown('selected_fields');genField('FilterLists');"><img src="/images/down.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+               	 <td>&nbsp;</td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="downdown_action" name="downdown_action" v-on:click="clickBasicReportMoveBottom" v-on:keyup.enter="clickBasicReportMoveBottom"><img src="/images/downdown.png"></a>-->
+                 	 <a href="javascript:void(0);" id="downdown_action" name="downdown_action" onclick="moveOptionBottom('selected_fields');genField('FilterLists');"><img src="/images/downdown.png"></a>
+                 </td>
+                 <td style='text-align:center;'>
+                 	 <a class="waves-light btn blue" id="save_basic" onclick="SaveCancel(1)">另存報表</a>&nbsp;&nbsp;&nbsp;
+                   <!--<a class="waves-light btn blue" id="cancel_basic" onclick="SaveCancel(2)">取消</a>-->
+                 </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Modal Structure -->
+          <div id="dialog-form" title="Save Basic Report Form">
+            <form>
+              <table>
+                <tr><td>報表名稱</td></tr>
+                <tr><td><input type="text" name="formname" id="formname" v-model="formname" value="" class="text ui-widget-content ui-corner-all" style="width:60%"></td></tr>
+                <!--<tr><td><input type="submit" tabindex="-1" style="position:absolute; top:-1000px" v-on:click="SaveBasicReportForm" v-on:keyup.enter="SaveBasicReportForm"></td></tr>-->
+              </table>
+            </form>
+          </div>
+          <br />
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>電子館</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="basicReportFieldLists" class="bordered" border="1" cellpadding="0" cellspacing="0" style="padding-left:20px; width:700px;" bgcolor='#CCCCCC'>
+            <tbody>
+              <tr>
+                 <td style='width:30%'>可用欄位</td>
+                 <td>&nbsp;</td>
+                 <td style='width:30%'>遊戲名稱</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td rowspan=4>
+                   <select id="avail_fields" name="available_field" multiple size="10"></select>
+                 </td>
+                 <td>&nbsp;</td>
+                 <td rowspan=4>
+                   <select id="selected_fields" name="selected_field" multiple size="10"></select>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="upup_action" name="upup_action" v-on:click="clickBasicReportMoveTop" v-on:keyup.enter="clickBasicReportMoveTop"><img src="/images/upup.png"></a>-->
+                 	 <a href="javascript:void(0);" id="upup_action" name="upup_action" onclick="moveOptionTop('selected_fields');genField('FilterLists');"><img src="/images/upup.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="right_action" name="right_action" v-on:click="clickBasicReportMoveRight" v-on:keyup.enter="clickBasicReportMoveRight"><img src="/images/right.png"></a>-->
+                 	 <a href="javascript:void(0);" id="right_action" name="right_action" onclick="moveSelectedOptions('avail_fields','selected_fields',false);genField('FilterLists');"><img src="/images/right.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="up_action" name="up_action" v-on:click="clickBasicReportMoveUp" v-on:keyup.enter="clickBasicReportMoveUp"><img src="/images/up.png"></a>-->
+                 	 <a href="javascript:void(0);" id="up_action" name="up_action" onclick="moveOptionUp('selected_fields');genField('FilterLists');"><img src="/images/up.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="left_action" name="left_action" v-on:click="clickBasicReportMoveLeft" v-on:keyup.enter="clickBasicReportMoveLeft"><img src="/images/left.png"></a>-->
+                 	 <a href="javascript:void(0);" id="left_action" name="left_action" onclick="moveSelectedOptions('selected_fields','avail_fields',false,'*');genField('FilterLists');"><img src="/images/left.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="down_action" name="down_action" v-on:click="clickBasicReportMoveDown" v-on:keyup.enter="clickBasicReportMoveDown"><img src="/images/down.png"></a>-->
+                 	 <a href="javascript:void(0);" id="down_action" name="down_action" onclick="moveOptionDown('selected_fields');genField('FilterLists');"><img src="/images/down.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+               	 <td>&nbsp;</td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="downdown_action" name="downdown_action" v-on:click="clickBasicReportMoveBottom" v-on:keyup.enter="clickBasicReportMoveBottom"><img src="/images/downdown.png"></a>-->
+                 	 <a href="javascript:void(0);" id="downdown_action" name="downdown_action" onclick="moveOptionBottom('selected_fields');genField('FilterLists');"><img src="/images/downdown.png"></a>
+                 </td>
+                 <td style='text-align:center;'>
+                 	 <a class="waves-light btn blue" id="save_basic" onclick="SaveCancel(1)">另存報表</a>&nbsp;&nbsp;&nbsp;
+                   <!--<a class="waves-light btn blue" id="cancel_basic" onclick="SaveCancel(2)">取消</a>-->
+                 </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Modal Structure -->
+          <div id="dialog-form" title="Save Basic Report Form">
+            <form>
+              <table>
+                <tr><td>報表名稱</td></tr>
+                <tr><td><input type="text" name="formname" id="formname" v-model="formname" value="" class="text ui-widget-content ui-corner-all" style="width:60%"></td></tr>
+                <!--<tr><td><input type="submit" tabindex="-1" style="position:absolute; top:-1000px" v-on:click="SaveBasicReportForm" v-on:keyup.enter="SaveBasicReportForm"></td></tr>-->
+              </table>
+            </form>
+          </div>
+          <br />
+        </div>
+      </li>
+    </ul>
+    <div style="padding:10px 45px;background-color:#ffffff;width:100%;height:60px;">
+      <div style="text-align:center;"><a id='save' class="btn waves-effect waves-light">變更設定</a></div>
+    </div>
+  </div>
+  <br/>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<!--<script src="/js/filesaver.min.js"></script>
+<script src="/js/tableexport.min.js"></script>-->
+<!--<script src="/js/accounting.min.js"></script>-->
+<script src="/js/jquery.tabletoCSV.js"></script>
+<script src="/js/selectbox.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/game_sort.js"></script>
+</body>
+</html>

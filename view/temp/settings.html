@@ -1,0 +1,1095 @@
+﻿<% include includer.html %>
+<style>
+#temp .article .inside.single{
+  padding-top: 0px;
+  padding-left: 0px;
+  /*background-color: #FFFFBB;*/
+}
+label {
+  color: #000000;
+}
+[type="checkbox"]+label {
+  padding-left: 23px;
+  width: 27%;
+}
+#gameConditionSetting [type="checkbox"]+label {
+  width: auto;
+}
+#newintelligence [type="checkbox"]+label {
+  width: auto;
+}
+#temp .article .inside {
+	background-color: #ffffff;
+}
+.collapsible {
+  margin: 0px;
+}
+.collapsible-header, .collapsible-body {
+  background-color: #FFEBC1;
+  padding:0 20px;
+}
+div#queryapp {
+	width:100%;
+	padding-left:20px;
+	background-color: #cccccc;
+}
+#subjectquery .collapsible-header, #subjectquery .collapsible-body {
+  background-color: #ffffff;
+}
+/*#temp .article {
+  width: 1480px;
+}*/
+input:not([type]), input[type=text] {
+  width: 100%;
+  /*width: auto;*/
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+  padding-left: 25px;
+}
+#bet_retrieve_pa {
+	width: 50%;
+}
+#gameConditionSetting select, #newintelligence select {
+	/*width: 40%;*/
+}
+/*td, th {
+	width: 30%;
+}*/
+/*#gameConditionSetting tbody tr td #game_switch tr td {
+	width: 20%;
+}*/
+#gameConditionSetting tbody tr td, #newintelligence tbody tr td {
+  /*width: 35%;*/
+  font-weight: bold;
+}
+textarea {
+  width: 900px;
+  height: 350px;
+}    
+.table-wrapper {
+  position:relative;
+}
+.table-scroll {
+  /*height:150px;*/
+  height:195px;
+  overflow:auto;  
+  /*margin-top:20px;*/
+}
+.table-wrapper table {
+  width:100%;   
+}
+.table-wrapper table * {
+  /*background:yellow;*/
+  /*color:black;*/
+  /*padding-left:0;*/
+  border: 1px solid #000000;
+}
+/*.table-wrapper table thead th .text {*/
+.table-wrapper table thead th {
+  /*position:absolute;*/
+  top:-25px;
+  z-index:2;
+  height:25px;
+  width:47%;
+  /*border:1px solid red;*/
+  background-color:#666666;
+  color:white;
+}
+
+#demogamesettings, #demogamesettings th, #demogamesettings td {
+ border: 1px solid black;
+}
+.login_tb_1 {
+    display: block;
+    float: left;
+    /*height: auto;
+    width: auto;*/
+    height: 120px;
+    width: 470px;
+    padding-right: 4px;
+    line-height: 22px;
+    padding-left: 95px;
+}
+.user_face {
+    display: block;
+    float: left;
+    /*height: auto;
+    width: auto;*/
+    height: 110px;
+    width: 110px;
+    margin-right: 16px;
+}
+.user_face img {
+    display: block;
+    border-radius: 99px;
+}
+.user_ifo_1 {
+    display: block;
+    float: left;
+    height: auto;
+    width: auto;
+    padding-top: 11%;
+}
+.user_ifo_1 .user_name {
+    display: block;
+    height: 30px;
+    width: 116px;
+    line-height: 30px;
+}
+.user_ifo_1 .btn_logout {
+    display: block;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div style="padding:10px;background-color:#CCCCCC;width:100%;height:30px;"><%= Content %></div>
+    <div style="padding:10px 45px;background-color:#CCCCCC;width:100%;">
+      <table border="0" cellpadding="0" cellspacing="0" style="padding-left:0px;" bgcolor='#CCCCCC'>
+        <tr>
+          <td>
+          	<div style="float:left;width:12%;">自動即時更新：</div>
+          	<div style="float:left;">
+          		<input type="radio" id="autoupdate_yes" name="autoupdate" value="yes">
+          		<label for="autoupdate_yes">是</label>&nbsp;&nbsp;&nbsp;
+              <input type="radio" id="autoupdate_no" name="autoupdate" value="no" checked>
+              <label for="autoupdate_no">否</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          	<div style="float:left;width:11%;">
+        		  <input type="radio" id="aid_title" name="query_key" value="aid" checked>
+         		  <label for="aid_title">GBID</label>
+         		</div>
+         		<div style="float:left;width:30%;"><input type="text" value="土豆仁" name="aid" id="aid"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          	<div style="float:left;width:11%;">
+        		  <input type="radio" id="nickname_title" name="query_key" value="暱稱">
+         		  <label for="nickname_title">暱稱</label>
+         		</div>
+          	<div style="float:left;width:30%;"><input type="text" value="土豆仁" name="nickname" id="nickname"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          	<div style="float:left;width:11%;">
+        		  <input type="radio" id="defaultnickname_title" name="query_key" value="預設暱稱">
+         		  <label for="defaultnickname_title">預設暱稱</label>
+         		</div>
+          	<div style="float:left;width:30%;"><input type="text" value="土豆仁" name="defaultnickname" id="defaultnickname"></div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          	<div style="float:left;width:11%;">
+        		  <input type="radio" id="registermobile_title" name="query_key" value="註冊手機">
+         		  <label for="registermobile_title">註冊手機</label>
+         		</div>
+          	<div style="float:left;width:30%;"><input type="text" value="土豆仁" name="registermobile" id="registermobile"></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="queryapp" style="padding:0px 35px;">
+      <table bgcolor="#cccccc">
+      	<tr>
+      		<td style='border:0'>
+      	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick="queryResult()"><span class="t1">查詢</span><img id='img1' src='/images/button_2green.png'></a></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+    <div id="show_result">
+    	<div style="padding:10px;background-color:#FFFFBB;width:100%;">
+    	<table border="0" cellpadding="0" cellspacing="0" style="padding-left:0px;width:100%;" bgcolor="#FFEBC1">
+    		<tr>
+    			<td colspan=2 style="background-color:#666666;">
+      	    <div style="float:left;text-align:right;width:50%;padding-top:6px;font-weight:bold;font-size:16px;color:white;">會員設定</div>
+      	    <div style="float:left;text-align:right;width:50%;color:white;">
+               <!--更新時間：&nbsp;<span id="sec">00:00:33&nbsp;之前</span>
+               <a class="waves-light btn blue" id="cancel" onclick="location.href='/member/settings'">擷取最新</a>-->
+               <div style="width:80%;float:left">
+                 更新時間：&nbsp;&nbsp;<span id='sec'></span>&nbsp;&nbsp;
+               </div>
+               <div style="width:10%;float:left">
+                 <a href="#" class="wrapper" onclick="location.href='/member/settings'"><span class="t4">擷取最新</span><img id='img2' src='/images/button_6blue.png'></a>
+               </div>
+            </div>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td style="width:50%;">
+    				<table>
+    					<tr>
+    						<td colspan=2>
+                  <div class="login_tb_1">
+                    <div class="user_face"><img src="../images/user_face_1_s.png" width="110" height="110"></div>
+                    <div class="user_ifo_1">
+                      <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick=""><span class="t7">預設</span><img id="img1" src="/images/button_2blue.png"></a></div>
+                    </div>
+                  </div>
+                </td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">註冊入口：</td>
+    						<td style="font-weight:bold;text-align:left;">測試用</td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">GBID：</td>
+    						<td style="font-weight:bold;text-align:left;">123456789</td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">暱稱：</td>
+    						<td style="font-weight:bold;text-align:left;"><div style="width:70%;"><input type='text' id='nickname' name='nickname' value="土豆仁"></input></div></td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">預設暱稱：</td>
+    						<td style="font-weight:bold;text-align:left;">幸運星123456<!--<input type='text' id='defaultnickname' name='defaultnickname' value="土豆仁"></input>--></td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">人氣指數：</td>
+    						<td style="font-weight:bold;text-align:left;"><div style="width:70%;"><input type='text' id='popularityindex' name='popularityindex' value="50"></input></div></td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">會員級別：</td>
+    						<td style="font-weight:bold;text-align:left;">
+    						   <select id="memberlevel" name="memberlevel" style="width:70%;">
+                     <option value="一般">一般</option>
+                     <option value="白鑽">白鑽</option>
+                     <option value="藍鑽">藍鑽</option>
+                     <option value="金鑽">金鑽</option>
+                     <option value="紅鑽">紅鑽</option>
+                   </select>
+    					  </td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">下月會員級別：</td>
+    						<td style="font-weight:bold;text-align:left;">一般</td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">LV：</td>
+    						<td style="font-weight:bold;text-align:left;"><div style="width:70%;"><input type='text' id='popularityindex' name='popularityindex' value="999"></input></div></td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">累積經驗值：</td>
+    						<td style="font-weight:bold;text-align:left;">987,654,321</td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">G幣：</td>
+    						<td style="font-weight:bold;text-align:left;"><div style="width:70%;"><input type='text' id='popularityindex' name='popularityindex' value="987,654,321"></input></div></td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">開運金：</td>
+    						<td style="font-weight:bold;text-align:left;"><div style="width:70%;"><input type='text' id='popularityindex' name='popularityindex' value="987,654,321"></input></div></td>
+    				  </tr>
+              <tr>
+              	<td style="text-align:right;">會員位置：</td>
+              	<td style="text-align:left;" colspan="2">
+              		<div id="pos_title" style="float:left;width:25%;">水果盤_50</div>
+              		<div id="pos_select" style="float:left;width:45%;">
+                    <select id="memberposition" name="memberposition" style="width:100%;">
+                      <option value="重置">重置</option>
+                      <option value="踢離(不保留)">踢離(不保留)</option>
+                      <option value="強制登出">強制登出</option>
+                      <option selected="" value="N/A">N/A</option>
+                    </select>
+              		</div>
+              	</td>
+              </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">帳號狀態：</td>
+    						<td style="font-weight:bold;text-align:left;">
+                   <select id="accountstatus" name="accountstatus" style="width:70%;">
+                     <option value="正常">正常</option>
+                     <option value="遊戲停權">遊戲停權</option>
+                     <option value="完全停權">完全停權</option>
+                   </select>
+    					  </td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">聊天狀態：</td>
+    						<td style="font-weight:bold;text-align:left;">
+                   <select id="chatstatus" name="chatstatus" style="width:70%;">
+                     <option value="正常">正常</option>
+                     <option value="禁言">禁言</option>
+                   </select>
+    					  </td>
+    				  </tr>
+    					<tr>
+    						<td style="font-weight:bold;text-align:right;">機率名單：</td>
+    						<td style="font-weight:bold;text-align:left;">
+                   <select id="probabilitylists" name="probabilitylists" style="width:70%;">
+                     <option value="無">無</option>
+                     <option value="RTP001">RTP001</option>
+                     <option value="RTP002">RTP002</option>
+                     <option value="RTP003">RTP003</option>
+                   </select>
+    					  </td>
+    				  </tr>
+    				</table>
+    			</td>
+    			<td style="width:50%;">
+             <table>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">註冊手機：</td>
+    						 <td style="font-weight:bold;text-align:left;">0920123456</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">註冊時間：</td>
+    						 <td style="font-weight:bold;text-align:left;">2016/6/14  11:34:21</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">最後登入平台：</td>
+    						 <td style="font-weight:bold;text-align:left;">測試用</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">最後IP：</td>
+    						 <td style="font-weight:bold;text-align:left;">192.72.16.18</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">最後登入時間：</td>
+    						 <td style="font-weight:bold;text-align:left;">2016/6/17  18:14:23</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">累積登入時間：</td>
+    						 <td style="font-weight:bold;text-align:left;">154時 59分 12秒</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">累積遊戲時間：</td>
+    						 <td style="font-weight:bold;text-align:left;">99時 0分 12秒</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">轉出總金額：</td>
+    						 <td style="font-weight:bold;text-align:left;">80,000</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">轉入總金額：</td>
+    						 <td style="font-weight:bold;text-align:left;">20,000</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">總儲值金額NT$：</td>
+    						 <td style="font-weight:bold;text-align:left;">3,000</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">前兩月儲值NT$：</td>
+    						 <td style="font-weight:bold;text-align:left;">15,000</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">本月儲值NT$：</td>
+    						 <td style="font-weight:bold;text-align:left;">0</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">遊戲局數：</td>
+    						 <td style="font-weight:bold;text-align:left;">49,123</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">總押分：</td>
+    						 <td style="font-weight:bold;text-align:left;">12,397,147</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">前兩月押分：</td>
+    						 <td style="font-weight:bold;text-align:left;">397,147</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">本月押分：</td>
+    						 <td style="font-weight:bold;text-align:left;">104,100</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">最後總得分：</td>
+    						 <td style="font-weight:bold;text-align:left;">30,000,000</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">個人RTP：</td>
+    						 <td style="font-weight:bold;text-align:left;">92.1234%</td>
+     				   </tr>
+    					 <tr>
+    						 <td style="font-weight:bold;text-align:right;">輸贏淨得：</td>
+    						 <td style="font-weight:bold;text-align:left;">20,000,000</td>
+     				   </tr>
+    		     </table>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td colspan=2>
+            <div style="padding:0px;width:100%;height:36px;">
+              <div style="text-align:center;"><a id="save" href="#" class="wrapper" onclick="SaveCancel(1)"><span class="t4">變更設定</span><img id='img2' src='/images/button_6blue.png'></a></div>
+            </div>
+    			</td>
+    		</tr>
+    		<!--個人資料-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>個人資料</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;">姓名：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;"><div style="width:50%;"><input type='text' id='name' name='name' value="N/A"></input></div></td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">E-mail：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;"><div style="width:50%;"><input type='text' id='email' name='email' value="N/A"></input></div></td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">身分證字號：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;"><div style="width:50%;"><input type='text' id='email' name='email' value="N/A"></input></div></td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;width:49%;">生日：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">
+    	     				      	 	<div style="float:left;width:33%;">
+    	     				      	 		<div style="float:left;width:70%">
+    	     				      	 		  <select id="birthday_year" name="birthday_year">
+                                  <option value="na">N/A</option>
+                                  <option value="RTP001">RTP001</option>
+                                  <option value="RTP002">RTP002</option>
+                                  <option value="RTP003">RTP003</option>
+                                 </select>
+                               </div>
+                               <div style="float:left;width:30%">年</div>
+    	     				      	 	</div>
+    	     				      	 	<div style="float:left;width:33%;">
+    	     				      	 		<div style="float:left;width:70%">
+    	     				      	 		  <select id="birthday_month" name="birthday_month">
+                                  <option value="na">N/A</option>
+                                  <option value="RTP001">RTP001</option>
+                                  <option value="RTP002">RTP002</option>
+                                  <option value="RTP003">RTP003</option>
+                                 </select>
+                               </div>
+                               <div style="float:left;width:30%">月</div>
+    	     				      	 	</div>
+    	     				      	 	<div style="float:left;width:33%;">
+    	     				      	 		<div style="float:left;width:70%">
+    	     				      	 		  <select id="birthday_day" name="birthday_day">
+                                  <option value="na">N/A</option>
+                                  <option value="RTP001">RTP001</option>
+                                  <option value="RTP002">RTP002</option>
+                                  <option value="RTP003">RTP003</option>
+                                 </select>
+                               </div>
+                               <div style="float:left;width:30%">日</div>
+    	     				      	 	</div>
+    	     				      	 </td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">年齡：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">N/A</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+        <!--轉點相關-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>轉點相關</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:33%;">轉點總人數：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">5</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">轉點總次數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">8</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">轉出總次數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">7</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">轉入總次數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">轉點總金額：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">100,000</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:49%;">本月轉出額：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">0</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">本月轉入額：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1,600</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">上月轉出額：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">40,000</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">上月轉入額：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">20,000</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">轉點手續費：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1,600</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+        <!--儲值相關-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>儲值相關</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:33%;">總儲值次數：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">8</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">儲值金額NT$_GP：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1,500</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">儲值金額NT$_MA：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">0</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">儲值金額NT$_Web：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1,500</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:49%;">儲值金額NT$_IOS：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">0</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">儲值金額NT$_小額：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">0</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">儲值金額NT$_通路卡：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">0</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+        <!--遊戲相關-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>遊戲相關</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:33%;">總押分_G幣：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">8</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">總押分_開運金：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1,500</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">SLOTS局數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">0</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">牌桌類局數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">1,500</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">某類1Game局數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">0</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">某類2Game局數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">0</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">JP總次數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">3</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">比倍總次數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">500</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:49%;">總得分：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">10,000,000</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">總外贈得分：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">5,000,000</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">JP總得分：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">5,000,000</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">比倍總得分：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">10,000,000</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">最後總得分_G幣：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">29,990,000</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">最後總得分_開運金：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">10,000</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+        <!--寶物相關-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>寶物相關</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="" class="bordered" border="1" cellpadding="0" cellspacing="0">
+                 	 <tr>
+                 		<td>
+                 			<div style="float:left;width:55%;text-align:right;font-weight:bold;">信件通知</div>
+                 			<div style="float:left;width:15%;text-align:right;font-weight:bold;">數量：3</div>
+                 			<div style="float:left;width:30%;text-align:left;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 		    <input type="checkbox" id="ckb_largest_winscore" name="ckb_largest_winscore" class="filled-in">
+                        <label for="ckb_largest_winscore">顯示</label>
+                 		  </div>
+                 		</td>
+                 	 </tr>
+    	     				 <tr>
+    	     					 <td>
+                         <div class="table-wrapper">
+                         	<div class="table-scroll">
+                         		<table id="letter_notice" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;">
+                         			<thead style="background-color:#666666;color:white;">
+                         				<th style="text-align:center;width:13%">信件發送時間</th>
+                         				<th style="text-align:center;width:13%">信件刪除時間</th>
+                         				<th style="text-align:center;width:11%">標題</th>
+                         				<th style="text-align:center;width:28%">內文</th>
+                         				<th style="text-align:center;width:11%">G幣</th>
+                         				<th style="text-align:center;width:11%">開運金</th>
+                         				<th style="text-align:center;width:13%">虛寶ID(數量)</th>
+                         			</thead>
+                         			<tbody style="background-color:#ffffff">
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">各位親愛的玩家你好，6/5 01:00 ~ 05:00 將進行版本更新，請玩家維護前提請離開遊戲，避免遊戲異常</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">0</td>
+                         				  <td style="text-align:center;">5(2)、1(1)</td>
+                         				</tr>
+                         			</tbody>
+                         		</table>
+                         	</div>
+                         </div>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+                 <table id="" class="bordered" border="1" cellpadding="0" cellspacing="0">
+                 	 <tr>
+                 		<td>
+                 			<div style="float:left;width:55%;text-align:right;font-weight:bold;">虛寶卡</div>
+                 			<div style="float:left;width:15%;text-align:right;font-weight:bold;">數量：5</div>
+                 			<div style="float:left;width:30%;text-align:left;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 		    <input type="checkbox" id="ckb_largest_winscore" name="ckb_largest_winscore" class="filled-in">
+                        <label for="ckb_largest_winscore">顯示</label>
+                 		  </div>
+                 		</td>
+                 	 </tr>
+    	     				 <tr>
+    	     					 <td>
+                         <div class="table-wrapper">
+                         	<div class="table-scroll">
+                         		<table id="item" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;">
+                         			<thead style="background-color:#666666;color:white;">
+                         				<th style="text-align:center;width:18%">發送時間</th>
+                         				<th style="text-align:center;width:18%">領取時間</th>
+                         				<th style="text-align:center;width:18%">使用期限</th>
+                         				<th style="text-align:center;width:15%">It_ID</th>
+                         				<th style="text-align:center;width:16%">名稱</th>
+                         				<th style="text-align:center;width:15%">數量</th>
+                         			</thead>
+                         			<tbody style="background-color:#ffffff">
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2</td>
+                         				  <td style="text-align:center;">全盤卡</td>
+                         				  <td style="text-align:center;">2</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">未領</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">3</td>
+                         				  <td style="text-align:center;">全盤卡</td>
+                         				  <td style="text-align:center;">1</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">5</td>
+                         				  <td style="text-align:center;">全盤卡</td>
+                         				  <td style="text-align:center;">1</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">5</td>
+                         				  <td style="text-align:center;">送燈卡</td>
+                         				  <td style="text-align:center;">1</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">5</td>
+                         				  <td style="text-align:center;">送燈卡</td>
+                         				  <td style="text-align:center;">2</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2</td>
+                         				  <td style="text-align:center;">送燈卡</td>
+                         				  <td style="text-align:center;">2</td>
+                         				</tr>
+                         			</tbody>
+                         		</table>
+                         	</div>
+                         </div>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+                 	 <tr>
+                 		<td>
+                 			<div style="float:left;width:55%;text-align:right;font-weight:bold;">寶物記綠</div>
+                 			<div style="float:left;width:15%;text-align:right;font-weight:bold;">筆數：4</div>
+                 			<div style="float:left;width:30%;text-align:left;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 		    <input type="checkbox" id="ckb_largest_winscore" name="ckb_largest_winscore" class="filled-in">
+                        <label for="ckb_largest_winscore">顯示</label>
+                 		  </div>
+                 		</td>
+                 	 </tr>
+    	     				 <tr>
+    	     					 <td>
+                         <div class="table-wrapper">
+                         	<div class="table-scroll">
+                         		<table id="treasures_log" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;">
+                         			<thead style="background-color:#666666;color:white;">
+                         				<th style="text-align:center;width:25%">發送時間</th>
+                         				<th style="text-align:center;width:25%">事件時間</th>
+                         				<th style="text-align:center;width:10%">事件</th>
+                         				<th style="text-align:center;width:40%">記綠內容</th>
+                         			</thead>
+                         			<tbody style="background-color:#ffffff">
+                         				<tr>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">信件到期</td>
+                         				  <td style="text-align:center;">信件標題：06/07遊戲幣異常補償123456789123456789</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">信件到期</td>
+                         				  <td style="text-align:center;">
+                         				  	 信件標題：06/07遊戲幣異常補償123456789123456789
+                                     信件內文：各位親愛的玩家在 今日維護更新後，部分玩家發生遊戲幣異常問題...
+                                     信件內容物移除：：100,000 開運金
+                                     信件內容物移除：：虛寶卡
+                                  </td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">寶物領取信件刪除</td>
+                         				  <td style="text-align:center;">
+                                     信件標題：06/07遊戲幣異常補償123456789123456789
+                                     信件內文：各位親愛的玩家在 今日維護更新後，部分玩家發生遊戲幣異常問題...
+                                     開運金獲得：100,000 開運金
+                                     虛寶卡獲得：虛寶卡
+                         				  </td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">2016/12/12 18:21:45</td>
+                         				  <td style="text-align:center;">信件刪除</td>
+                         				  <td style="text-align:center;">信件標題：06/07遊戲幣異常補償123456789123456789信件內文：各位親愛的玩家在 今日維護更新後，部分玩家發生遊戲幣異常問題...</td>
+                         				</tr>
+                         				<tr>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">2016/06/02 12:00</td>
+                         				  <td style="text-align:center;">06/05 版本更新通知</td>
+                         				  <td style="text-align:center;">
+                         				  	信件標題：06/07遊戲幣異常補償123456789123456789
+                                    信件內文：各位親愛的玩家在 今日維護更新後，部分玩家發生遊戲幣異常問題...
+                                    開運金獲得：100,000 開運金
+                                    虛寶卡獲得：虛寶卡
+                                  </td>
+                         				</tr>
+                         			</tbody>
+                         		</table>
+                         	</div>
+                         </div>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+        <!--其他-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>其他</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:33%;">開始停權時間：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">2016/6/17  18:14:23</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">開始禁言時間：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">2016/6/17  18:14:23</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">好友人數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">32</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:49%;">最後登出時間：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">2016/6/17  18:14:23</td>
+    	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">登入次數：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">85</td>
+     	     			         </tr>
+    	     				       <tr>
+    	     				      	 <td style="font-weight:bold;text-align:right;">最後IP：</td>
+    	     				      	 <td style="font-weight:bold;text-align:left;">192.12.48.2</td>
+     	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+        <!--修改歷程-->
+        <tr>
+         <td colspan=2>
+           <ul class="collapsible" data-collapsible="expandable">
+             <li>
+               <div class="collapsible-header"><i class="material-icons">play_arrow</i>修改歷程</div>
+               <div class="collapsible-body" style="text-align:center;">
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:33%;">後台修改G幣：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">5,000</td>
+    	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+    	     					 <td style="width:50%;">
+    	     				     <table>
+    	     				       <tr>
+    	     				       	<td style="font-weight:bold;text-align:right;width:49%;">後台修改開運金：</td>
+    	     				       	<td style="font-weight:bold;text-align:left;">-5,000</td>
+    	     			         </tr>
+    	     	           </table>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+                 <table id="personal_data" class="bordered" border="1" cellpadding="0" cellspacing="0">
+    	     				 <tr>
+    	     					 <td>
+    	     					 	 <textarea id="comingsoon_content" style="background-color:#ffffff">
+2016/6/6 23:25:12  twodog
+異動動項目
+1.聊天狀態： 正常 --> 遊戲停權
+2.目前G幣： 1,740,000 --> 1,745,000
+3.開運金： 7,000 --> 0
+異動說明：一二三四五六七八九十一二三四五六七八九十
+--------------------------------------------------------------------------------------------------------------
+2016/6/5 23:24:12  neil
+異動動項目
+1.暱稱： 幸運星123456 --> 土豆仁
+2.機率名單： RTP001 --> 無
+異動說明：一二三四五六七八九十一二三四五六七八九十
+--------------------------------------------------------------------------------------------------------------
+2016/6/5 23:24:12  hank
+異動動項目
+1.LV： 1 --> 999
+2.累積經驗值： 0 --> 1,854,999,944
+異動說明：一二三四五六七八九十一二三四五六七八九十
+    	     					 	 </textarea>
+    	     					 </td>
+     	     			   </tr>
+                 </table>
+               </div>
+             </li>
+           </ul>
+         </td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+<% include save_dialog.html %>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/settings.js"></script>
+</body>
+</html>

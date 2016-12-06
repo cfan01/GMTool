@@ -1,0 +1,92 @@
+﻿<% include includer.html %>
+<style>
+  table thead {
+  	background: #000000;
+  	color: white;
+  	font-size: 14px
+  }
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+  	<tr bgcolor="#CCCCCC"><td>
+  <!--<table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+    <tbody>
+        <tr>
+            <td style="text-align:center; vertical-align: top;"> 這是 <%= Content %> 頁面!
+            </td>
+        </tr>
+    </tbody>
+  </table>-->
+    <div>
+    	<a class="waves-light btn blue" id="new" onclick="javascript:location.href='/backend/account_management_edit'">新增</a>
+      <!--<a class="waves-light btn blue disabled" id="cancel" onclick="AddCancel(2)">取消</a>-->
+    </div>
+    <br>
+    <table id="priviledgeModal" class="highlight" border="0" cellpadding="0" cellspacing="0" style="width: 750px;">
+      <thead>
+        <tr>
+          <th data-field="account">帳號</th>
+          <th data-field="user">使用者</th>
+          <th data-field="lastlogin">最後登入時間</th>
+          <th data-field="status">狀態</th>
+          <th data-field="maintain">管理</th>
+        </tr>
+      </thead>
+      <tbody>
+           <tr v-for="item in Accounts">
+             <td><input type='text' id='account{{$index}}' name='{{item.account}}' value='{{item.account}}' style="border:none" readonly></input></td>
+             <td><input type='text' id='user{{$index}}' name='{{item.user}}' value='{{item.user}}' style="border:none" readonly></input></td>
+             <td><input type='text' id='lastlogin{{$index}}' name='{{item.lastlogin}}' value='{{item.lastlogin}}' style="border:none" readonly></input></td>
+             	<td><input type='text' id='status{{$index}}' name='{{item.status}}' value='{{item.status}}' style="border:none" readonly></input></td>
+             <td><a href="url{{$index}}">帳號編輯</a></td>
+           </tr>
+           <!--<tr id='addPriv' style="display:none">
+             <td><input type='text' id='classify' name='classify' value=''></input></td>
+             <td><input type='text' id='opened' name='opened' value='0' style="border:none" readonly></input></td>
+             <td><input type='text' id='closed' name='closed' value='0' style="border:none" readonly></input></td>
+             <td><a href="url">權限編輯</a></td>
+           </tr>-->
+      </tbody>
+    </table>
+    </td></tr>
+    </table>
+  <br />
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/accountlists.js"></script>
+<!--<script>
+ 	function AddCancel(i)
+  {
+  	if(i==1)
+  	{
+  	  document.getElementById('addPriv').style.display='';
+  	  $("#new").addClass("disabled");
+  	  $("#cancel").removeClass("disabled");
+  	  document.getElementById('new').style.pointerEvents = 'none';
+  	  document.getElementById('cancel').style.pointerEvents = '';
+  	}
+  	if(i==2)
+  	{
+  	  document.getElementById('addPriv').style.display='none';
+  	  $("#new").removeClass("disabled");
+  	  $("#cancel").addClass("disabled");
+      document.getElementById('new').style.pointerEvents = '';
+  	  document.getElementById('cancel').style.pointerEvents = 'none';
+  	}
+  }
+  document.getElementById('cancel').style.pointerEvents = 'none';
+</script>
+-->
+</body>
+</html>

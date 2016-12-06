@@ -1,0 +1,1598 @@
+﻿<% include includer.html %>
+<style>
+  table thead {
+  	background: #000000;
+  	color: white;
+  	font-size: 14px
+  }
+  /*#addPriv td{
+  	background: #cccccc;
+  }*/
+  /*.collapsible-body {
+  	padding-left: 30px;
+  }*/
+  label {
+  	color: #000000;
+  }
+  .table_tr_td_border {
+    border: 1px solid #000;
+    text-align: center;
+    background-color: #99CCCC;
+  }
+  .no_background {
+    background-color: #ffffff;
+  }
+  /*table, th, td {
+  	border: 1px solid #000;
+  	text-align: center;
+  }*/
+  /*input[type="checkbox"] {
+  	position: initial;
+  }*/
+  [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: initial;
+    opacity: initial;
+  }
+  .collapsible-header {
+    padding: 0px;
+  }
+  #pagePrivTable tbody tr td {
+  	padding: 0 2px;
+  }
+  .btn {
+    background-color: #287B00;
+    cursor:default;
+    width:12%;
+    padding:0px;
+    box-shadow:none;
+  }
+  .btn:hover {
+    background-color: #287B00;
+    box-shadow:none;
+  }
+  .width_1pa {
+  	width:1%;
+  }
+  .width_2pa {
+  	width:2%;
+  }
+  .width_3pa {
+  	width:3%;
+  }
+  .width_4pa {
+  	width:4%;
+  }
+  .width_5pa {
+  	width:5%;
+  }
+  .width_6pa {
+  	width:6%;
+  }
+  .width_7pa {
+  	width:7%;
+  }
+  .width_8pa {
+  	width:8%;
+  }
+  .width_9pa {
+  	width:9%;
+  }
+  .width_10pa {
+  	width:10%;
+  }
+  .width_11pa {
+  	width:11%;
+  }
+  .width_12pa {
+  	width:12%;
+  }
+  .width_13pa {
+  	width:13%;
+  }
+  .width_14pa {
+  	width:14%;
+  }
+  .width_15pa {
+  	width:15%;
+  }
+  .width_16pa {
+  	width:16%;
+  }
+  .width_17pa {
+  	width:17%;
+  }
+  .width_18pa {
+  	width:18%;
+  }
+  .width_19pa {
+  	width:19%;
+  }
+  .width_20pa {
+  	width:20%;
+  }
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+  	<tr id='newClassifySettings' bgcolor="#CCCCCC" style='display:'>
+  		<td>
+        <div>
+        	<a href='javascript:;' id='privnew' class="wrapper" onclick="privAddCancel('privnew')"><span class="t6">新增</span><img id='img3' src='/images/button_2blue.png'></a>
+        	<a href='javascript:;' id='privcancel' class="wrapper disabled" onclick="privAddCancel('privcancel')"><span class="t6">取消</span><img id='img3' src='/images/button_2gray.png'></a>
+          <!--<a class="waves-light btn blue" id="privnew" onclick="privAddCancel(1)">新增</a>
+          <a class="waves-light btn blue disabled" id="privcancel" onclick="privAddCancel(2)">取消</a>-->
+        </div>
+        <table id="priviledgeModal" class="highlight" border="0" cellpadding="0" cellspacing="0" style="width: 700px;">
+          <thead>
+            <tr>
+              <th width='29%' data-field="classify">管理者分類名稱</th>
+              <th width='23%' data-field="opened">啟用人數</th>
+              <th width='23%' data-field="closed">關閉人數</th>
+              <th width='25%' data-field="maintain">新增/修改/刪除/權限編輯</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr style="background-color:#cccccc;" v-for="item in privLists">
+                <td><input type='text' id='classify{{$index}}' name='classify{{$index}}' value='{{item.classify}}' style="background-color:#cccccc;border:none;cursor:pointer;" onclick='classifymodify({{$index}});' onblur="confirmClassify('{{item.classify}}',this.value,{{$index}})" readonly></input></td>
+                <td><input type='text' id='enabledcounts{{$index}}' name='enabledcounts{{$index}}' value='{{item.enabledcounts}}' style="background-color:#cccccc;border:none" readonly></input></td>
+                <td><input type='text' id='disabledcounts{{$index}}' name='disabledcounts{{$index}}' value='{{item.disabledcounts}}' style="background-color:#cccccc;border:none" readonly></input></td>
+                <!--<td><a href="/backend/priviledge_edit{{$index}}">權限編輯</a></td>-->
+              	<td>
+               	  <div style='float:left;width:62%;'>
+              	    <img src="/images/add_lock.png" id='privadd{{$index}}' name='privadd{{$index}}' alt='privadd' title='add_lock' style="display:;" onclick="classifyAction(this.title, '{{item._id}}', (this.parentNode.parentNode.parentNode.rowIndex-1))">
+               	    <img src="/images/edit_lock.png" id='privedit{{$index}}' name='privedit{{$index}}' alt='privedit' title='edit_lock' style="display:;" onclick="classifyAction(this.title, '{{item._id}}', (this.parentNode.parentNode.parentNode.rowIndex-1))">
+               	    <img src="/images/delete.png" id='privdelete{{$index}}' name='privdelete{{$index}}' alt='privedit' title='delete' style="display:;cursor:pointer;" onclick="classifyAction(this.title, '{{item._id}}', (this.parentNode.parentNode.parentNode.rowIndex-1))">
+              	  </div>
+              	  <div style='float:left;width:38%;'>
+              	    <a href='javascript:;' onclick="editPriv('{{item._id}}')">權限編輯</a>
+              	  </div>
+              	</td>
+              </tr>
+              <tr id='addPriv' style="background-color:#cccccc;display:none;">
+                <td><input type='text' id='classify' name='classify'></input></td>
+                <td><input type='text' id='enabledcounts' name='enabledcounts' value='' style="background-color:#cccccc;border:none" readonly></input></td>
+                <td><input type='text' id='disabledcounts' name='disabledcounts' value='' style="background-color:#cccccc;border:none" readonly></input></td>
+                <!--<td><a href="/backend/priviledge_edit">權限編輯</a></td>-->
+              	<td>
+               	  <div style='float:left;width:62%;'>
+              	    <img src="/images/add.png" id='privadd{{$index}}' name='privadd{{$index}}' alt='privadd' title='add' style="display:;cursor:pointer;" onclick="classifyAction(this.title, 'new', (this.parentNode.parentNode.parentNode.rowIndex-1))">
+               	    <img src="/images/edit_lock.png" id='privedit{{$index}}' name='privedit{{$index}}' alt='privedit' title='edit' style="display:;" onclick="classifyAction(this.title, '{{item._id}}', (this.parentNode.parentNode.parentNode.rowIndex-1))">
+               	    <img src="/images/delete_lock.png" id='privdelete{{$index}}' name='privdelete{{$index}}' alt='privedit' title='delete' style="display:;" onclick="classifyAction(this.title, '{{item._id}}', (this.parentNode.parentNode.parentNode.rowIndex-1))">
+              	  </div>
+              	  <div style='float:left;width:38%;'>
+              	    <a href='javascript:;' style='cursor:default;'><font style='color:gray'>權限編輯</font></a>
+              	  </div>
+              	</td>
+              </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  	<tr id='newPrivSettings' bgcolor='#cccccc' style='display:none'>
+  		<td>
+        <div id="classifyPrivModal" style="text-align:left">classifyPrivModal</div>
+        <div id="_idPrivModal" style="display:none;">_idPrivModal</div>
+        <ul class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header active"><i class="material-icons">play_arrow</i>報表欄位查看權限設定</div>
+            <div id="rf_fieldPrivModal" class="collapsible-body" style="text-align:center;padding-right:18px;"></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">play_arrow</i>頁面進入權限設定</div>
+            <div id="pagePrivModal" class="collapsible-body" style="text-align:center;padding-right:18px;">
+              <table id="pagePrivTable" class="bordered" border="0" cellpadding="0" cellspacing="0" style="width: 950px;" bgcolor='#ffffff'>
+                <thead>
+                  <tr>
+                  	 <th style="text-align:left;">頁面進入權限</th>
+                  </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                       <td>
+                       	 <table>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="backend_all" name="backend_all"><label for="backend_all" class="width_12pa">全選</label><br>
+                       	 	 	 		<a id="backend_management" class="btn width_12pa">後台管理</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="backend_home_q" name="backend_home_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="backend_priviledge_q" name="backend_priviledge_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="backend_priviledge_s" name="backend_priviledge_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="backend_account_management_q" name="backend_account_management_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="backend_account_management_s" name="backend_account_management_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;">
+                       	 	 	 	  <input type="checkbox" id="backend_log_q" name="backend_log_q"><span id="backend_log_q">查</span>
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="backend_home" class="btn width_12pa">首頁</a>
+                       	 	 	 	  <a id="backend_priviledge" class="btn width_12pa">權限設置</a>
+                       	 	 	 	  <a id="backend_account_management" class="btn width_12pa">帳號管理</a>
+                       	 	 	 	  <a id="backend_log" class="btn width_12pa">後台操作log</a>
+                       	 	 	 	  <hr>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 </table>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                       	 <table>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="member_all" name="member_all"><label for="member_all" class="width_17pa">全選</label><br>
+                       	 	 	 		<a id="member_related" class="btn width_17pa">會員相關</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_report_q" name="member_report_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_report_s" name="member_report_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_settings_q" name="member_settings_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_settings_s" name="member_settings_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_treasure_q" name="member_treasure_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_treasure_s" name="member_treasure_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                       	 	 	 	  <input type="checkbox" id="member_history_q" name="member_history_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_suspended_q" name="member_suspended_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="member_suspended_s" name="member_suspended_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="member_report" class="btn width_17pa">會員報表查詢</a>
+                       	 	 	 	  <a id="member_settings" class="btn width_17pa">會員設定</a>
+                       	 	 	 	  <a id="member_treasure" class="btn width_17pa">會員持有寶物查詢</a>
+                       	 	 	 	  <a id="member_history" class="btn width_17pa">會員歷程查詢</a>
+                       	 	 	 	  <a id="member_suspended" class="btn width_17pa">停權查詢</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="basic_report_q" name="basic_report_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="basic_report_s" name="basic_report_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                                  <input type="checkbox" id="game_currency_q" name="game_currency_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="basic_report" class="btn width_17pa">基本報表查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="game_currency" class="btn width_17pa">遊戲幣異動歷程查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="game_info_q" name="game_info_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="game_info_s" name="game_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                                  <input type="checkbox" id="game_history_q" name="game_history_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="game_info" class="btn width_17pa">會員遊戲概況查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="game_history" class="btn width_17pa">會員遊戲歷程查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="gift_info_q" name="gift_info_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="gift_info_s" name="gift_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                                  <input type="checkbox" id="gift_history_q" name="gift_history_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="gift_info" class="btn width_17pa">會員儲值概況查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="gift_history" class="btn width_17pa">儲值歷程查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="point_info_q" name="point_info_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="point_info_s" name="point_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                                  <input type="checkbox" id="point_history_q" name="point_history_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="point_info" class="btn width_17pa">會員轉點概況查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="point_history" class="btn width_17pa">轉點歷程查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="login_info_q" name="login_info_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="login_info_s" name="login_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                                  <input type="checkbox" id="pullcolor_history_q" name="pullcolor_history_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="login_info" class="btn width_17pa">會員登入概況查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="pullcolor_history" class="btn width_17pa">會員拉彩歷程查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;">
+                                  <input type="checkbox" id="login_history_q" name="login_history_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="login_history" class="btn width_17pa">個人登入歷程查詢</a>
+                       	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <hr>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 </table>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                       	 <table>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="game_all" name="game_all"><label for="game_all" class="width_12pa">全選</label><br>
+                       	 	 	 		<a id="game_related" class="btn">遊戲相關</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="game_monitor_q" name="game_monitor_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="game_monitor_s" name="game_monitor_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="equipment_monitor_q" name="equipment_monitor_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="equipment_monitor_s" name="equipment_monitor_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="jp_monitor_q" name="jp_monitor_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="jp_monitor_s" name="jp_monitor_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="special_probability_q" name="special_probability_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="special_probability_s" name="special_probability_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_13pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_dispatch_q" name="item_dispatch_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_dispatch_s" name="item_dispatch_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="treasure_management_q" name="treasure_management_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="treasure_management_s" name="treasure_management_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_10pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_management_q" name="robot_management_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_management_s" name="robot_management_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_7pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="demo_management_q" name="demo_management_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="demo_management_s" name="demo_management_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="lucky_gold_q" name="lucky_gold_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="lucky_gold_s" name="lucky_gold_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="game_monitor" class="btn width_11pa">遊戲監控與設定</a>
+                       	 	 	 	  <a id="equipment_monitor" class="btn width_11pa">機台監控與設定</a>
+                       	 	 	 	  <a id="jp_monitor" class="btn width_14pa">連線彩金監控與設定</a>
+                       	 	 	 	  <a id="special_probability" class="btn width_14pa">特殊機率名單與設定</a>
+                       	 	 	 	  <a id="item_dispatch" class="btn width_13pa">常態發送虛寶設定</a>
+                       	 	 	 	  <a id="treasure_management" class="btn width_8pa">寶物管理</a>
+                       	 	 	 	  <a id="robot_management" class="btn width_10pa">機器人管理</a>
+                       	 	 	 	  <a id="demo_management" class="btn width_7pa">試玩管理</a>
+                       	 	 	 	  <a id="lucky_gold" class="btn width_8pa">開運金設置</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_13pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_q" name="item_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_s" name="item_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="treasure_dispatch_q" name="treasure_dispatch_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="treasure_dispatch_s" name="treasure_dispatch_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_10pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_in_use_q" name="robot_in_use_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_in_use_s" name="robot_in_use_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_7pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="item" class="btn width_13pa">虛寶卡</a>
+                       	 	 	 	  <a id="treasure_dispatch" class="btn width_8pa">寶物發送</a>
+                       	 	 	 	  <a id="robot_in_use" class="btn width_10pa">運作中機器人</a>
+                       	 	 	 	  <a class="btn width_7pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_8pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_13pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_reward_q" name="item_reward_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_reward_s" name="item_reward_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="treasure_statistics_q" name="treasure_statistics_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="treasure_statistics_s" name="treasure_statistics_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_10pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_settings_q" name="robot_settings_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_settings_s" name="robot_settings_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_7pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="item_reward" class="btn width_13pa">升等獎勵</a>
+                       	 	 	 	  <a id="treasure_statistics" class="btn width_8pa">寶物統計</a>
+                       	 	 	 	  <a id="robot_settings" class="btn width_10pa">設定機器人</a>
+                       	 	 	 	  <a class="btn width_7pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_8pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_13pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_synthesis_q" name="item_synthesis_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_synthesis_s" name="item_synthesis_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_query_q" name="item_query_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_query_s" name="item_query_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_10pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_lists_q" name="robot_lists_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_lists_s" name="robot_lists_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_7pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="item_synthesis" class="btn width_13pa">合成虛寶卡</a>
+                       	 	 	 	  <a id="item_query" class="btn width_8pa">虛寶卡查詢</a>
+                       	 	 	 	  <a id="robot_lists" class="btn width_10pa">機器人列表</a>
+                       	 	 	 	  <a class="btn width_7pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_8pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_11pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_14pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_13pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_point_notice_q" name="item_point_notice_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_point_notice_s" name="item_point_notice_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_statistics_q" name="item_statistics_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="item_statistics_s" name="item_statistics_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_10pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_stress_test_q" name="robot_stress_test_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="robot_stress_test_s" name="robot_stress_test_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_7pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_8pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_11pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_14pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="item_point_notice" class="btn width_13pa">轉點通知</a>
+                       	 	 	 	  <a id="item_statistics" class="btn width_8pa">虛寶卡統計</a>
+                       	 	 	 	  <a id="robot_stress_test" class="btn width_10pa">設定壓測</a>
+                       	 	 	 	  <a class="btn width_7pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_8pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <hr>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 </table>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                       	 <table>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="business_all" name="business_all"><label for="business_all" class="width_12pa">全選</label><br>
+                       	 	 	 		<a id="business_related" class="btn">營運相關</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="memberstatistics_q" name="memberstatistics_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="memberstatistics_s" name="memberstatistics_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="historyvipmember_q" name="historyvipmember_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="historyvipmember_s" name="historyvipmember_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="gift_statistics_q" name="gift_statistics_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="gift_statistics_s" name="gift_statistics_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="realtime_online_q" name="realtime_online_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="history_online_q" name="history_online_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="retention_q" name="retention_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="numberloss_q" name="numberloss_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="reflux_q" name="reflux_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="memberstatistics" class="btn width_12pa">會員統計</a>
+                       	 	 	 	  <a id="historyvipmember" class="btn width_12pa">歷史VIP會員查詢</a>
+                       	 	 	 	  <a id="gift_statistics" class="btn width_12pa">儲值統計</a>
+                       	 	 	 	  <a id="realtime_online" class="btn width_12pa">即時在線</a>
+                       	 	 	 	  <a id="history_online" class="btn width_12pa">歷史在線</a>
+                       	 	 	 	  <a id="retention" class="btn width_12pa">留存率</a>
+                       	 	 	 	  <a id="numberloss" class="btn width_12pa">流失數</a>
+                       	 	 	 	  <a id="reflux" class="btn width_12pa">回流數</a>
+                       	 	 	 	  <hr>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 </table>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                       	 <table>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="announcement_all" name="announcement_all"><label for="announcement_all" class="width_12pa">全選</label><br>
+                       	 	 	 		<a id="announcement_management" class="btn">公告管理</a>
+                       	 	 	 		<!--<hr>-->
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="officialwebsite_q" name="officialwebsite_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="officialwebsite_s" name="officialwebsite_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="officialwebsite_banner_q" name="officialwebsite_banner_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="officialwebsite_banner_s" name="officialwebsite_banner_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="ingame_q" name="ingame_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="ingame_s" name="ingame_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="ingame_leaderboard_q" name="ingame_leaderboard_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="ingame_leaderboard_s" name="ingame_leaderboard_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="winner_q" name="winner_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="winner_s" name="winner_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="marquee_q" name="marquee_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="marquee_s" name="marquee_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="broadcast_news_q" name="broadcast_news_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="broadcast_news_s" name="broadcast_news_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <input type="checkbox" id="maintain_edit_q" name="maintain_edit_q">查
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="officialwebsite" class="btn">官網公告</a>
+                       	 	 	 	  <a id="officialwebsite_banner" class="btn">官網Banner</a>
+                       	 	 	 	  <a id="ingame" class="btn">InGame公告</a>
+                       	 	 	 	  <a id="ingame_leaderboard" class="btn">InGame排行榜</a>
+                       	 	 	 	  <a id="winner" class="btn">得獎名單公告</a>
+                       	 	 	 	  <a id="marquee" class="btn">跑馬燈</a>
+                       	 	 	 	  <a id="broadcast_news" class="btn">推播消息</a>
+                       	 	 	 	  <a id="maintain_edit" class="btn">維護視窗編輯</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="activity_marquee_q" name="activity_marquee_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="activity_marquee_s" name="activity_marquee_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="activity_marquee" class="btn width_12pa">活動跑馬燈</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="winner_marquee_q" name="winner_marquee_q">查
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="winner_marquee_s" name="winner_marquee_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">&nbsp;
+                       	 	 	 	</div>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a id="winner_marquee" class="btn width_12pa">得獎跑馬燈</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
+                       	 	 	 	  <hr>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 </table>
+                       </td>
+                     </tr>
+                     <tr>
+                       <td>
+                       	 <table>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="chat_all" name="chat_all"><label for="chat_all" class="width_12pa">全選</label><br>
+                       	 	 	 		<a id="chat_customerservice" class="btn">聊天客服</a>
+                       	 	 	 		<!--<hr>-->
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>&nbsp;<!--<hr>--></td>
+                       	 	 </tr>
+                       	 </table>
+                       </td>
+                     </tr>
+                </tbody>
+              </table>
+              <table>
+                <tr>
+                  <td style="text-align: center;">
+                  	<a class="waves-light btn blue" id="pageprivsave" onclick="privAddCancel('pageprivsave')" style="cursor:pointer;">確定</a>&nbsp;&nbsp;&nbsp;
+                    <a class="waves-light btn blue" id="pageprivcancel" onclick="privAddCancel('pageprivcancel')" style="cursor:pointer;">取消</a>
+                  </td>
+                </tr>
+              </table>
+              <br />
+            </div>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <br />
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script>
+  var rf_fieldPriv_blank = [];
+  var pagePriv_blank = [];
+  var d, divider=11;
+  var iPriv;
+  var arrayFormFieldQueryPriv, arrayPagePriv;
+  var gAvailable_Field_Options = [];
+
+  $.getJSON('/js/rf_field_data.json', function(data) {
+  	//alert(JSON.stringify(data));
+  	gAvailable_Field_Options = data.Available_Field_Options;
+  	//alert(JSON.stringify(gAvailable_Field_Options));
+  	d={};
+    $.each(gAvailable_Field_Options, function(i,v) {
+    	//alert(i);
+    	//alert(Object.keys(v)[0]);
+    	//alert('v['+i+'] = '+ JSON.stringify(v));
+    	//d.field=Object.keys(v)[0];
+    	d=v;
+    	d.priv="";
+      rf_fieldPriv_blank.push(d);
+    });
+    //alert('rf_fieldPriv_blank ==> '+JSON.stringify(rf_fieldPriv_blank));
+  });
+
+  $.getJSON('/js/menu.json', function(data) {
+  	//alert(JSON.stringify(data));
+  	d={};
+    $.each(data.arrayMenu, function(i,v) {
+    	//alert(i);
+    	//alert(Object.keys(v)[0]);
+    	//alert('v['+i+'] = '+ JSON.stringify(v));
+    	//d.field=Object.keys(v)[0];
+    	d=v;
+    	d.priv="";
+      pagePriv_blank.push(d);
+    });
+    //alert('pagePriv_blank ==> '+JSON.stringify(pagePriv_blank));
+  });
+
+	var priv = new Vue({
+		el: '#priviledgeModal',
+		data: {
+			privLists: [
+		 	  //{"classify":"最高管理者", "enabledcounts":1, "disabledcounts":0},
+			  //{"classify":"企劃管理", "enabledcounts":2, "disabledcounts":0},
+			  //{"classify":"營運管理", "enabledcounts":3, "disabledcounts":3}
+			]
+		},
+		methods:{
+			privAdd: function(id,classify,rf_fieldPriv,pagePriv) {
+ 			  console.log("# priviledgeModal: "+id+' '+classify+' '+rf_fieldPriv+' '+pagePriv);
+
+			  var data = {};
+			  data.classify = classify;
+			  data.enabledcounts = 0;
+			  data.disabledcounts = 0;
+			  data.rf_fieldPriv = rf_fieldPriv;
+			  data.pagePriv = pagePriv;
+
+				$.ajax({
+					type: 'POST',
+					data: data,
+			    url: '/api/v1/privlists',
+
+			    success: function(result) {
+			        console.log(JSON.stringify(result));
+			        if(result.error){
+                                 
+			        	swal({
+			        		title: "Priviledge Create Error!",
+			        		text: result.error,
+			        		type: "error",
+			        		confirmButtonText: "OK" 
+			        	},function(){
+			        		location.reload();
+			        	});
+			        }else{
+			        	swal({
+			        		title: "Priviledge Create Success!",
+			        		//text: JSON.stringify(result),
+			        		type: "success",
+			        		confirmButtonText: "OK" 
+			        	},function(){
+                  //alert('success create priviledge');
+			        		location.reload();
+			        	});
+			        }
+			    }
+			  });
+			},
+
+			privEdit: function(id,classify,rf_fieldPriv,pagePriv) {
+ 			  console.log("#priviledgeModal: "+id+' '+classify+' '+rf_fieldPriv+' '+pagePriv);
+
+			  var data = {};
+			  data.classify = classify;
+			  //data.enabledcounts = 0;
+			  //data.disabledcounts = 0;
+			  if(rf_fieldPriv!="")
+			    data.rf_fieldPriv = rf_fieldPriv;
+			  if(pagePriv!="")
+			    data.pagePriv = pagePriv;
+
+				$.ajax({
+					type: 'PUT',
+					data: data,
+			    url: '/api/v1/privlists/'+id,
+
+			    success: function(result) {
+			        console.log(JSON.stringify(result));
+			        if(result.error){
+                                 
+			        	swal({
+			        		title: "Priviledge Modify Error!",
+			        		text: result.error,
+			        		type: "error",
+			        		confirmButtonText: "OK" 
+			        	},function(){
+			        		location.reload();
+			        	});
+			        }else{
+			        	swal({
+			        		title: "Priviledge Modify Success!",
+			        		text: JSON.stringify(result),
+			        		type: "success",
+			        		confirmButtonText: "OK" 
+			        	},function(){
+                  //alert('success modify priviledge');
+			        		location.reload();
+			        	});
+			        }
+			    }
+			  });
+			},
+
+			privDelete: function(id) {
+
+				$.ajax({
+					type: 'DELETE',
+			    url: '/api/v1/privlists/'+id,
+
+			    success: function(result) {
+			        console.log(JSON.stringify(result));
+			        if(result.error){
+			        	swal({
+			        		title: "Priviledge Deletion Error!",
+			        		text: result.error,
+			        		type: "error",
+			        		confirmButtonText: "OK" 
+			        	},function(){
+			        		location.reload();
+			        	});
+			        }else{
+			        	swal({
+			        		title: "Priviledge Deletion Success!",
+			        		text: JSON.stringify(result),
+			        		type: "success",
+			        		confirmButtonText: "OK" 
+			        	},function(){
+                  //alert('success delete priviledge');
+			        		location.reload();
+			        	});
+			        }
+			    }
+			  });
+			}
+    },
+    created: function(){
+      var self = this;
+      /*
+      $.getJSON('/js/privlists.json', function(data) {
+      	//alert('cccccccccccccccc');
+        self.rows = data.arrayData;
+        //alert('ddddddddddddddddddd');
+        //alert('self.rows.length = '+self.rows.length);
+      });
+      */
+	    $.ajax({
+	    	type: 'GET',
+        url: '/api/v1/privlists',
+      
+	      success: function(result) {
+	          console.log(JSON.stringify(result));
+	          if(result.error){
+	          }else{
+                self.privLists = result;
+                //alert(JSON.stringify(self.privLists));
+                //genField('Available');
+                //genField('Selected');
+                //genField('FilterLists');
+            }
+        }
+      });
+    }
+  });
+
+ 	function privAddCancel(s)
+  {
+    //alert(s);
+  	if(s=='privnew')
+  	{
+  	  document.getElementById('addPriv').style.display='';
+  	  //document.getElementById('privnew').src="/images/button_gray.png";
+  	  //document.getElementById('privcancel').src="/images/button_blue.png";
+  	  $("#privnew #img3").attr("src","/images/button_2gray.png");
+  	  $("#privcancel #img3").attr("src","/images/button_2blue.png");
+  	  $("#privnew").addClass("disabled");
+  	  $("#privcancel").removeClass("disabled");
+  	  document.getElementById('privnew').style.pointerEvents = 'none';
+  	  document.getElementById('privcancel').style.pointerEvents = '';
+  	  //document.getElementById('priveditdel').style.display='';
+  	  //document.getElementById('privesave').style.display='';
+  	}
+  	if( (s=='privcancel') || (s=='rf_fieldprivcancel') || (s=='pageprivcancel') )
+  	{
+  		location.reload();
+  	  /*document.getElementById('addPriv').style.display='none';
+  	  $("#privnew #img3").attr("src","/images/button_2blue.png");
+  	  $("#privcancel #img3").attr("src","/images/button_2gray.png");
+  	  $("#privnew").removeClass("disabled");
+  	  $("#privcancel").addClass("disabled");
+      document.getElementById('privnew').style.pointerEvents = '';
+  	  document.getElementById('privcancel').style.pointerEvents = 'none';*/
+  	}
+  	if(s=='rf_fieldprivsave')
+  	{
+  		alert('rf_fieldprivsave ==> selecteditems = '+JSON.stringify(selecteditems));
+  		alert('iPriv._id = '+iPriv._id);
+  		alert('iPriv.classify = '+iPriv.classify);
+  		//rf_fieldPriv_blank = selecteditems;
+  		//alert('rf_fieldPriv_blank = '+JSON.stringify(rf_fieldPriv_blank));
+  		//alert('pagePriv_blank = '+JSON.stringify(pagePriv_blank));
+  		priv.privEdit(iPriv._id,iPriv.classify,arrayFormFieldQueryPriv,arrayPagePriv);
+    }
+  	/*if(s=='rf_fieldprivcancel')
+  	{
+    }*/
+  	if(s=='pageprivsave')
+  	{
+    }
+    /*
+  	if(s=='pageprivcancel')
+  	{
+    }*/
+  }
+  document.getElementById('privcancel').style.pointerEvents = 'none';
+
+ 	function saveclassify()
+  {
+  	//alert(idx);
+  	alert('saveclassify');
+  	//$("#classify").attr({'readonly':true,'style':'borderStyle:none'});
+  	$("#classify").attr({'disabled':true,'readonly':true,'style':'border:none;background-color:#cccccc;'});
+  }
+
+  function editPriv(id)
+  {
+  	document.getElementById('newClassifySettings').style.display='none';
+    document.getElementById('newPrivSettings').style.display='';
+	  $.ajax({
+	  	type: 'GET',
+      url: '/api/v1/privlists/'+id,
+
+	    success: function(result) {
+	        console.log(JSON.stringify(result));
+	        if(result.error){
+	        }else{
+              iPriv = result;
+              //alert(JSON.stringify(iPriv));
+              //classifyName=iPriv.classify;
+              arrayFormFieldQueryPriv = iPriv.rf_fieldPriv;
+              arrayPagePriv = iPriv.pagePriv;
+              //alert(JSON.stringify(arrayFormFieldQueryPriv));
+              //alert(JSON.stringify(arrayPagePriv));
+              genField('rf_fieldPriv');
+              genField('pagePriv');
+          }
+      }
+    });
+  }
+
+  function genField(c)
+  {
+  	var s='';
+
+  	//alert(classify);
+  	$('#classifyPrivModal').html(iPriv.classify);
+  	if(c=='rf_fieldPriv')
+  	{
+      s+="<table id=\"rf_fieldPrivTable\" class=\"bordered\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:950px;\"bgcolor=\"#ffffff\">";
+      s+="  <thead>";
+      s+="    <tr>";
+      s+="    	<th colspan=\""+ divider+"\" style=\"text-align:left;\">報表欄位查看權限</th>";
+      s+="    </tr>";
+      s+="  </thead>";
+      s+="  <tbody>";
+            for(var i=0;i<iPriv.rf_fieldPriv.length;i+=divider)
+            {
+            	if((i+divider)<iPriv.rf_fieldPriv.length)
+            	{
+      s+=" 	       <tr>";
+      s+=" 	         <td colspan=\""+divider+"\" style=\"text-align:center;padding:15px 15px 0 15px\">";
+      s+=" 	         <table class=\"bordered\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:950px;\" bgcolor=\"#ffffff\">";
+      s+="            <tr>";
+                   for(var j=0;j<divider;j++)
+      s+="                <td class=\"table_tr_td_border\">"+ Object.keys(iPriv.rf_fieldPriv[i+j])[0] +"</td>";
+      s+="            </tr>";
+      s+="            <tr>";
+                   for(var j=0;j<divider;j++)
+                   {
+                   	   //alert("arrayFormFieldQueryPriv["+i+j+"].priv = "+arrayFormFieldQueryPriv[i+j].priv);
+                   	   //alert("arrayFormFieldQueryPriv["+i+j+"][Object.keys(arrayFormFieldQueryPriv["+i+j+"])] = "+arrayFormFieldQueryPriv[i+j][Object.keys(arrayFormFieldQueryPriv[i+j])[0]]);
+                   	   var c = (iPriv.rf_fieldPriv[i+j].priv=="r"?"checked":"");
+      s+="                <td class=\"table_tr_td_border no_background\"><input type=\"checkbox\" name=\"ckb_"+ iPriv.rf_fieldPriv[i+j][Object.keys(iPriv.rf_fieldPriv[i+j])[0]] +"\" "+c+"></td>";
+                   }
+      s+="            </tr>";
+      s+="          </table>";
+      s+="        </td></tr>";
+              }
+              else
+              {
+      s+=" 	      <tr>";
+      s+=" 	     	   <td colspan=\""+divider+"\" style=\"text-align:center;padding:15px\">";
+      s+=" 	     	   <table class=\"bordered\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:950px;\" bgcolor=\"#ffffff\">";
+      s+="             <tr>";
+                   for(var k=i;k<iPriv.rf_fieldPriv.length;k++)
+      s+="               <td class=\"table_tr_td_border\">"+Object.keys(iPriv.rf_fieldPriv[k])[0] +"</td>";
+      s+="         </tr>";
+      s+="         <tr>";
+                   for(var k=i;k<iPriv.rf_fieldPriv.length;k++)
+                   {
+                   	   var c = (iPriv.rf_fieldPriv[k].priv=="r"?"checked":"");
+      s+="             <td class=\"table_tr_td_border no_background\"><input type=\"checkbox\" name=\"ckb_"+ iPriv.rf_fieldPriv[k][Object.keys(iPriv.rf_fieldPriv[k])[0]] +"\" "+c+"></td>";
+                   }
+      s+="         </tr>";
+      s+="        </table>";
+      s+="      </td></tr>";
+              }
+            }
+      s+="  </tbody>";
+      s+="</table>";
+      s+="<table>";
+      s+="  <tr>";
+      s+="    <td style=\"text-align: center;\">";
+      s+="    	<a class=\"waves-light btn blue\" id=\"rf_fieldprivsave\" onclick=\"privAddCancel('rf_fieldprivsave')\" style=\"cursor:pointer;\">確定</a>&nbsp;&nbsp;&nbsp;";
+      s+="      <a class=\"waves-light btn blue\" id=\"rf_fieldprivcancel\" onclick=\"privAddCancel('rf_fieldprivcancel')\" style=\"cursor:pointer;\">取消</a>";
+      s+="    </td>";
+      s+="  </tr>";
+      s+="</table>";
+      s+="<br />";
+      s+="<script>\n";
+      s+="gen_rf_FieldDataArray();";
+      s+="$('#rf_fieldPrivTable input').change(function() {\n";
+      //s+="	alert(\"input state changed\");\n";
+      s+="	gen_rf_FieldDataArray();\n";
+      s+="});\n";
+      s+="<\/script>\n";
+      /*
+      s+="function gen_rf_FieldDataArray() {\n";
+      //s+="	alert(\"gen_rf_FieldDataArray\");\n";
+      s+="	selecteditems = [];\n";
+      s+="  $('#rf_fieldPrivTable input[type=\"checkbox\"]').each(function() {\n";
+      //s+="    alert($(this).attr('name'));\n";
+      s+="   	var d={};\n";
+      s+="    var k= ($(this).attr('name').split('ckb_'))[1];\n";
+      //s+="     alert(k);\n";
+      s+="    if ($(this).prop('checked')==true)\n";
+      s+=" 		  d.priv=\"r\";\n";
+      s+=" 		else\n";
+      s+=" 			d.priv=\"\";\n";
+      s+="    $.getJSON('/js/rf_field_data.json', function(data) {\n";
+      s+="      $.each(data.Available_Field_Options, function(i,v) {\n";
+      //s+="        alert(v[Object.keys(v)[0]]);\n";
+      s+="      	if(k==v[Object.keys(v)[0]])\n";
+      s+="      	{\n";
+      s+="      		d[Object.keys(v)[0]]=v[Object.keys(v)[0]];\n";
+      s+="        	selecteditems.push(d);\n";
+      //s+="          alert('111 selecteditems = '+JSON.stringify(selecteditems));\n";
+      s+="      		return false;\n";
+      s+="      	}\n";
+      s+="      });\n";
+      s+="    });\n";
+      //s+="    alert('111 selecteditems = '+JSON.stringify(selecteditems));\n";
+      s+="  });\n";
+      s+="}\n";
+      */
+      $('#rf_fieldPrivModal').empty(); // remove old options
+      $('#rf_fieldPrivModal').html(s);
+    }
+  	if(c=='pagePriv')
+  	{
+    }
+  }
+
+  var selecteditems;
+/*  $('#rf_fieldPrivTable input').change(function() {
+  	alert("input state changed");
+  	gen_rf_FieldDataArray();
+  });
+*/
+  function gen_rf_FieldDataArray() {
+  	selecteditems=[];
+  	//alert("gen_rf_FieldDataArray");
+  	//selecteditems = arrayFormFieldQueryPriv;
+  	//alert('111 gen_rf_FieldDataArray ===> selecteditems'+JSON.stringify(selecteditems));
+    $('#rf_fieldPrivTable input[type="checkbox"]').each(function() {
+     	var d={};
+      var k= ($(this).attr('name').split('ckb_'))[1];
+      for(var i=0;i<gAvailable_Field_Options.length;i++)
+      {
+      	//alert('k='+k);
+      	//alert('gAvailable_Field_Options[i][Object.keys(gAvailable_Field_Options[i])[0]]='+JSON.stringify(gAvailable_Field_Options[i][Object.keys(gAvailable_Field_Options[i])[0]]));
+        if(k==gAvailable_Field_Options[i][Object.keys(gAvailable_Field_Options[i])[0]])
+        {
+        	d[Object.keys(gAvailable_Field_Options[i])[0]]=gAvailable_Field_Options[i][Object.keys(gAvailable_Field_Options[i])[0]];
+        	//selecteditems.push(d);
+        	break;
+        }
+      }
+      if ($(this).prop('checked')==true)
+		     d.priv="r";
+	    else
+		   	d.priv="";
+		  selecteditems.push(d);
+		  //alert('222 gen_rf_FieldDataArray ===> selecteditems'+JSON.stringify(selecteditems));
+      /*$.getJSON('/js/rf_field_data.json', function(data) {
+        $.each(data.Available_Field_Options, function(i,v) {
+        	//alert('2');
+        	if(k==v[Object.keys(v)[0]])
+        	{
+        		d[Object.keys(v)[0]]=v[Object.keys(v)[0]];
+          	selecteditems.push(d);
+        		return false;
+        	}
+        });
+      });*/
+      //alert('1');
+    });
+    //alert('222 gen_rf_FieldDataArray ===> selecteditems'+JSON.stringify(selecteditems));
+    arrayFormFieldQueryPriv = selecteditems;
+    /*if(!selecteditems.length)
+    {
+     selecteditems = arrayFormFieldQueryPriv;
+     alert('333 gen_rf_FieldDataArray ===> selecteditems'+JSON.stringify(selecteditems));
+    }*/
+  }
+
+  function classifymodify(idx)
+  {
+  	$("#classify"+idx).attr({"readonly":false,"style":"borderStyle:solid"});
+  	$("#privedit"+idx).attr({"src":"/images/edit.png","title":"edit","style":"cursor:pointer;"});
+  }
+
+  function confirmClassify(oldval,newvalue,idx)
+  {
+  	//alert('old value : ' + oldval);
+  	//alert('new value : ' + newvalue);
+  	if(oldval != newvalue)
+  	{
+  		/*alert("Plesase complete this action!");
+  		$("#classify"+idx).focus();
+  		return;*/
+  	}
+  	else
+  	{
+  		$("#classify"+idx).attr({"readonly":true,"style":"background-color:#cccccc;border:none;cursor:pointer;color:#000000"});
+  		$("#privedit"+idx).attr({"src":"/images/edit_lock.png","title":"edit_lock","style":"cursor:default;"});
+  	}
+  }
+
+  classifyAction = function(act,_id,idex)
+  {
+    /*alert(act);
+    alert(_id);
+    alert(idex);
+    */
+    if(act == 'add')
+    {
+       swal({
+         title: "Are you sure to add this priviledge?",
+         //text: "You will not be able to recover this account!",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonClass: "btn-danger",
+         confirmButtonText: "Yes",
+         cancelButtonText: "No",
+         closeOnConfirm: false,
+         closeOnCancel: false
+       },
+       function(isConfirm) {
+         if (isConfirm) {
+         	 //alert('success add priviledge');
+       	   priv.privAdd(_id,$("#classify").val(),rf_fieldPriv_blank,pagePriv_blank);
+         } else {
+           //swal("Cancelled", "The priviledge is safe :)", "error");
+           location.reload();
+         }
+       });
+    }
+    if(act == 'edit')
+    {
+       swal({
+         title: "Are you sure to modify this priviledge?",
+         //text: "You will not be able to recover this account!",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonClass: "btn-danger",
+         confirmButtonText: "Yes",
+         cancelButtonText: "No",
+         closeOnConfirm: false,
+         closeOnCancel: false
+       },
+       function(isConfirm) {
+         if (isConfirm) {
+         	//alert('success modify priviledge');
+           priv.privEdit(_id,$("#classify"+idex).val(),"","");
+         } else {
+           //swal("Cancelled", "The priviledge is safe :)", "error");
+           location.reload();
+         }
+       });
+    }
+    if(act == 'delete')
+    {
+       swal({
+         title: "Are you sure to delete this priviledge?",
+         //text: "You will not be able to recover this account!",
+         type: "warning",
+         showCancelButton: true,
+         confirmButtonClass: "btn-danger",
+         confirmButtonText: "Yes",
+         cancelButtonText: "No",
+         closeOnConfirm: false,
+         closeOnCancel: false
+       },
+       function(isConfirm) {
+         if (isConfirm) {
+         	//alert('success delete priviledge');
+           priv.privDelete(_id);
+         } else {
+           //swal("Cancelled", "The priviledge is safe :)", "error");
+           location.reload();
+         }
+       });
+    }
+  };
+
+/*  $(function(){
+    if($("#backend_all label").attr('checked')==true)
+    {
+    	$("#backend_home_q").attr("checked",true);
+    	$("#backend_priviledge_q").attr("checked",true);
+    	$("#backend_priviledge_s").attr("checked",true);
+    	$("#backend_account_management_q").attr("checked",true);
+    	$("#backend_account_management_s").attr("checked",true);
+    	$("#backend_log_q").attr("checked",true);
+    }
+  });
+*/
+  $('input[type=radio][name=backend_all]').click(function()
+  {
+  	$("#backend_home_q").prop('checked', true);
+  	$("#backend_priviledge_q").prop('checked', true);
+  	$("#backend_priviledge_s").prop('checked', true);
+  	$("#backend_account_management_q").prop('checked', true);
+  	$("#backend_account_management_s").prop('checked', true);
+  	$("#backend_log_q").prop('checked', true);
+/*
+     if (this.value == '所有')
+     {
+        $.each(subject_chkbox_id_lists, function(i,v)
+        {
+          $("#backend_home_q").prop('checked', true);
+          $("#"+v).prop("disabled", true);
+        });
+     }
+     else if (this.value == '個別')
+     {
+        $.each(subject_chkbox_id_lists, function(i,v)
+        {
+          $("#"+v).prop('checked', false);
+          $("#"+v).prop("disabled", false);
+        });
+     }
+*/
+  });
+
+
+</script>
+</body>
+</html>

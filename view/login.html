@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--<meta charset="UTF-8">-->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= Title %></title>
+	
+	<!-- Compiled and minified CSS -->
+	<link type="text/css" rel="stylesheet" href="/Materialize/dist/css/materialize.min.css">
+	<!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css" media="screen,projection"> -->
+	<link type="text/css" rel="stylesheet" href="/material-design-icons/iconfont/material-icons.css">
+	<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" href="/sweetalert/dist/sweetalert.css">
+  <style type="text/css">
+  html,body {
+    height: 100%;
+  }
+  html {
+    display: table;
+    margin: auto;
+  }
+  body {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .margin {
+    margin: 0 !important;
+  }
+  /*.row {
+    margin-bottom: 20px;
+  }*/
+  </style>
+</head>
+
+<body class="black">
+  <div id="login-page" class="row">
+    <div id="loginModal" class="col s12 z-depth-6 card-panel">
+      <form class="login-form">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="/images/logo.png" alt="" class="responsive-img valign profile-image-login">
+            <p class="center login-form-text">GoWin2 Admin Login</p>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">supervisor_account</i>
+            <input id="username" name='username' type="text" class="validate" v-model="username">
+						<label for="account">Account</label>
+            <!--<i class="mdi-social-person-outline prefix"></i>
+            <input class="validate" id="email" type="email">
+            <label for="email" data-error="wrong" data-success="right" class="center-align">Email</label>-->
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+						<i class="material-icons prefix">vpn_key</i>
+						<input id="password" name='password' type="password" class="validate" v-model="password">
+						<label for="password">Password</label>
+            <!--<i class="mdi-action-lock-outline prefix"></i>
+            <input id="password" type="password">
+            <label for="password">Password</label>-->
+          </div>
+        </div>
+        <!--
+        <div class="row">          
+          <div class="input-field col s12 m12 l12  login-text">
+              <input type="checkbox" id="remember-me" />
+              <label for="remember-me">Remember me</label>
+          </div>
+        </div>
+        -->
+        <div class="row">
+          <div class="input-field col s12">
+            <!--<a href="/login" class="btn waves-effect waves-light col s12">Login</a>-->
+            <a class="btn waves-effect waves-light col s12" name="submit_action" v-on:click="clickModalLogin" v-on:keyup.enter="clickModalLogin">Login</a>
+          </div>
+          <div class="input-field col s12">
+            <p class="margin center medium-small red-text"><%= ErrorCode %></p>
+          </div>
+          <!--<div class="input-field col s12">
+            <p class="margin center medium-small red-text">密碼錯誤</p>
+          </div>-->
+        </div>
+        <!--<div class="row">
+          <div class="input-field col s12">
+            <p class="margin center medium-small">No account? Please <a href="/register">Register</a></p>
+          </div>
+          <!--
+          <div class="input-field col s6 m6 l6">
+            <p class="margin right-align medium-small"><a href="forgot-password.html">Forgot password?</a></p>
+          </div>
+          -->
+        <!--</div>-->
+      </form>
+    </div>
+  </div>
+
+	<!--Import jQuery before materialize.js-->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+	<script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> -->
+	<script type="text/javascript" src="/Materialize/dist/js/materialize.min.js"></script>
+	<!-- <script src="/js/vue/vue.min.js"></script> -->
+	<script src="/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="/vue/dist/vue.min.js"></script>
+	<script src="/js/login.js"></script>
+</body>
+</html>

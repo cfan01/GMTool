@@ -1,0 +1,309 @@
+﻿<% include includer.html %>
+<!--<script src="/js/data2.js"></script>-->
+<style>
+select {
+  border: 2px solid #9A9A9A;
+}
+select option span {
+	color: red;
+}
+.redText {
+  color: red;
+}
+.greenText {
+  color: green;
+}
+.blueText {
+  color: blue;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div style="text-align:left"><%= Content %><!--基本報表查詢--></div><hr id="line-content">
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">play_arrow</i>欄位清單</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="basicReportFieldLists" class="bordered" border="1" cellpadding="0" cellspacing="0" style="padding-left:20px; width: 500px;" bgcolor='#ffffff'>
+            <tbody>
+              <tr>
+                 <td>可用欄位</td>
+                 <td>&nbsp;</td>
+                 <td>已選取的欄位</td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td rowspan=4>
+                   <select id="available_field" name="available_field" multiple size="8"></select>
+                 </td>
+                 <td>&nbsp;</td>
+                 <td rowspan=4>
+                   <select id="selected_field" name="selected_field" multiple size="8"></select>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript: void(0);" id="upup_action" name="upup_action" v-on:click="clickBasicReportMoveTop" v-on:keyup.enter="clickBasicReportMoveTop"><img src="/images/upup.png"></a>-->
+                 	 <a href="javascript: void(0);" id="upup_action" name="upup_action" onclick="moveOptionTop('selected_field')"><img src="/images/upup.png"></a>
+                 </td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript: void(0);" id="right_action" name="right_action" v-on:click="clickBasicReportMoveRight" v-on:keyup.enter="clickBasicReportMoveRight"><img src="/images/right.png"></a>-->
+                 	 <a href="javascript: void(0);" id="right_action" name="right_action" onclick="moveSelectedOptions('available_field','selected_field',false)"><img src="/images/right.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript: void(0);" id="up_action" name="up_action" v-on:click="clickBasicReportMoveUp" v-on:keyup.enter="clickBasicReportMoveUp"><img src="/images/up.png"></a>-->
+                 	 <a href="javascript: void(0);" id="up_action" name="up_action" onclick="moveOptionUp('selected_field')"><img src="/images/up.png"></a>
+                 </td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript: void(0);" id="left_action" name="left_action" v-on:click="clickBasicReportMoveLeft" v-on:keyup.enter="clickBasicReportMoveLeft"><img src="/images/left.png"></a>-->
+                 	 <a href="javascript: void(0);" id="left_action" name="left_action" onclick="moveSelectedOptions('selected_field','available_field',false,'*')"><img src="/images/left.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript: void(0);" id="down_action" name="down_action" v-on:click="clickBasicReportMoveDown" v-on:keyup.enter="clickBasicReportMoveDown"><img src="/images/down.png"></a>-->
+                 	 <a href="javascript: void(0);" id="down_action" name="down_action" onclick="moveOptionDown('selected_field')"><img src="/images/down.png"></a>
+                 </td>
+              </tr>
+              <tr>
+               	 <td>&nbsp;</td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript: void(0);" id="downdown_action" name="downdown_action" v-on:click="clickBasicReportMoveBottom" v-on:keyup.enter="clickBasicReportMoveBottom"><img src="/images/downdown.png"></a>-->
+                 	 <a href="javascript: void(0);" id="downdown_action" name="downdown_action" onclick="moveOptionBottom('selected_field')"><img src="/images/downdown.png"></a>
+                 </td>
+              </tr>
+              <tr>
+                <td colspan=4 style='text-align: center;'>
+                	<a class="waves-light btn blue" id="save_basic" onclick="SaveCancel(1)">確定</a>&nbsp;&nbsp;&nbsp;
+                  <a class="waves-light btn blue" id="cancel_basic" onclick="SaveCancel(2)">取消</a>	
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Modal Structure -->
+          <div id="dialog-form" title="Save Basic Report Form">
+            <form>
+              <table>
+                <tr><td>Name</td></tr>
+                <tr><td><input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all"></td></tr>
+                <tr><td><input type="submit" tabindex="-1" style="position:absolute; top:-1000px"></td></tr>
+              </table>
+            </form>
+          </div>
+          <!--<div id="dialog-form" class="modal">
+            <div class="modal-content">
+              <div class="input-field col s12">
+                <input id="basic_name" name='basic_name' type="text" class="validate" v-model="basic_name">
+              </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+            </div>
+          </div>-->
+          <br />
+        </div>
+      </li>
+    <!--</ul>
+    <ul class="collapsible" data-collapsible="accordion">-->
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>篩選條件</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="filterConditionModal" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width: 350px;" bgcolor='#ffffff'>
+            <thead>
+              <tr>
+              	<th colspan=2 style='text-align: center;'>
+              		<input name="group1" class="with-gap" type="radio" id="test1" /><label for="test1">帳號啟用</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              		<input name="group1" class="with-gap" type="radio" id="test2" /><label for="test2">帳號關閉</label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                 <!--<tr bgcolor='#0066CC'>
+                   <td><input name="group1" class="with-gap" type="radio" id="test1" />帳號啟用</td>
+                   <td><input name="group1" class="with-gap" type="radio" id="test2" />帳號關閉</td>
+                 </tr>-->
+                 <tr>
+                   <td>管理名稱： </td>
+                   <td>
+                   	 <!--<input type='text' id='managename{{$index}}' name='{{item.managename}}'></input>-->
+                     <select id='permission_{{$index}}' name='permission_{{$index}}'>
+                        <option value="superadmin">SuperAdmin</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                     </select>
+                   </td>
+                 </tr>
+                 <tr>
+                   <td>帳號：</td><td><input type='text' id='account{{$index}}' name='{{item.account}}'></input></td>
+                 </tr>
+                 <tr>
+                   <td>密碼：</td><td><input type='text' id='passwd{{$index}}' name='{{item.passwd}}'></input></td>
+                 </tr>
+                 <tr>
+                   <td>使用者：</td><td><input type='text' id='user{{$index}}' name='{{item.user}}'></input></td>
+                 </tr>
+            </tbody>
+            <tfoot>
+                 <tr>
+                   <td colspan=2 style='text-align: center;'>
+                   	<a class="waves-light btn blue" id="new" onclick="AddCancel(1)">確定</a>&nbsp;&nbsp;&nbsp;
+                    <a class="waves-light btn blue" id="cancel" onclick="AddCancel(2)">取消</a>	
+                   </td>
+                 </tr>
+            </tfoot>
+          </table>
+        <br />
+        </div>
+      </li>
+    </ul>
+<!--
+    <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+      <tbody>
+        <tr>
+            <td style="text-align:center; vertical-align: top;"> 這是 <%= Content %> 頁面!
+            </td>
+        </tr>
+      </tbody>
+    </table>
+-->
+  <br />
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/selectbox.js"></script>
+<!--<script src="/js/basic_report.js"></script>-->
+<script>
+	//var Basic_Form_Nonmove_Options=["GBID","暱稱","註冊入口","會員級別","目前G幣"];
+	var RForms=[];
+
+	$.ajax({
+		type: 'GET',
+		//data: data,
+	  url: '/api/v1/reportforms',
+
+	  success: function(result) {
+	      console.log(JSON.stringify(result));
+	      if(result.error){
+	      	swal({
+	      		title: "Get Report Form Error!",
+	      		text: result.error,
+	      		type: "error",
+	      		confirmButtonText: "OK" 
+	      	},function(){
+	      		location.reload();
+	      	});
+	      }else{
+	      	RForms = result;
+	      }
+	  }
+	});
+
+  function genField(classify)
+  {
+  	if(classify=='Available')
+  	{
+  	  var $el = $("#available_field");
+      $el.empty(); // remove old options
+      $.getJSON('/js/data2.json', function(data) {
+        $.each(data.Available_Field_Options, function(i,value) {
+        	var exclude=0;
+        	$.each(data.Basic_Form_Selected_Field_Options, function(j,val) {
+        	  //if(value=="GBID" || value=="暱稱" || value=="註冊入口" || value=="會員級別" || value=="目前G幣")
+        	  if(value==val)
+        	  {
+        	  	exclude=1;
+        	  	return;
+        	  }
+        	});
+          if(!exclude)
+          {
+            $el.append($("<option></option>").attr("value", i).text(value));
+          }
+        });
+      });
+    }
+  	if(classify=='Selected')
+  	{
+  	  var $el = $("#selected_field");
+      $el.empty(); // remove old options
+      $.getJSON('/js/data2.json', function(data) {
+        $.each(data.Basic_Form_Selected_Field_Options, function(i,value) {
+        	var unmovable=0;
+        	$.each(data.Basic_Form_Nonmove_Options, function(j,val) {
+        	  //if(value=="GBID" || value=="暱稱" || value=="註冊入口" || value=="會員級別" || value=="目前G幣")
+        	  if(value==val)
+        	  {
+        	  	unmovable =1;
+        	  	return;
+        	  }
+        	});
+          if(unmovable)
+          {
+        	  $el.append($("<option></option>").attr("value", i).text('*'+value).css("color","red"));
+        	  //$el.append($("<option></option>").attr("value", i).text('*'+value).addClass('redText'));
+        	}
+          else
+            $el.append($("<option></option>").attr("value", i).text(value));
+        });
+      });
+    }
+  }
+
+  genField('Available');
+  genField('Selected');
+
+  dialog = $("#dialog-form").dialog({
+     autoOpen: false,
+     height: 160,
+     width: 250,
+     modal: true,
+     buttons: {
+       "OK": SaveBasicReportName,
+       "Cancel": function() {
+         dialog.dialog( "close" );
+       }
+     }
+     /*
+     close: function() {
+       //form[0].reset();
+       //allFields.removeClass( "ui-state-error" );
+     }*/
+  });
+  $(".ui-dialog-titlebar").hide();
+
+  /*form = dialog.find("form").on("submit", function(event) {
+     event.preventDefault();
+     SaveBasicReportName();
+  });*/
+
+  function SaveCancel(n)
+  {
+  	if(n==1)
+  	{
+      //$("#save_basic").button().on("click", function() {
+      dialog.dialog("open");
+      //});
+    }
+  	if(n==2)
+  	{
+  		 location.reload();
+    }
+  }
+
+  function SaveBasicReportName()
+  {
+  	
+  }
+
+</script>
+</body>
+</html>

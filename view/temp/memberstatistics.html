@@ -1,0 +1,237 @@
+﻿<% include includer.html %>
+<!--<script src="/js/data2.js"></script>-->
+<style>
+select {
+ border:2px solid #9A9A9A;
+}
+select option span {
+ color:red;
+}
+.redText {
+ color:red;
+}
+.greenText {
+ color:green;
+}
+.blueText {
+ color:blue;
+}
+[type="checkbox"]+label {
+ padding-left:25px;
+}
+label {
+ color: #000000;
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+ padding-left: 25px;
+ width: 15%;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div id="basicformModal" style="text-align:left"><%= Content %></div><!--<hr id="line-content">-->
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>篩選條件</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <div id="filterLists">
+            <table cellspacing=0 cellpadding=0>
+              <tr id="switch_timerange" style="display:;">
+                <td id='timerangetable'></td>
+              </tr>
+              <tr id="switch_timerange_quick" style="display:;">
+                <td style="padding:0;">
+                  <table cellspacing=0 cellpadding=0 width="100%" border=0>
+                    <tr>
+                      <td style="width:15%;">&nbsp;</td>
+                      <td style="font-weight:bold;text-align:left;">
+                      	<div style="float:left;width:4%;">&nbsp;</div>
+                      	<div style="float:left;width:46%;">
+                      		<div>
+                      			<div style="float:left;width:24%;">
+                              <a href="javascript:;" id="1hourago" class="wrapper"><span class="t9">1時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:24%;">
+                              <a href="javascript:;" id="6hourago" class="wrapper"><span class="t9">6時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                              <a href="javascript:;" id="today" class="wrapper"><span class="t8">今日</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="this_week" class="wrapper"><span class="t8">本週</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="this_month" class="wrapper"><span class="t8">本月</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      		</div>
+                      		<div>
+                      			<div style="float:left;width:24%;">
+                      				<a href="javascript:;" id="3hourago" class="wrapper"><span class="t9">3時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:24%;">
+                      				<a href="javascript:;" id="12hourago" class="wrapper"><span class="t9">12時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="yesterday" class="wrapper"><span class="t8">昨日</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="last_week" class="wrapper"><span class="t8">上週</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="last_month" class="wrapper"><span class="t8">上月</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      		</div>
+                      	</div>
+                      	<!--<div style="float:left;width:20%;">&nbsp;</div>-->
+                      	<div style="float:left;width:50%;">&nbsp;</div>
+    	     				    </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        <br />
+        </div>
+      </li>
+    </ul>
+    <div>
+      <div id="queryapp" style="padding-right:18px">
+        <table>
+        	<tr>
+        		<td style='border:0'>
+        	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick="queryResult()"><span class="t1">查詢</span><img id='img1' src='/images/button_2green.png'></a></div>
+        	     <div id="basicformModal_str" style="width:80%;float:left;line-height:36px;text-align:right;">請按下查詢；或進行[欄位清單]或[篩選條件]設定後再進行查詢。</div>
+               <div id="basicformModal_qpage" class="pagination" style='width:80%;float:left;line-height:36px;text-align:left;display:none'>
+                 <ul id='ind1'>
+                   <li v-bind:class="{'disabled': (currPage === 1)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage-1)"><上頁</span>
+                         <img v-if="(currPage === 1)" id='img2' src='/images/button_2gray.png'>
+                       	 <img v-else id='img2' src='/images/button_2blue.png'>
+                       </a></li>
+                   <li v-for="n in totalPage"
+                       v-bind:class="{'active': (currPage === (n+1))}" 
+                       @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                   <li v-bind:class="{'disabled': (currPage === totalPage)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage+1)">下頁></span>
+                         <img v-if="(currPage === totalPage)" id='img2' src='/images/button_2gray.png'>
+                       	 <img v-else id='img2' src='/images/button_2blue.png'>
+                       </a></li>
+                   <li><input type=text size=3 maxlength=3 v-model='gotopageval' style='text-align:center;'></li>
+                   <li><a href='javascript:;' class="wrapper"><span class="t3" @click="setPage({{gotopageval}})">跳頁</span><img id='img2' src='/images/button_2blue.png'></a></li>
+                   <li>
+                   	Results 301 - 350 of 46045 筆
+                   </li>
+                   <li id='divexportExcel' style='padding-top:6px;text-align:right'>
+                     	<a href='javascript:;' class="wrapper"><span class="t4" id="exportExcel">匯出報表</span><img id='img2' src='/images/button_6blue.png'></a>
+                   </li>
+                 </ul>
+               </div>
+            </td>
+          </tr>
+        </table>
+        <div id='searchresult' style='display:none;'>
+          <!--<table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>age</th>
+                <th>gender </th>
+              </tr>
+            </thead>   
+            <tbody>
+              <tr v-for="r in rows 
+                | filterBy filter_name in 'name' 
+                | recordLength 'filteredRowCount' 
+                | limitBy countOfPage pageStart">
+                <td>{{ (currPage-1) * countOfPage + $index + 1 }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.age }}</td>
+                <td>{{ r.gender }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table id="querytable" style='display:none;'>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>age</th>
+                <th>gender</th>
+              </tr>
+            </thead>   
+            <tbody>
+              <tr v-for="r in rows">
+                <td>{{ r.index + 1 }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.age }}</td>
+                <td>{{ r.gender }}</td>
+              </tr>
+            </tbody>
+          </table>-->
+        </div>
+        <table id="basicformModal_qpage1" style='display:none;'>
+        	<tr>
+        		<td colspan=4 style='border:0'>
+               <div id="basicformModal" style="width:20%;float:left;text-align:left">&nbsp;</div>
+               <div id="basicformModal_qpage" class="pagination" style='width:80%;float:left;line-height:36px;text-align:left'>
+                  <ul id='ind2'>
+                    <li v-bind:class="{'disabled': (currPage === 1)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage-1)"><上頁</span>
+                          <img v-if="(currPage === 1)" id='img2' src='/images/button_2gray.png'>
+                        	<img v-else id='img2' src='/images/button_2blue.png'>
+                        </a></li>
+                    <li v-for="n in totalPage"
+                        v-bind:class="{'active': (currPage === (n+1))}" 
+                        @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                    <li v-bind:class="{'disabled': (currPage === totalPage)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage+1)">下頁></span>
+                          <img v-if="(currPage === totalPage)" id='img2' src='/images/button_2gray.png'>
+                        	<img v-else id='img2' src='/images/button_2blue.png'>
+                        </a></li>
+                   <li><input id=gotopageval1 type=text size=3 maxlength=3 style='text-align:center;'></li>
+                   <li><a href='javascript:;' class="wrapper"><span class="t3" @click="setPage({{gotopageval}})">跳頁</span><img id='img2' src='/images/button_2blue.png'></a></li>
+                   <li>
+                   	Results 301 - 350 of 46045 筆
+                   </li>
+                   <li id='divexportExcel1' style='padding-top:6px;text-align:right'>
+                     	<a href='javascript:;' class="wrapper"><span class="t4" id="exportExcel1">匯出報表</span><img id='img2' src='/images/button_6blue.png'></a>
+                   </li>
+                 </ul>
+                  <!--
+                  <ul id='ind2'>
+                    <li v-bind:class="{'disabled': (currPage === 1)}" 
+                        @click.prevent="setPage(currPage-1)"><a href="#">Prev</a></li>
+                    <li v-for="n in totalPage"
+                        v-bind:class="{'active': (currPage === (n+1))}" 
+                        @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                    <li v-bind:class="{'disabled': (currPage === totalPage)}" 
+                        @click.prevent="setPage(currPage+1)"><a href="#">Next</a></li>
+                  </ul>
+                  -->
+               </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  <br/>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<!--<script src="/js/filesaver.min.js"></script>
+<script src="/js/tableexport.min.js"></script>-->
+<!--<script src="/js/accounting.min.js"></script>-->
+<script src="/js/jquery.tabletoCSV.js"></script>
+<script src="/js/selectbox.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/machine_query_history.js"></script>
+</body>
+</html>

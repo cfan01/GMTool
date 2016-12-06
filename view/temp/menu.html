@@ -1,0 +1,295 @@
+<div id="temp">
+  <div class="article">
+     <!--<hr id="line-top">-->
+     <div id="nav">
+        <!--<p class="title">關鍵字廣告</p>-->
+        <div class="btns">
+        	<div class="col s12">
+        	  <ul class="tabs">
+              <li class="tab col s3"><a href="#lv0"<% if (Category=='member'){%> class="active"<%}%> onclick="location.href='/member/basic_report'">會員相關</a></li>
+              <li class="tab col s3"><a href="#lv1"<% if (Category=='game'){%> class="active"<%}%> onclick="location.href='/game/game_monitor'">遊戲相關</a></li>
+              <li class="tab col s3"><a href="#lv2"<% if (Category=='business'){%> class="active"<%}%> onclick="location.href='/business/memberstatistics'">營運相關</a></li>
+              <li class="tab col s3"><a href="#lv3"<% if (Category=='announcement'){%> class="active"<%}%> onclick="location.href='/announcement/officialwebsite'">公告管理</a></li>
+              <li class="tab col s3"><a href="#lv4" <% if (Category=='chat'){%> class="active"<%}%> onclick="location.href='/chat/customer_service'">聊天客服</a></li>
+              <!--<li class="tab col s3"><a href="#lv4">聊天客服</a></li>-->
+              <li class="tab col s3"><a href="#lv5"<% if (Category=='backend'){%> class="active"<%}%> onclick="location.href='/backend/home'">後台管理</a></li>
+            </ul>
+        	</div>
+
+        	<div id="lv0" class="col s12 menu2">
+            <div id="it00">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='basic_report' || Page=='game_info' || Page=='gift_info' ||
+                	Page=='point_info' || Page=='login_info' || Page=='user_report'){%> select_active<%}%>" data-activates='rl00'>會員報表查詢</a>
+                <ul id="rl00" class='dropdown-content'>
+                  <li><a href="/member/basic_report"<% if (Page=='basic_report'){%> class="current"<%}%>><span></span>基本報表查詢</a></li>
+                  <li><a href="/member/game_info"<% if (Page=='game_info'){%> class="current"<%}%>><span></span>會員遊戲概況查詢</a></li>
+                  <li><a href="/member/gift_info"<% if (Page=='gift_info'){%> class="current"<%}%>><span></span>會員儲值概況查詢</a></li>
+                  <li><a href="/member/point_info"<% if (Page=='point_info'){%> class="current"<%}%>><span></span>會員轉點概況查詢</a></li>
+                  <li><a href="/member/login_info"<% if (Page=='login_info'){%> class="current"<%}%>><span></span>會員登入概況查詢</a></li>
+                  <% if (Property.hasOwnProperty("user_reportforms")){%>
+                    <% if (Property.user_reportforms.length>0){%>
+                     <% for (var i=0;i<Property.user_reportforms.length;i++){%>
+                       <% if (Property.user_reportforms[i]!=null){%>
+                         <li><a href="/member/user<%=(i+1)%>_report"<% if (URLs=='/member/user'+(i+1)+'_report'){%> class="current"<%}%>><span></span><%= Property.user_reportforms[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                    <%}%>
+                  <%}%>
+                </ul>
+            </div>
+            <div id="it01">
+                <a href="/member/settings" class="dropdown-button m1<% if (Page=='settings'){%> select_active<%}%>" data-activates='rl01'>會員設定</a>
+            </div> 
+            <div id="it02">
+                <a href="/member/treasure" class="dropdown-button m1<% if (Page=='treasure'){%> select_active<%}%>" data-activates='rl02'>會員持有寶物查詢</a>
+            </div> 
+            <div id="it03">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='game_currency' || Page=='game_history' || Page=='gift_history' || Page=='point_history' ||
+                	Page=='pullcolor_history' || Page=='login_history'){%> select_active<%}%>" data-activates='rl03'>會員歷程查詢</a>
+                <ul id="rl03" class='dropdown-content'>
+                  <li class="m2"><a href="/member/game_currency"<% if ((Page=='game_currency')||(Page=='user_game_currency')){%> class="current"<%}%>><span></span>遊戲幣異動歷程查詢</a>
+                  <% if (Property.user_historyquery.hasOwnProperty("game_currency")){%>
+                    <% if (Property.user_historyquery.game_currency.length>0){%>
+                       <ul id="qi01">
+                     <% for (var i=0;i<Property.user_historyquery.game_currency.length;i++){%>
+                       <% if (Property.user_historyquery.game_currency[i]!=null){%>
+                           <li><a href="/member/user<%=(i+1)%>_game_currency"<% if (URLs=='/member/user'+(i+1)+'_game_currency'){%> class="current"<%}%>><span></span><%= Property.user_historyquery.game_currency[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                       </ul>
+                    <%}%>
+                  <%}%>
+                  </li>
+                  <li class="m2"><a href="/member/game_history"<% if ((Page=='game_history')||(Page=='user_game_history')){%> class="current"<%}%>><span></span>會員遊戲歷程查詢</a>
+                  <% if (Property.user_historyquery.hasOwnProperty("game_history")){%>
+                    <% if (Property.user_historyquery.game_history.length>0){%>
+                       <ul id="qi02">
+                     <% for (var i=0;i<Property.user_historyquery.game_history.length;i++){%>
+                       <% if (Property.user_historyquery.game_history[i]!=null){%>
+                           <li><a href="/member/user<%=(i+1)%>_game_history"<% if (URLs=='/member/user'+(i+1)+'_game_history'){%> class="current"<%}%>><span></span><%= Property.user_historyquery.game_history[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                       </ul>
+                    <%}%>
+                  <%}%>
+                  </li>
+                  <li class="m2"><a href="/member/gift_history"<% if ((Page=='gift_history')||(Page=='user_gift_history')){%> class="current"<%}%>><span></span>儲值歷程查詢</a>
+                  <% if (Property.user_historyquery.hasOwnProperty("gift_history")){%>
+                    <% if (Property.user_historyquery.gift_history.length>0){%>
+                       <ul id="qi03">
+                     <% for (var i=0;i<Property.user_historyquery.gift_history.length;i++){%>
+                       <% if (Property.user_historyquery.gift_history[i]!=null){%>
+                           <li><a href="/member/user<%=(i+1)%>_gift_history"<% if (URLs=='/member/user'+(i+1)+'_gift_history'){%> class="current"<%}%>><span></span><%= Property.user_historyquery.gift_history[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                       </ul>
+                    <%}%>
+                  <%}%>
+                  </li>
+                  <li class="m2"><a href="/member/point_history"<% if ((Page=='point_history')||(Page=='user_point_history')){%> class="current"<%}%>><span></span>轉點歷程查詢</a>
+                  <% if (Property.user_historyquery.hasOwnProperty("point_history")){%>
+                    <% if (Property.user_historyquery.point_history.length>0){%>
+                       <ul id="qi04">
+                     <% for (var i=0;i<Property.user_historyquery.point_history.length;i++){%>
+                       <% if (Property.user_historyquery.point_history[i]!=null){%>
+                           <li><a href="/member/user<%=(i+1)%>_point_history"<% if (URLs=='/member/user'+(i+1)+'_point_history'){%> class="current"<%}%>><span></span><%= Property.user_historyquery.point_history[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                       </ul>
+                    <%}%>
+                  <%}%>
+                  </li>
+                  <li class="m2"><a href="/member/pullcolor_history"<% if ((Page=='pullcolor_history')||(Page=='user_pullcolor_history')){%> class="current"<%}%>><span></span>會員拉彩歷程查詢</a>
+                  <% if (Property.user_historyquery.hasOwnProperty("pullcolor_history")){%>
+                    <% if (Property.user_historyquery.pullcolor_history.length>0){%>
+                       <ul id="qi05">
+                     <% for (var i=0;i<Property.user_historyquery.pullcolor_history.length;i++){%>
+                       <% if (Property.user_historyquery.pullcolor_history[i]!=null){%>
+                           <li><a href="/member/user<%=(i+1)%>_pullcolor_history"<% if (URLs=='/member/user'+(i+1)+'_pullcolor_history'){%> class="current"<%}%>><span></span><%= Property.user_historyquery.pullcolor_history[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                       </ul>
+                    <%}%>
+                  <%}%>
+                  </li>
+                  <li class="m2"><a href="/member/login_history"<% if ((Page=='login_history')||(Page=='user_login_history')){%> class="current"<%}%>><span></span>個人登入歷程查詢</a>
+                  <% if (Property.user_historyquery.hasOwnProperty("login_history")){%>
+                    <% if (Property.user_historyquery.login_history.length>0){%>
+                       <ul id="qi06">
+                     <% for (var i=0;i<Property.user_historyquery.login_history.length;i++){%>
+                       <% if (Property.user_historyquery.login_history[i]!=null){%>
+                           <li><a href="/member/user<%=(i+1)%>_login_history"<% if (URLs=='/member/user'+(i+1)+'_login_history'){%> class="current"<%}%>><span></span><%= Property.user_historyquery.login_history[i].formname %></a></li>
+                       <%}%>
+                     <%}%>
+                       </ul>
+                    <%}%>
+                    <%}%>
+                  </li>
+                </ul>
+            </div>
+            <div id="it04">
+                <a href="/member/suspended" class="dropdown-button m1<% if (Page=='suspended'){%> select_active<%}%>" data-activates='rl04'>停權查詢</a>
+            </div>
+        	</div>
+
+        	<div id="lv1" class="col s12 grey darken-2">
+            <div id="it10">
+                <a href="/game/game_monitor" class="dropdown-button m1<% if (Page=='game_monitor'){%> select_active<%}%>" data-activates='rl10'>遊戲監控與設定</a>
+            </div>
+            <div id="it11">
+                <a href="/game/equipment_monitor" class="dropdown-button m1<% if (Page=='equipment_monitor'){%> select_active<%}%>" data-activates='rl11'>機台監控與設定</a>
+            </div>
+            <div id="it12">
+                <a href="/game/jp_monitor" class="dropdown-button m1<% if (Page=='jp_monitor'){%> select_active<%}%>" data-activates='rl12'>連線彩金監控與設定</a>
+            </div>
+            <div id="it13">
+                <a href="/game/special_probability" class="dropdown-button m1<% if (Page=='special_probability'){%> select_active<%}%>" data-activates='rl13'>特殊機率名單與設定</a>
+            </div>
+            <div id="it14">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='item_task'||Page=='item_reward'||Page=='item_synthesis'||Page=='item_point_notice'){%> select_active<%}%>" data-activates='rl14'>常態發送虛寶設定</a>
+                <ul id="rl14" class='dropdown-content'>
+                  <li><a href="/game/item_task"<% if (Page=='item_task'){%> class="current"<%}%>><span></span>虛寶卡任務</a></li>
+                  <li><a href="/game/item_reward"<% if (Page=='item_reward'){%> class="current"<%}%>><span></span>升等獎勵</a></li>
+                  <li><a href="/game/item_synthesis"<% if (Page=='item_synthesis'){%> class="current"<%}%>><span></span>合成虛寶卡</a></li>
+                </ul>
+            </div>
+            <div id="it15">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='treasure_dispatch'||Page=='treasure_statistics'||Page=='item_query'||Page=='item_statistics'){%> select_active<%}%>" data-activates='rl15'>寶物管理</a>
+                <ul id="rl15" class='dropdown-content'>
+                  <li><a href="/game/treasure_dispatch"<% if (Page=='treasure_dispatch'){%> class="current"<%}%>><span></span>寶物發送</a></li>
+                  <li><a href="/game/treasure_statistics"<% if (Page=='treasure_statistics'){%> class="current"<%}%>><span></span>寶物統計</a></li>
+                  <li><a href="/game/item_query"<% if (Page=='item_query'){%> class="current"<%}%>><span></span>虛寶卡查詢</a></li>
+                  <li><a href="/game/item_statistics"<% if (Page=='item_statistics'){%> class="current"<%}%>><span></span>虛寶卡統計</a></li>
+                </ul>
+            </div>
+            <div id="it16">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='robot_in_use'||Page=='robot_settings'||Page=='robot_lists'||Page=='robot_stress_test'){%> select_active<%}%>" data-activates='rl16'>機器人管理</a>
+                <ul id="rl16" class='dropdown-content'>
+                  <li><a href="/game/robot_in_use"<% if (Page=='robot_in_use'){%> class="current"<%}%>><span></span>運作中機器人</a></li>
+                  <li><a href="/game/robot_settings"<% if (Page=='robot_settings'){%> class="current"<%}%>><span></span>設定機器人</a></li>
+                  <li><a href="/game/robot_lists"<% if (Page=='robot_lists'){%> class="current"<%}%>><span></span>機器人列表</a></li>
+                  <li><a href="/game/robot_stress_test"<% if (Page=='robot_stress_test'){%> class="current"<%}%>><span></span>設定壓測</a></li>
+                </ul>
+            </div>
+            <div id="it17">
+                <a href="/game/demo_management" class="dropdown-button m1<% if (Page=='demo_management'){%> select_active<%}%>" data-activates='rl17'>試玩管理</a>
+            </div>
+            <div id="it18">
+                <a href="/game/luckymoney" class="dropdown-button m1<% if (Page=='luckymoney'){%> select_active<%}%>" data-activates='rl18'>開運金設置</a>
+            </div>
+            <div id="it19">
+                <a href="/game/game_query_history" class="dropdown-button m1<% if (Page=='game_query_history'){%> select_active<%}%>" data-activates='rl19'>遊戲查詢與歷程</a>
+            </div>
+            <div id="it110">
+                <a href="/game/machine_query_history" class="dropdown-button m1<% if (Page=='machine_query_history'){%> select_active<%}%>" data-activates='rl110'>機台遊戲歷程查詢</a>
+            </div>
+            <div id="it111">
+                <a href="/game/machine_status" class="dropdown-button m1<% if (Page=='machine_status'){%> select_active<%}%>" data-activates='rl111'>單一機台狀態查詢</a>
+            </div>
+            <div id="it112">
+                <a href="/game/game_sort" class="dropdown-button m1<% if (Page=='game_sort'){%> select_active<%}%>" data-activates='rl112'>遊戲排序設定</a>
+            </div>
+        	</div>
+
+        	<div id="lv2" class="col s12 grey darken-2">
+            <div id="it20">
+                <a href="/business/memberstatistics" class="dropdown-button m1<% if (Page=='memberstatistics'){%> select_active<%}%>" data-activates='rl20'>會員統計</a>
+            </div>
+            <div id="it21">
+                <a href="/business/historyvipmember" class="dropdown-button m1<% if (Page=='historyvipmember'){%> select_active<%}%>" data-activates='rl21'>歷史VIP會員查詢</a>
+            </div>
+            <div id="it22">
+                <a href="/business/gift_statistics" class="dropdown-button m1<% if (Page=='gift_statistics'){%> select_active<%}%>" data-activates='rl22'>儲值統計</a>
+            </div>
+            <div id="it23">
+                <a href="/business/realtime_online" class="dropdown-button m1<% if (Page=='realtime_online'){%> select_active<%}%>" data-activates='rl23'>即時在線</a>
+            </div>
+            <div id="it24">
+                <a href="/business/history_online" class="dropdown-button m1<% if (Page=='history_online'){%> select_active<%}%>" data-activates='rl24'>歷史在線</a>
+            </div>
+            <div id="it25">
+                <a href="/business/retention" class="dropdown-button m1<% if (Page=='retention'){%> select_active<%}%>" data-activates='rl25'>留存率</a>
+            </div>
+            <div id="it26">
+                <a href="/business/numberloss" class="dropdown-button m1<% if (Page=='numberloss'){%> select_active<%}%>" data-activates='rl26'>流失數</a>
+            </div>
+            <div id="it27">
+                <a href="/business/reflux" class="dropdown-button m1<% if (Page=='reflux'){%> select_active<%}%>" data-activates='rl27'>回流數</a>
+            </div>
+        	</div>
+
+        	<div id="lv3" class="col s12 grey darken-2">
+            <div id="it30">
+                <a href="/announcement/officialwebsite" class="dropdown-button m1<% if (Page=='officialwebsite'){%> select_active<%}%>" data-activates='rl30'>官網公告</a>
+            </div>
+            <div id="it31">
+                <a href="/announcement/officialwebsite_banner" class="dropdown-button m1<% if (Page=='officialwebsite_banner'){%> select_active<%}%>" data-activates='rl31'>官網Banner</a>
+            </div>
+            <div id="it32">
+                <a href="/announcement/ingame" class="dropdown-button m1<% if (Page=='ingame'){%> select_active<%}%>" data-activates='rl32'>InGame公告</a>
+            </div>
+            <div id="it33">
+                <a href="/announcement/ingame_leaderboard" class="dropdown-button m1<% if (Page=='ingame_leaderboard'){%> select_active<%}%>" data-activates='rl33'>InGame排行榜</a>
+            </div>
+            <div id="it34">
+                <a href="/announcement/winner" class="dropdown-button m1<% if (Page=='winner'){%> select_active<%}%>" data-activates='rl34'>得獎名單公告</a>
+            </div>
+            <div id="it35">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='activity_marquee' || Page=='winner_marquee'){%> select_active<%}%>" data-activates='rl35'>跑馬燈</a>
+                <ul id="rl35" class='dropdown-content'>
+                  <li><a href="/announcement/activity_marquee"<% if (Page=='activity_marquee'){%> class="current"<%}%>><span></span>活動跑馬燈</a></li>
+                  <li><a href="/announcement/winner_marquee"<% if (Page=='winner_marquee'){%> class="current"<%}%>><span></span>得獎跑馬燈</a></li>
+                </ul>
+            </div>
+            <div id="it36">
+                <a href="/announcement/broadcast_news" class="dropdown-button m1<% if (Page=='broadcast_news'){%> select_active<%}%>" data-activates='rl36'>推播消息</a>
+            </div>
+            <div id="it37">
+                <a href="/announcement/maintain_edit" class="dropdown-button m1<% if (Page=='maintain_edit'){%> select_active<%}%>" data-activates='rl37'>維護視窗編輯</a>
+            </div>
+        	</div>
+
+        	<!--<div id="lv4" class="col s12 grey darken-2">
+        	</div>-->
+        	<div id="lv4" class="col s12 grey darken-2">
+            <div id="it40">
+                <a href="/chat/basic_channel" class="dropdown-button m1<% if (Page=='basic_channel'){%> select_active<%}%>" data-activates='rl40'>頻道基本設定</a>
+            </div>
+            <div id="it41">
+                <a href="/chat/private_lists" class="dropdown-button m1<% if (Page=='private_lists'){%> select_active<%}%>" data-activates='rl41'>查詢私頻列表</a>
+            </div>
+            <div id="it42">
+                <a href="/chat/public_members" class="dropdown-button m1<% if (Page=='public_members'){%> select_active<%}%>" data-activates='rl42'>查詢公頻成員</a>
+            </div>
+            <div id="it43">
+                <a href="/chat/private_members" class="dropdown-button m1<% if (Page=='private_members'){%> select_active<%}%>" data-activates='rl43'>查詢私頻成員</a>
+            </div>
+            <div id="it44">
+                <a href="/chat/individual_history" class="dropdown-button m1<% if (Page=='individual_history'){%> select_active<%}%>" data-activates='rl44'>查詢個人發言歷程</a>
+            </div>
+            <div id="it45">
+                <a href="/chat/dialog_history" class="dropdown-button m1<% if (Page=='dialog_history'){%> select_active<%}%>" data-activates='rl45'>查詢頻道對話歷程</a>
+            </div>
+            <div id="it46">
+                <a href="/chat/customer" class="dropdown-button m1<% if (Page=='customer'){%> select_active<%}%>" data-activates='rl46'>客服</a>
+            </div>
+        	</div>
+
+
+        	<div id="lv5" class="col s12 grey darken-2">
+            <div id="it50">
+                <a href="/backend/home" class="dropdown-button m1<% if (Page=='home'){%> select_active<%}%>" data-activates='rl50'>首頁</a>
+            </div>
+            <div id="it51">
+                <a href="/backend/priviledge" class="dropdown-button m1<% if (Page=='priviledge' || Page=='priviledge_edit'){%> select_active<%}%>" data-activates='rl51'>權限設置</a>
+            </div>
+            <div id="it52">
+                <a href="/backend/account_management" class="dropdown-button m1<% if (Page=='account_management' || Page=='account_management_edit'){%> select_active<%}%>" data-activates='rl52'>帳號管理</a>
+            </div>
+            <div id="it53">
+                <a href="/backend/log" class="dropdown-button m1<% if (Page=='log'){%> select_active<%}%>" data-activates='rl53'>後台操作log</a>
+            </div>
+        	</div>
+
+        </div>
+     </div>

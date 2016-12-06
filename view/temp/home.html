@@ -1,0 +1,67 @@
+﻿<% include includer.html %>
+<!--<script src="/js/status_data.json"></script>-->   
+<style>
+  table thead {
+  	background: #000000;
+  	color: white;
+  	font-size: 14px
+  }
+  /*.collapsible-body {
+  	padding-left: 30px;
+  }*/
+  label {
+  	color: white;
+  }
+  .table_tr_td_border {
+    border: 1px solid #000;
+    text-align: center;
+    background-color: #666666;
+    color: white;
+  }
+  .no_background {
+    background-color: #ffffff;
+  }
+  /*table, th, td {
+  	border: 1px solid #000;
+  	text-align: center;
+  }*/
+  /*input[type="checkbox"] {
+  	position: initial;
+  }*/
+  [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: initial;
+    opacity: initial;
+  }
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single" style="padding:18px;">
+    <div style="width:950px;text-align:right">
+    	<div style="width:850px;float:left">
+    	  更新時間 (時:分:秒)：&nbsp;&nbsp;<span id='sec'></span>&nbsp;&nbsp;
+      </div>
+      <div style="width:100px;float:left">
+      <!--<a class="waves-light btn blue" id="cancel" onclick="location.href='/backend/home'">擷取最新</a>-->
+        <a href="#" class="wrapper" onclick="location.href='/backend/home'"><span class="t4">擷取最新</span><img id='img2' src='/images/button_6blue.png'></a>
+      </div>
+    </div>
+    <div style="width:950px;">
+      <div id='serverstatus' style="float:left; width:200px;"></div>
+      <div id='gamestatus' style="float:left; width:500px;"></div>
+      <div id='todayoperatestatus' style="float:left; width:250px;"></div>
+    </div>
+    <br />
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/home.js"></script>
+</body>
+</html>

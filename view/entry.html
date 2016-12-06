@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+<meta http-equiv="content-language" content="zh-tw" />
+<title><%= Title %></title>
+<!-- Compiled and minified CSS -->
+<!--<link rel="stylesheet" href="css/materialize.min.css"  type="text/css">-->
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="css/content.css">
+</head>
+
+<body>
+<!-- ================================= top =========================================================== -->
+<div id="top">
+  <div class="temp">
+    <a href="/" id="header"><h1 id="title"><!--<font>網頁設計</font>、<font>網站行銷</font>--></h1></a>
+    <div id="sns"></div>
+  </div>
+</div>
+
+<!-- ================================= content =========================================================== -->
+<div id="temp">
+  <div class="article">
+     <div id="nav">
+        <p class="title">Welcome ! <%= User %>&nbsp;&nbsp;&nbsp;<a href="/logout">登出 (Logout)</a></p>
+     </div>
+     <!--<div id="nav">
+        <div class="btns">
+<div id="rt0">
+    <a href="/" class="dropdown-button m1" data-activates='rl0'>首頁</a>
+    <ul id="rl0" class='dropdown-content'>
+      <li><a href="/home/calendar"><span></span>月曆/日曆模式</a></li>
+      <li><a href="/home/server_status"><span></span>伺服器狀態</a></li>
+      <li><a href="/logout"><span></span>登出 (Logout)</a></li>
+    </ul>
+</div>
+<div id="rt1">
+    <a href="javascript: void(0);" class="dropdown-button m1" data-activates='rl1'>遊戲管理</a> 
+    <ul id="rl1" class='dropdown-content'>
+      <li><a href="/game/info"><span></span>登入公告管理</a></li>
+      <li><a href="/game/push_notification"><span></span>推播管理</a></li>
+      <li><a href="/game/bonus"><span></span>獎勵管理</a></li>
+      <li><a href="/game/parameters"><span></span>彩帶管理</a></li>
+      <li><a href="/game/activity"><span></span>活動時段管理</a></li>
+      <li><a href="/game/robot"><span></span>機器人管理</a></li>
+      <li><a href="/game/speciallBonus"><span></span>活動派發道具</a></li>
+      <li><a href="/game/rankViewList"><span></span>遊戲排行榜面板管理</a></li>
+    </ul>
+</div> 
+<div id="rt2">
+    <a href="javascript: void(0);" class="dropdown-button m1" data-activates='rl2'>玩家資料查詢</a> 
+    <ul id="rl2" class='dropdown-content'>
+      <li><a href="/user/account" class="active"><span></span>帳號資料查詢</a></li>
+      <li><a href="/user/financial_history"><span></span>遊戲歷史記錄</a></li>
+      <li><a href="/user/friend_list"><span></span>朋友列表</a></li>
+      <li><a href="/user/equipment"><span></span>道具列表</a></li>
+    </ul>
+</div> 
+<div id="rt3">
+    <a href="javascript: void(0);" class="dropdown-button m1" data-activates='rl3'>營運資料查詢</a> 
+    <ul id="rl3" class='dropdown-content'>
+      <li><a href="/business/statistics"><span></span>營運報表</a></li>
+      <li><a href="/business/billing"><span></span>儲值記錄</a></li>
+      <li><a href="/business/cashflow"><span></span>儲值幣歷史指數</a></li>
+      <li><a href="/business/jpleaderboard"><span></span>彩金排行榜</a></li>
+      <li><a href="/business/scoreleaderboard"><span></span>得分王排行榜</a></li>
+      <li><a href="/business/tomco_card"><span></span>堂口卡查詢</a></li>
+    </ul>
+</div>
+<div id="rt4">
+    <a href="javascript: void(0);" class="dropdown-button m1" data-activates='rl4'>後台使用者管理</a> 
+    <ul id="rl4" class='dropdown-content'>
+      <li><a href="/account/setup"><span></span>管理者帳號設定</a></li>
+      <li><a href="/account/list"><span></span>管理者列表</a></li>
+      <li><a href="/account/log"><span></span>後台操作 LOG</a></li>
+      <li><a href="/account/auth_edit"><span></span>權限管理</a></li>
+    </ul>
+</div>
+
+<div id="rt5">
+    <a href="javascript: void(0);" class="dropdown-button m1" data-activates='rl5'>聊天室管理</a> 
+    <ul id="rl5" class='dropdown-content'>
+      <li><a href="/chat/chatroom"><span></span>開關聊天室</a></li>
+      <li><a href="/chat/common_board"><span></span>公共聊天室公告</a></li>
+      <li><a href="/chat/boardcast_msg"><span></span>廣播訊息</a></li>
+      <li><a href="/chat/chat_login"><span></span>聊天官方帳號 登入</a></li>
+    </ul>
+</div>
+</div>
+   </div>
+-->
+  <div class="inside single c1">
+  <!--<table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
+    <tbody>
+        <tr>
+            <td style="text-align:center; vertical-align: top;"> 這是 <%= Content %> 頁面!
+            </td>
+        </tr>
+    </tbody>
+  </table>-->
+
+	<table border="0" cellspacing="12" cellpadding="0" style="width: 980px; height: 620px;">
+		<tr>
+			<!--<td width=33% height=33% bgcolor="#2361BB" class="text-status" onclick="javascript: location.href = 'home.htm';">-->
+			<td width=33% height=33% bgcolor="#2361BB" class="text-status" onclick="javascript: void(0);">
+				<div class="icon10"><!--<img src='images/home.png'>--></div>首頁
+			</td>
+			<!--<td width=33% height=33% bgcolor="#3034D4" class="text-status" onclick="javascript: location.href = 'game.htm';">-->
+				<td width=33% height=33% bgcolor="#3034D4" class="text-status" onclick="javascript: void(0);">
+				<div class="icon10"><!--<img src='images/game.png'>--></div>遊戲管理
+			</td>
+			<!--<td width=33% height=33% bgcolor="#00A21B" class="text-status" onclick="javascript: location.href = 'user.htm';">-->
+			<td width=33% height=33% bgcolor="#00A21B" class="text-status" onclick="javascript: void(0);">
+				<div class="icon10"><!--<img src='images/user.png'>--></div>玩家資料查詢
+			</td>
+		</tr>
+		<tr>
+			<!--<td width=33% height=33% bgcolor="#973AA9" class="text-status" onclick="javascript: location.href = 'business.htm';">-->
+			<td width=33% height=33% bgcolor="#973AA9" class="text-status" onclick="javascript: void(0);">
+				<div class="icon10"><!--<img src='images/business.png'>--></div>營運資料查詢
+			</td>
+			<!--<td width=33% height=33% bgcolor="#468FE7" class="text-status" onclick="javascript: location.href = 'backend.htm';">-->
+			<td width=33% height=33% bgcolor="#468FE7" class="text-status" onclick="javascript: void(0);">
+				<div class="icon10"><!--<img src='images/backend.png'>--></div>後台使用者管理
+			</td>
+			<!--<td width=33% height=33% bgcolor="#C95E41" class="text-status" onclick="javascript: location.href = 'chatroom.htm';">-->
+			<td width=33% height=33% bgcolor="#C95E41" class="text-status" onclick="javascript: void(0);">
+				<div class="icon10"><!--<img src='images/chatroom.png'>--></div>聊天室管理
+			</td>
+		</tr>
+	</table>
+  <!--<br />-->
+  </div>
+
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<div id="bottom">
+  <div class="temp">
+    <div class="contact">
+    </div>
+    <div id="footer">
+        <div id="google_translate_element"></div>
+        <p id="explorer">建議使用最新版本 <a href="http://www.google.com/chrome/index.html?hl=zh-TW&brand=CHMB&utm_campaign=zh-TW&utm_source=zh-TW-ha-apac-tw-sk&utm_medium=ha&gclid=COG06_bJhb8CFcJ8vQod05QArg" target="_blank">Google</a>、<a href="http://windows.microsoft.com/zh-tw/internet-explorer/download-ie" target="_blank">Internet Explorer</a> 瀏覽器觀看<br>
+        ©茂為歐買尬數位科技股份有限公司（MacroWell OMG Digital Entertainment Co., Ltd.）All Rights Reserved .</p>
+    
+    </div>
+  </div>
+</div>
+
+        <!--Import jQuery before materialize.js-->
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+        <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> -->
+        <script type="text/javascript" src="/Materialize/dist/js/materialize.min.js"></script>
+        <!-- <script src="/js/vue/vue.min.js"></script> -->
+        <script type="text/javascript" src="/vue/dist/vue.min.js"></script>
+        <script type="text/javascript" src="/js/form.js"></script>
+        <!--<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/jquery.thumbox.1.2.js"></script>-->
+        <!-- Compiled and minified JavaScript -->
+        <!--<script src="js/materialize.min.js"></script>-->
+        <script src="/js/tjs.js"></script>
+        <script type="text/javascript" src="/f.txt"></script>
+<!--google language -->
+        <!--<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'zh-TW', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+}
+        </script>-->
+        <script>
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement(
+                        {pageLanguage: 'zh-TW'},
+                        'google_translate_element'
+                    );
+                /*
+                   To remove the "powered by google",
+                   uncomment one of the following code blocks.
+                   NB: This breaks Google's Attribution Requirements:
+                   https://developers.google.com/translate/v2/attribution#attribution-and-logos
+                */
+        
+                // Native (but only works in browsers that support query selector)
+                if(typeof(document.querySelector) == 'function') {
+                    document.querySelector('.goog-logo-link').setAttribute('style', 'display: none');
+                    document.querySelector('.goog-te-gadget').setAttribute('style', 'font-size: 0');
+                }
+                
+                // If you have jQuery - works cross-browser - uncomment this
+                jQuery('.goog-logo-link').css('display', 'none');
+                jQuery('.goog-te-gadget').css('font-size', '0');
+            }
+</script>
+
+</body>
+</html>

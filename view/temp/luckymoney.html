@@ -1,0 +1,204 @@
+﻿<% include includer.html %>
+<style>
+#temp .article .inside.single{
+  padding-top: 0px;
+  padding-left: 0px;
+  background-color: #FFFFBB;
+}
+label {
+  color: #000000;
+}
+[type="checkbox"]+label {
+  padding-left: 23px;
+  width: 17%;
+}
+#gameConditionSetting [type="checkbox"]+label {
+  width: auto;
+}
+#newintelligence [type="checkbox"]+label {
+  width: auto;
+}
+#temp .article .inside {
+	background-color: #ffffff;
+}
+.collapsible {
+  margin: 0px;
+}
+.collapsible-header, .collapsible-body {
+  background-color: #ffffff;
+  padding:0 20px;
+}
+div#queryapp {
+	width:100%;
+	padding-left:20px;
+	background-color: #cccccc;
+}
+#subjectquery .collapsible-header, #subjectquery .collapsible-body {
+  background-color: #ffffff;
+}
+/*#temp .article {
+  width: 1480px;
+}*/
+input:not([type]), input[type=text] {
+  width: 100%;
+  /*width: auto;*/
+}
+#bet_retrieve_pa {
+	width: 50%;
+}
+#gameConditionSetting select, #newintelligence select {
+	/*width: 40%;*/
+}
+/*td, th {
+	width: 30%;
+}*/
+/*#gameConditionSetting tbody tr td #game_switch tr td {
+	width: 20%;
+}*/
+#gameConditionSetting tbody tr td, #newintelligence tbody tr td {
+  /*width: 35%;*/
+  font-weight: bold;
+}
+textarea {
+  width: 360px;
+  height: 80px;
+}    
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  /*height:150px;*/
+  height:195px;
+  overflow:auto;  
+  /*margin-top:20px;*/
+}
+#table-wrapper table {
+  width:100%;   
+}
+#table-wrapper table * {
+  /*background:yellow;*/
+  /*color:black;*/
+  /*padding-left:0;*/
+}
+#table-wrapper table thead th .text {
+  /*position:absolute;*/
+  top:-25px;
+  z-index:2;
+  height:25px;
+  width:47%;
+  /*border:1px solid red;*/
+  background-color:#666666;
+  color:white;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div style="padding:10px 45px;background-color:#CCCCCC;width:100%;height:45px;">
+      <div style="float:left;text-align:left;width:12%;">自動即時更新：</div>
+      <div style="float:left;">
+      	<input type="radio" id="autoupdate_yes" name="autoupdate" value="yes">
+      	<label for="autoupdate_yes">是</label>&nbsp;&nbsp;&nbsp;
+        <input type="radio" id="autoupdate_no" name="autoupdate" value="no" checked>
+        <label for="autoupdate_no">否</label>
+      </div>
+    </div>
+    <div id="queryapp" style="padding:0px 35px;">
+      <table bgcolor="#cccccc">
+      	<tr>
+      		<td style='border:0'>
+      	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick="queryResult()"><span class="t1">確定</span><img id='img1' src='/images/button_2green.png'></a></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+    <div id="show_result">
+      <!--<div style="padding:10px 45px 0 45px;background-color:#ffffff;width:100%;height:50px">
+      	<div style="float:left;text-align:left;width:35%;padding-top:10px;">
+           開運金總額：&nbsp;4,475,426,154
+        </div>
+      	<div style="float:left;text-align:right;width:65%;">
+           更新時間：&nbsp;<span id="sec">00:00:33&nbsp;之前</span>
+           <a class="waves-light btn blue" id="cancel" onclick="location.href='/game/luckymoney'">擷取最新</a>
+        </div>
+      </div>
+      <ul class="collapsible" data-collapsible="expandable">
+        <li>
+          <div class="collapsible-header active"><i class="material-icons">play_arrow</i>開運金設定</div>
+          <div class="collapsible-body" style="text-align:center;padding-left:45px;">
+            <table id="newintelligence" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:50%;" bgcolor='#ffffff'>
+              <tr>
+                 <td style="width:25%;text-align:left;">開運金領取後使用期限</td>
+                 <td style="width:20%;text-align:left;"><input type="text" id="luckymoney_expire" name="luckymoney_expire" value="" size="3" onkeypress="return (event.charCode>=48&amp;&amp;event.charCode<=57)" style="text-align:center;width:20%">&nbsp;日</td>
+              </tr>
+              <tr>
+                 <td colspan=2 style="width:25%;text-align:left;"><input type="checkbox" id="clear_all" name="clear_all" class="filled-in"><label for="clear_all">立即清除所有帳號開運金</label></td>
+              </tr>
+              <tr>
+                <td colspan=2 style="color:red;font-weight:bold;">※無法清除信件內的開運金，勾選按下變更設定成功後生效，</td>
+              </tr>
+              <tr>
+                <td colspan=2 style="color:red;font-weight:bold;">生效後回到未勾選狀態。建議與維護時間配合</td>
+              </tr>
+            </table>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header active"><i class="material-icons">play_arrow</i>小提示內容編輯</div>
+          <div class="collapsible-body" style="text-align:center;padding-left:45px;">
+            <table border="0" cellpadding="0" cellspacing="0" style="width:100%;" bgcolor='#ffffff'>
+              <tr>
+                <td>
+                	<textarea id="comingsoon_content" style="background-color:#ffffff;width:80%;height:100px;">
+開運金使用期限{0}天
+到期後清空
+請把握機會使用
+                  </textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan=2 style="color:red;font-weight:bold;">※ 字串變數{0}代表後台使用者設定的使用期限天數</td>
+              </tr>
+            </table>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header active"><i class="material-icons">play_arrow</i>大提示內容編輯</div>
+          <div class="collapsible-body" style="text-align:center;padding-left:45px;">
+            <table border="0" cellpadding="0" cellspacing="0" style="width:100%;" bgcolor='#ffffff'>
+              <tr>
+                <td>
+                	<textarea id="comingsoon_content" style="background-color:#ffffff;width:80%;height:180px;">
+1.贈送的遊戲幣，凡掛有開運金標籤的遊戲，即可使用開運金押注。
+2.進遊戲後將優先使用開運金，以每局押分為基準，若該局有贏分則優先回補該局的開運金，其他贏分成為G幣。
+3.使用開運金時，只能以該遊戲最低分台的最小押注進行遊玩；開運金用完畢即可調高押注。
+4.開運金有使用期限。
+5.要領出信件內開運金，必須先用盡原有開運金才可領出新的。
+                  </textarea>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+      <div style="padding:10px 45px;background-color:#ffffff;width:100%;height:60px;">
+        <div style="text-align:center;"><a id='save' class="btn waves-effect waves-light">變更設定</a></div>
+      </div>-->
+    </div>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+<% include save_dialog.html %>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/luckymoney.js"></script>
+</body>
+</html>

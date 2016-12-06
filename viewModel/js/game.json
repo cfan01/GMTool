@@ -1,0 +1,439 @@
+{
+   "Game_Subjects" : [{"海底樂園":"sea_paradise"},
+                      {"金鑽列車":"gowin_car"},
+                      {"將軍傳":"general_bio"},
+                      {"狩魔之塔":"hunt_magic_tower"},
+                      {"亂世梟雄":"dignity_in_troubled_times"},
+                      {"俏財神":"qiao_fortuna"},
+                      {"馬雅歷險":"mayan_adventure"},
+                      {"捕魚大師":"fishing_master"},
+                      {"海灘排球":"beach_volleyball"},
+                      {"俠盜傳奇":"grand_theft_auto_legends"},
+                      {"銀河探險隊":"galaxy_expedition"},
+                      {"大海賊":"great_pirates"}
+                     ],
+
+   "Game_Monitor_Info" : [ {"mayan_adventure" : {
+                                                "Latest_News": {"number_in_use":{"normal":54,"tester":10},
+                                                                "reserved_number":12,
+                                                                "num_of_Board":9541124,
+                                                                "total_bet":50154100,
+                                                                "total_score":50000000,
+                                                                "final_total_score":50004100,
+                                                                "real_rtp":99.6927,
+                                                                "total_winlose":150000
+                                                               },
+                                                "Game_Settings": {"condition":{"lv":1},
+                                                                  "game_switch":{"android_switch":"close_comingsoon",
+                                                                                 "web_switch":"open",
+                                                                                 "kick_off_time":300,
+                                                                                 "comingsoon_time":180,
+                                                                                 "comingsoon_content":"海底樂園將於[%time]秒後關閉維護"},
+                                                                  "multiple_switch":"open",
+                                                                  "largest_winscore":{"ckb_largest_winscore":true,"largest_winscore":100000000},
+                                                                  "bet_setting":{"basic_singlelinebet":10,"bet_level":10},
+                                                                  "howmanyscoremachine": {"howmanyscore0":{"ckb_howmanyscore0":true,
+                                                                                                           "name_show0":"900分台",
+                                                                                                           "fmachine_num_mayan_adventure_0a":"1",
+                                                                                                           "tmachine_num_mayan_adventure_0a":"80",
+                                                                                                           "fmachine_num_mayan_adventure_1a":"126",
+                                                                                                           "tmachine_num_mayan_adventure_1a":"130",
+                                                                                                           "fmachine_num_mayan_adventure_2a":"131",
+                                                                                                           "tmachine_num_mayan_adventure_2a":"150",
+                                                                                                           "fmachine_num_mayan_adventure_3a":"156",
+                                                                                                           "tmachine_num_mayan_adventure_3a":"165",
+                                                                                                           "fmachine_num_mayan_adventure_4a":"166",
+                                                                                                           "tmachine_num_mayan_adventure_4a":"170"
+                                                                                                           },
+                                                                                          "howmanyscore1":{"ckb_howmanyscore1":true,
+                                                                                                           "name_show1":"1800分台",
+                                                                                                           "fmachine_num_mayan_adventure_0b":"81",
+                                                                                                           "tmachine_num_mayan_adventure_0b":"110",
+                                                                                                           "fmachine_num_mayan_adventure_1b":"171",
+                                                                                                           "tmachine_num_mayan_adventure_1b":"175",
+                                                                                                           "fmachine_num_mayan_adventure_2b":"176",
+                                                                                                           "tmachine_num_mayan_adventure_2b":"180",
+                                                                                                           "fmachine_num_mayan_adventure_3b":"181",
+                                                                                                           "tmachine_num_mayan_adventure_3b":"185",
+                                                                                                           "fmachine_num_mayan_adventure_4b":"186",
+                                                                                                           "tmachine_num_mayan_adventure_4b":"190"
+                                                                                                           },
+                                                                                          "howmanyscore2":{"ckb_howmanyscore2":true,
+                                                                                                           "name_show2":"4500分台",
+                                                                                                           "fmachine_num_mayan_adventure_0c":"111",
+                                                                                                           "tmachine_num_mayan_adventure_0c":"125",
+                                                                                                           "fmachine_num_mayan_adventure_1c":"151",
+                                                                                                           "tmachine_num_mayan_adventure_1c":"155",
+                                                                                                           "fmachine_num_mayan_adventure_2c":"191",
+                                                                                                           "tmachine_num_mayan_adventure_2c":"195",
+                                                                                                           "fmachine_num_mayan_adventure_3c":"196",
+                                                                                                           "tmachine_num_mayan_adventure_3c":"200",
+                                                                                                           "fmachine_num_mayan_adventure_4c":"201",
+                                                                                                           "tmachine_num_mayan_adventure_4c":"205"
+                                                                                                           },
+                                                                                          "howmanyscore3":{"ckb_howmanyscore3":false,
+                                                                                                           "name_show3":"18000分台",
+                                                                                                           "fmachine_num_mayan_adventure_0d":"206",
+                                                                                                           "tmachine_num_mayan_adventure_0d":"210",
+                                                                                                           "fmachine_num_mayan_adventure_1d":"211",
+                                                                                                           "tmachine_num_mayan_adventure_1d":"215",
+                                                                                                           "fmachine_num_mayan_adventure_2d":"216",
+                                                                                                           "tmachine_num_mayan_adventure_2d":"220",
+                                                                                                           "fmachine_num_mayan_adventure_3d":"221",
+                                                                                                           "tmachine_num_mayan_adventure_3d":"225",
+                                                                                                           "fmachine_num_mayan_adventure_4d":"226",
+                                                                                                           "tmachine_num_mayan_adventure_4d":"230"
+                                                                                                           }
+                                                                                          },
+                                                                  "probability_setting":96,
+                                                                  "compensate":{"ckb_compensate":true,"compensate_set":5},
+                                                                  "individual_winnings_retrieve_pa":1.5,
+                                                                  "basic_level":10,
+                                                                  "board_num":{"board_switch":"yes","number_of_board":1},
+                                                                  "g_money":{"g_switch":"yes","g_money":1},
+                                                                  "enter_bonus":{"bonus_switch":"yes","bonus":1},
+                                                                  "winning_multiple":{"winning_multiple_switch":"yes","winning_multiple":1},
+                                                                  "winnings":{"winnings_switch":"yes","winnings":1},
+                                                                  "ckb_lucky_money_use":false,
+                                                                  "ckb_gift_switch":false
+                                                                 }
+                                               }
+                           }
+                         ],
+
+   "Equipment_Monitor_Info" : [ {"mayan_adventure" : [{"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                      },
+                                                      {"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                       
+                                                      },
+                                                      {"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                       
+                                                      },
+                                                      {"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                       
+                                                      },
+                                                      {"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                       
+                                                      },
+                                                      {"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                       
+                                                      },
+                                                      {"tester":false,
+                                                       "bet_rate":"1:1",
+                                                       "nickname":"nickname",
+                                                       "rtp":"96",
+                                                       "status":"using",
+                                                       "gameboardnumber":1341,
+                                                       "total_bet":154100,
+                                                       "total_score":146395,
+                                                       "final_total_score":175674,
+                                                       "condition":"",
+                                                       "real_rtp":95,
+                                                       "total_winlose":-21574,
+                                                       "robot_placement":"",
+                                                       "probability_setting":96,
+                                                       "big_prize":"",
+                                                       "small_prize":"",
+                                                       "specific_jp":"",
+                                                       "Equip_Owner_Info": {"gbid":"xxx",
+                                                                            "lv":"52",
+                                                                            "memberlevel":"白鑽",
+                                                                            "g_money":849741,
+                                                                            "luckymoney":0,
+                                                                            "personalrtp":92.1245,
+                                                                            "chargepointsthismonth":452451456
+                                                                           }
+                                                       
+                                                      }
+                                                     ]
+                                }
+                              ],
+
+       "JP_Monitor_Info" : {"Latest_News": {"cumulative_bets":4475426154,
+                                            "total_cumulative_score":35803409,
+                                            "real_extraction":0.8,
+                                            "jp_threshold_show":{
+                                                                 "JP1":{"cumulative_numofwins":45,"cumulative_score":1475426154,"current_score":12345678,"jp_threshold":15040010},
+                                                                 "JP2":{"cumulative_numofwins":153,"cumulative_score":975426154,"current_score":2345678,"jp_threshold":2509000},
+                                                                 "JP3":{"cumulative_numofwins":894,"cumulative_score":575426154,"current_score":345678,"jp_threshold":400500},
+                                                                 "JP4":{"cumulative_numofwins":1524,"cumulative_score":275426154,"current_score":45678,"jp_threshold":50080}
+                                                                }
+                                           },
+                            "JP_Settings": {"common_game_lists":["sea_paradise","gowin_car","mayan_adventure","beach_volleyball","christmas_marley","hibiscus"],
+                                            "parameter_settings":{"JP1":{"base_set":500000,"uplimit_set":5000000,"bet_retrieve_pa":0.01,"bet_threshold_pa":51,"jp_retrieve1":"yes"},
+                                                                  "JP2":{"base_set":250000,"uplimit_set":1100000,"bet_retrieve_pa":0.05,"bet_threshold_pa":26,"jp_retrieve2":"yes"},
+                                                                  "JP3":{"base_set":40000,"uplimit_set":350000,"bet_retrieve_pa":0.1,"bet_threshold_pa":11,"jp_retrieve3":"yes"},
+                                                                  "JP4":{"base_set":17500,"uplimit_set":40000,"bet_retrieve_pa":0.3,"bet_threshold_pa":11,"jp_retrieve4":"yes"}}
+                                           }
+                           },
+
+       "Luckymoney_Info" : {"Luckymoney": {"totalamount": 4475426154,
+                                           "expiration": 7
+                                          },
+                            "Hint": {"Small": "開運金使用期限{0}天\n到期後清空\n請把握機會使用",
+                                     "Big": "1.贈送的遊戲幣，凡掛有開運金標籤的遊戲，即可使用開運金押注。\n2.進遊戲後將優先使用開運金，以每局押分為基準，若該局有贏分則優先回補該局的開運金，其他贏分成為G幣。\n3.使用開運金時，只能以該遊戲最低分台的最小押注進行遊玩；開運金用完畢即可調高押注。\n4.開運金有使用期限。\n5.要領出信件內開運金，必須先用盡原有開運金才可領出新的。"
+                                    }
+                           },
+
+       "Demo_Management_Info" : {"PeopleCount": {"running": 72,
+                                                  "uplimit": 100
+                                                },
+                                 "Settings": {"Game_Subjects": [
+                                                                {"sea_paradise": {"switch":"open",
+                                                                                  "liver":1,
+                                                                                  "limit":50,
+                                                                                  "tester":100
+                                                                                 }
+                                                                },
+                                                                {"gowin_car": {"switch":"open",
+                                                                               "liver":1,
+                                                                               "limit":20,
+                                                                               "tester":0
+                                                                               }
+                                                                },
+                                                                {"general_bio": {"switch":"open",
+                                                                                 "liver":10,
+                                                                                 "limit":10,
+                                                                                 "tester":30
+                                                                                }
+                                                                },
+                                                                {"hunt_magic_tower": {"switch":"close",
+                                                                                      "liver":0,
+                                                                                      "limit":20,
+                                                                                      "tester":0
+                                                                                     }
+                                                                },
+                                                                {"dignity_in_troubled_times": {"switch":"close",
+                                                                                               "liver":0,
+                                                                                               "limit":0,
+                                                                                               "tester":0
+                                                                                              }
+                                                                },
+                                                                {"qiao_fortuna": {"switch":"close",
+                                                                                  "liver":0,
+                                                                                  "limit":0,
+                                                                                  "tester":0
+                                                                                 }
+                                                                },
+                                                                {"mayan_adventure": {"switch":"close",
+                                                                                     "liver":0,
+                                                                                     "limit":0,
+                                                                                     "tester":0
+                                                                                    }
+                                                                },
+                                                                {"fishing_master": {"switch":"close",
+                                                                                    "liver":0,
+                                                                                    "limit":0,
+                                                                                    "tester":0
+                                                                                   }
+                                                                },
+                                                                {"beach_volleyball": {"switch":"close",
+                                                                                      "liver":0,
+                                                                                      "limit":0,
+                                                                                      "tester":0
+                                                                                     }
+                                                                },
+                                                                {"grand_theft_auto_legends": {"switch":"close",
+                                                                                              "liver":0,
+                                                                                              "limit":0,
+                                                                                              "tester":0
+                                                                                             }
+                                                                },
+                                                                {"galaxy_expedition": {"switch":"close",
+                                                                                       "liver":0,
+                                                                                       "limit":0,
+                                                                                       "tester":0
+                                                                                      }
+                                                                },
+                                                                {"great_pirates": {"switch":"close",
+                                                                                   "liver":0,
+                                                                                   "limit":0,
+                                                                                   "tester":0
+                                                                                  }
+                                                                },
+                                                                {"christmas_marley": {"switch":"close",
+                                                                                      "liver":0,
+                                                                                      "limit":0,
+                                                                                      "tester":0
+                                                                                     }
+                                                                },
+                                                                {"fruit_tray": {"switch":"close",
+                                                                                "liver":0,
+                                                                                "limit":0,
+                                                                                "tester":0
+                                                                               }
+                                                                },
+                                                                {"7pk": {"switch":"close",
+                                                                         "liver":0,
+                                                                         "limit":0,
+                                                                         "tester":0
+                                                                        }
+                                                                },
+                                                                {"baccarat": {"switch":"close",
+                                                                              "liver":0,
+                                                                              "limit":0,
+                                                                              "tester":0
+                                                                             }
+                                                                },
+                                                                {"sic_bo": {"switch":"close",
+                                                                            "liver":0,
+                                                                            "limit":0,
+                                                                            "tester":0
+                                                                           }
+                                                                },
+                                                                {"hibiscus": {"switch":"close",
+                                                                              "liver":0,
+                                                                              "limit":0,
+                                                                              "tester":0
+                                                                             }
+                                                                }
+                                                               ],
+                                              "demomoney_initial":100000
+                                             }
+                                }
+
+}

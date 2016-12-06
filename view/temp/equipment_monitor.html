@@ -1,0 +1,352 @@
+﻿<% include includer.html %>
+<style>
+#temp .article .inside.single{
+  padding-top: 0px;
+  padding-left: 0px;
+  background-color: #FFFFBB;
+}
+label {
+  color: #000000;
+}
+[type="checkbox"]+label {
+  padding-left: 23px;
+  width: 17%;
+}
+#gameConditionSetting [type="checkbox"]+label {
+  width: auto;
+}
+#newintelligence [type="checkbox"]+label {
+  width: auto;
+}
+/*#temp .article .inside {
+	background-color: #ffffff;
+}*/
+.collapsible {
+  margin: 0px;
+}
+div#queryapp {
+	width:100%;
+	padding-left:20px;
+	background-color: #cccccc;
+}
+#subjectquery .collapsible-header, #subjectquery .collapsible-body {
+  background-color: #ffffff;
+}
+#temp .article {
+  width: 1280px;
+}
+input:not([type]), input[type=text] {
+  /*width: 36%;*/
+  width: auto;
+}
+#gameConditionSetting select, #newintelligence select {
+	/*width: 40%;*/
+}
+/*td, th {
+	width: 30%;
+}*/
+/*#gameConditionSetting tbody tr td #game_switch tr td {
+	width: 20%;
+}*/
+#gameConditionSetting tbody tr td, #newintelligence tbody tr td {
+  /*width: 35%;*/
+  font-weight: bold;
+}
+textarea {
+  width: 360px;
+  height: 80px;
+}    
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  width: 220px;
+  height:210px;
+  overflow:auto;  
+  /*margin-top:20px;*/
+}
+#table-wrapper table {
+  width:100%;   
+}
+#table-wrapper table * {
+  /*background:yellow;*/
+  /*color:black;*/
+  /*padding-left:0;*/
+}
+#table-wrapper table thead th .text {
+  /*position:absolute;*/
+  top:-25px;
+  z-index:2;
+  height:25px;
+  width:47%;
+  /*border:1px solid red;*/
+  background-color:#666666;
+  color:white;
+}
+#game_subject_lists [type="radio"]:not(:checked)+label,
+#game_subject_lists [type="radio"]:checked+label {
+  padding-left: 25px;
+  width: 100px;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>選擇主題</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; width:950px;" bgcolor='#CCCCCC'>
+            <tr>
+              <td>
+              	<div style="width:50%;float:left">
+              	  <div style="float:left;width:25%;">自動即時更新：</div>
+              	  <div style="float:left;">
+              	  	<input type="radio" id="autoupdate_yes" name="autoupdate" value="yes">
+              	  	<label for="autoupdate_yes">是</label>&nbsp;&nbsp;&nbsp;
+                    <input type="radio" id="autoupdate_no" name="autoupdate" value="no" checked>
+                    <label for="autoupdate_no">否</label>
+                  </div>
+                </div>
+                <div style="width:50%;float:left">
+           	      <div style="text-align:right">
+                    <div style="width:85%;float:left">
+                      更新時間：&nbsp;&nbsp;<span id='sec'></span>&nbsp;&nbsp;
+                    </div>
+                    <div style="width:10%;float:left">
+                      <a href="#" class="wrapper" onclick="location.href='/game/equipment_monitor'"><span class="t4">擷取最新</span><img id='img2' src='/images/button_6blue.png'></a>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!--<tr>
+              <td>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="subject_all" name="gamesubject" value="所有">
+             		  <label for="subject_all">所有</label>
+             		</div>
+              </td>
+            </tr>-->
+            <tr>
+              <td>
+              	<!--<div style="float:left;width:10%;">
+            		  <input type="radio" id="subject_individual" name="gamesubject" value="個別" checked>
+             		  <label for="subject_individual">個別</label>
+             		</div>-->
+              	<div id="game_subject_lists" style="float:left;width:90%;"></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <div id="queryapp">
+      <table bgcolor="#cccccc">
+      	<tr>
+      		<td style='border:0'>
+      	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick="queryResult()"><span class="t1">確定</span><img id='img1' src='/images/button_2green.png'></a></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+   <!------------------------------------------ Show Query Subject Result Begin -------------------------------------------------------->
+   <div id="div_subjectquery">
+     <!--<table>
+      <tr><td>
+       <div id="subjectquery" style="width:20%;background-color:#ffffff;float:left;border: 1px solid #000000;">
+        <table id="newintelligence" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;">
+          <tbody>
+            <tr>
+               <td style="text-align:right;width:40%;">機台編號：</td>
+               <td style="text-align:left;width:60%;">001</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;width:40%;">押注倍率：</td>
+               <td style="text-align:left;">1:1</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">使用者暱稱：</td>
+               <td style="text-align:left;">暱稱一二三四</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">使用者RTP：</td>
+               <td style="text-align:left;">96%</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">狀態：</td>
+               <td style="text-align:left;" colspan=2>
+               	<div style="float:left;width:50%;">保留/使用</div>
+                <div style="float:left;width:50%;">
+                 <select id="u45236_input">
+                   <option value="重置">重置</option>
+                   <option value="踢離">踢離</option>
+                   <option selected="" value="N/A">N/A</option>
+                 </select>
+                </div>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="collapsible" data-collapsible="expandable">
+          <li>
+            <div id="" class="collapsible-header"><i class="material-icons">play_arrow</i>機台擁有者資訊</div>
+            <div id="" class="collapsible-body" style="text-align:center;padding:0 18px;">
+                <div id="table-wrapper">
+                  <div id="table-scroll">
+                    <table id="newintelligence" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;" bgcolor='#E4E4E4'>
+                      <tbody>
+                        <tr>
+                           <td style="text-align:right;width:40%;">GBID：</td>
+                           <td style="text-align:left;width:60%;">1:1</td>
+                        </tr>
+                        <tr>
+                           <td style="text-align:right;">LV：</td>
+                           <td style="text-align:left;">52</td>
+                        </tr>
+                        <tr>
+                           <td style="text-align:right;">會員級別：</td>
+                           <td style="text-align:left;">白鑽</td>
+                        </tr>
+                        <tr>
+                           <td style="text-align:right;">G幣：</td>
+                           <td style="text-align:left;">849,741</td>
+                        </tr>
+                        <tr>
+                           <td style="text-align:right;">開運金：</td>
+                           <td style="text-align:left;">0</td>
+                        </tr>
+                        <tr>
+                           <td style="text-align:right;">個人RTP：</td>
+                           <td style="text-align:left;">92.1245%</td>
+                        </tr>
+                        <tr>
+                           <td style="text-align:right;">本月押分：</td>
+                           <td style="text-align:left;">452,451,456</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+          </li>
+        </ul>
+        <table id="newintelligence" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;">
+          <tbody>
+            <tr>
+               <td style="text-align:right;width:50%;">機台遊戲局數：</td>
+               <td style="text-align:left;width:50%;">1,541</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">機台總押注：</td>
+               <td style="text-align:left;">154,100</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">機台總得分：</td>
+               <td style="text-align:left;">146,395</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">機台最後總得分：</td>
+               <td style="text-align:left;">175,674</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">進入條件：</td>
+               <td style="text-align:left;">無</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">機台實際RTP：</td>
+               <td style="text-align:left;">95%</td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">機台總輸贏：</td>
+               <td style="text-align:left;"><font color="red">-21,574</font></td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">機器人：</td>
+               <td style="text-align:left;">
+                 <select id="u45229_input">
+                   <option value="不安插(預設)">不安插(預設)</option>
+                   <option value="安插">安插</option>
+                 </select>
+               </td>
+            </tr>
+     
+            <tr>
+               <td style="text-align:right;">機率設定：</td>
+               <td style="text-align:left;">
+                 <select id="u45229_input">
+                   <option selected="" value="96% (預設)">96% (預設)</option>
+                   <option value="98%">98%</option>
+                   <option value="100%">100%</option>
+                   <option value="102%">102%</option>
+                   <option value="96%">96%</option>
+                   <option value="94%">94%</option>
+                   <option value="92%">92%</option>
+                   <option value="90%">90%</option>
+                   <option value="88%">88%</option>
+                   <option value="80%">80%</option>
+                   <option value="70%">70%</option>
+                   <option value="60%">60%</option>
+                   <option value="50%">50%</option>
+                 </select>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">指定大獎：</td>
+               <td style="text-align:left;">
+                 <select id="u45229_input">
+                   <option value="BG">BG</option>
+                   <option value="FG">FG</option>
+                   <option value="各獎項">各獎項</option>
+                   <option selected="" value="N/A">N/A</option>
+                 </select>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">指定小獎：</td>
+               <td style="text-align:left;">
+                 <select id="u45229_input">
+                   <option value="N/A">N/A</option>
+                   <option value="小獎代碼1">小獎代碼1</option>
+                   <option value="小獎代碼2">小獎代碼2</option>
+                   <option value="小獎代碼3">小獎代碼3</option>
+                 </select>
+               </td>
+            </tr>
+            <tr>
+               <td style="text-align:right;">指定連線彩金：</td>
+               <td style="text-align:left;">
+                 <select id="u45229_input">
+                   <option value="JP1">JP1</option>
+                   <option value="JP2">JP2</option>
+                   <option value="JP3">JP3</option>
+                   <option value="JP4">JP4</option>
+                   <option selected="" value="N/A">N/A</option>
+                 </select>
+               </td>
+            </tr>
+            <tr>
+               <td colspan=2 style="text-align:center;"><a id='save' class="btn waves-effect waves-light">變更設定</a></td>
+            </tr>
+          </tbody>
+        </table>
+       </div>
+      </td></tr>
+     </table>-->
+   </div>
+   <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+<% include save_dialog.html %>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/equipment_monitor.js"></script>
+</body>
+</html>

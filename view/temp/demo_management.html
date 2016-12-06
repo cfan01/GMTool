@@ -1,0 +1,217 @@
+﻿<% include includer.html %>
+<style>
+#temp .article .inside.single{
+  padding-top: 0px;
+  padding-left: 0px;
+  /*background-color: #FFFFBB;*/
+}
+label {
+  color: #000000;
+}
+[type="checkbox"]+label {
+  padding-left: 23px;
+  width: 17%;
+}
+#gameConditionSetting [type="checkbox"]+label {
+  width: auto;
+}
+#newintelligence [type="checkbox"]+label {
+  width: auto;
+}
+#temp .article .inside {
+	background-color: #ffffff;
+}
+.collapsible {
+  margin: 0px;
+}
+.collapsible-header, .collapsible-body {
+  background-color: #ffffff;
+  padding:0 20px;
+}
+div#queryapp {
+	width:100%;
+	padding-left:20px;
+	background-color: #cccccc;
+}
+#subjectquery .collapsible-header, #subjectquery .collapsible-body {
+  background-color: #ffffff;
+}
+/*#temp .article {
+  width: 1480px;
+}*/
+input:not([type]), input[type=text] {
+  width: 100%;
+  /*width: auto;*/
+}
+#bet_retrieve_pa {
+	width: 50%;
+}
+#gameConditionSetting select, #newintelligence select {
+	/*width: 40%;*/
+}
+/*td, th {
+	width: 30%;
+}*/
+/*#gameConditionSetting tbody tr td #game_switch tr td {
+	width: 20%;
+}*/
+#gameConditionSetting tbody tr td, #newintelligence tbody tr td {
+  /*width: 35%;*/
+  font-weight: bold;
+}
+textarea {
+  width: 360px;
+  height: 80px;
+}    
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  /*height:150px;*/
+  height:195px;
+  overflow:auto;  
+  /*margin-top:20px;*/
+}
+#table-wrapper table {
+  width:100%;   
+}
+#table-wrapper table * {
+  /*background:yellow;*/
+  /*color:black;*/
+  /*padding-left:0;*/
+}
+#table-wrapper table thead th .text {
+  /*position:absolute;*/
+  top:-25px;
+  z-index:2;
+  height:25px;
+  width:47%;
+  /*border:1px solid red;*/
+  background-color:#666666;
+  color:white;
+}
+
+#demogamesettings, #demogamesettings th, #demogamesettings td {
+ border: 1px solid black;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div style="padding:10px 45px;background-color:#CCCCCC;width:100%;height:45px;">
+      <div style="float:left;text-align:left;width:12%;">自動即時更新：</div>
+      <div style="float:left;">
+      	<input type="radio" id="autoupdate_yes" name="autoupdate" value="yes">
+      	<label for="autoupdate_yes">是</label>&nbsp;&nbsp;&nbsp;
+        <input type="radio" id="autoupdate_no" name="autoupdate" value="no" checked>
+        <label for="autoupdate_no">否</label>
+      </div>
+    </div>
+    <div id="queryapp" style="padding:0px 35px;">
+      <table bgcolor="#cccccc">
+      	<tr>
+      		<td style='border:0'>
+      	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick="queryResult()"><span class="t1">確定</span><img id='img1' src='/images/button_2green.png'></a></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+    <div id="show_result">
+      <!--<div style="padding:10px 45px 0 45px;background-color:#ffffff;width:100%;height:50px">
+      	<div style="float:left;text-align:left;width:35%;padding-top:10px;">
+           試玩人數：&nbsp;(72/100)
+        </div>
+      	<div style="float:left;text-align:right;width:65%;">
+           更新時間：&nbsp;<span id="sec">00:00:33&nbsp;之前</span>
+           <a class="waves-light btn blue" id="cancel" onclick="location.href='/backend/home'">擷取最新</a>
+        </div>
+      </div>
+      <ul class="collapsible" data-collapsible="expandable">
+        <li>
+          <div id="" class="collapsible-header active"><i class="material-icons">play_arrow</i>試玩設定</div>
+          <div id="" class="collapsible-body" style="text-align:center;">
+            <table id="settings" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;" bgcolor='#ffffff'>
+              <tr>
+                 <td style="width:25%;text-align:left;">初始試完幣：<input type="text" id="demomoney_initial" name="demomoney_initial" value="" size="8" onkeypress="return (event.charCode>=48&amp;&amp;event.charCode<=57)" style="text-align:center;width:40%"></td>
+                 <td style="text-align:left;">&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style="width:25%;text-align:left;">可試玩遊戲與人數設定：</td>
+                 <td style="text-align:left;">&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style="width:100%;text-align:left;" colspan=2>
+                 	 <table id="demogamesettings" bgcolor="#EAEAEA">
+                     <thead>
+                       <tr>
+                         <th style="text-align:center;width:5%;background-color:#303030;color:#ffffff;">編號</th>
+                         <th style="text-align:center;width:25%;background-color:#303030;color:#ffffff;">遊戲名稱</th>
+                         <th style="text-align:center;width:25%;background-color:#303030;color:#ffffff;">遊戲開關</th>
+                         <th style="text-align:center;width:15%;background-color:#303030;color:#ffffff;">目前活人</th>
+                         <th style="text-align:center;width:15%;background-color:#303030;color:#ffffff;">人數上限</th>
+                         <th style="text-align:center;width:15%;background-color:#303030;color:#ffffff;">機器人設定</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                 	 	   <tr>
+                 	 	   	 <td style="text-align:center;width:5%">1</td>
+                 	 	   	 <td style="text-align:center;width:25%">海底樂園</td>
+                         <td style="text-align:center;width:25%">
+                         	 <input type="radio" id="game_switch_open1" name="game_switch1" value="open" width="15%"><label for="game_switch_open1">開啟</label>&nbsp;&nbsp;&nbsp;
+                         	 <input type="radio" id="game_switch_close1" name="game_switch1" value="close" width="15%" checked><label for="game_switch_close1">關閉</label>
+                         </td>
+                 	 	   	 <td style="text-align:center;width:15%">1</td>
+                 	 	   	 <td style="text-align:center;width:15%"><input type="text" id="live_limit1" name="live_limit1" value="50" size="3" style="text-align:center;width:100%"></td>
+                 	 	   	 <td style="text-align:center;width:15%"><input type="text" id="tester_limit1" name="tester_limit1" value="100" size="3" style="text-align:center;width:100%"></td>
+                       </tr>
+                 	 	   <tr>
+                 	 	   	 <td style="text-align:center;width:5%">2</td>
+                 	 	   	 <td style="text-align:center;width:25%">金鑽列車</td>
+                 	 	   	 <td style="text-align:center;width:25%">
+                         	 <input type="radio" id="game_switch_open2" name="game_switch2" value="open" width="15%"><label for="game_switch_open2">開啟</label>&nbsp;&nbsp;&nbsp;
+                         	 <input type="radio" id="game_switch_close2" name="game_switch2" value="close" width="15%" checked><label for="game_switch_close2">關閉</label>
+                 	 	   	 </td>
+                 	 	   	 <td style="text-align:center;width:15%">1</td>
+                 	 	   	 <td style="text-align:center;width:15%"><input type="text" id="live_limit2" name="live_limit2" value="20" size="3" style="text-align:center;width:100%"></td>
+                 	 	   	 <td style="text-align:center;width:15%"><input type="text" id="tester_limit2" name="tester_limit2" value="0" size="3" style="text-align:center;width:100%"></td>
+                       </tr>
+                 	 	   <tr>
+                 	 	   	 <td style="text-align:center;width:5%">3</td>
+                 	 	   	 <td style="text-align:center;width:25%">將軍傳</td>
+                 	 	   	 <td style="text-align:center;width:25%">
+                         	 <input type="radio" id="game_switch_open3" name="game_switch3" value="open" width="15%"><label for="game_switch_open3">開啟</label>&nbsp;&nbsp;&nbsp;
+                         	 <input type="radio" id="game_switch_close3" name="game_switch3" value="close" width="15%" checked><label for="game_switch_close3">關閉</label>
+                 	 	   	 </td>
+                 	 	   	 <td style="text-align:center;width:15%">10</td>
+                 	 	   	 <td style="text-align:center;width:15%"><input type="text" id="live_limit3" name="live_limit3" value="10" size="3" style="text-align:center;width:100%"></td>
+                 	 	   	 <td style="text-align:center;width:15%"><input type="text" id="tester_limit3" name="tester_limit3" value="30" size="3" style="text-align:center;width:100%"></td>
+                       </tr>
+                     </tbody>
+                   </table>
+                 </td>
+              </tr>
+            </table>
+          </div>
+        </li>
+      </ul>
+      <div style="padding:10px 45px;background-color:#ffffff;width:100%;height:60px;">
+        <div style="text-align:center;"><a id='save' class="btn waves-effect waves-light">變更設定</a></div>
+      </div>-->
+    </div>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+<% include save_dialog.html %>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/demo_management.js"></script>
+</body>
+</html>

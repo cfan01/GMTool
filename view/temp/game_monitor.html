@@ -1,0 +1,571 @@
+﻿<% include includer.html %>
+<style>
+#temp .article .inside.single{
+  padding-top: 0px;
+  padding-left: 0px;
+  background-color: #FFFFBB;
+  /*padding-bottom: 0px;*/
+}
+label {
+  color: #000000;
+}
+[type="checkbox"]+label {
+  padding-left: 23px;
+  width: 17%;
+}
+#gameConditionSetting [type="checkbox"]+label {
+  width: auto;
+}
+#newintelligence [type="checkbox"]+label {
+  width: auto;
+}
+#temp .article .inside {
+	background-color: #ffffff;
+}
+.collapsible {
+  margin: 0px;
+}
+div#queryapp {
+	width:100%;
+	padding-left:20px;
+	background-color: #cccccc;
+}
+#subjectquery .collapsible-header, #subjectquery .collapsible-body {
+  background-color: #ffffff;
+}
+/*#temp .article {
+  width: 1480px;
+}*/
+input:not([type]), input[type=text] {
+  /*width: 36%;*/
+  width: auto;
+}
+#howmanyscoremachine, #howmanyscoremachine th, #howmanyscoremachine td,
+#game_switch, #game_switch th, #game_switch td,
+#automode_defaultsetting, #automode_defaultsetting th, #automode_defaultsetting td {
+ border: 1px solid black;
+}
+#newintelligence tbody tr td {
+  /*width: 26%;*/
+  font-weight: bold;
+  text-align:right;
+}
+/*#newintelligence tbody tr:nth-child(n+1){
+	width: 26%;
+} 
+#newintelligence tbody tr:nth-child(n+2){
+	width: 24%;
+} 
+#newintelligence tbody tr:nth-child(n+3){
+	width: 50%;
+}*/
+#gameConditionSetting tbody tr td {
+  /*width: 35%;*/
+  font-weight: bold;
+}
+textarea {
+  /*width: 360px;*/
+  height: 80px;
+}
+/*#alert_desc {
+  width: 455px;
+  height: 150px;
+}*/
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  /*height:150px;*/
+  height:195px;
+  overflow:auto;  
+  /*margin-top:20px;*/
+}
+#table-wrapper table {
+  width:100%;   
+}
+#table-wrapper table * {
+  /*background:yellow;*/
+  /*color:black;*/
+  /*padding-left:0;*/
+}
+#table-wrapper table thead th .text {
+  /*position:absolute;*/
+  top:-25px;
+  z-index:2;
+  height:25px;
+  width:47%;
+  /*border:1px solid red;*/
+  background-color:#666666;
+  color:white;
+}
+/*td, th {
+  padding:0;
+}*/
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>顯示主題</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; width:950px;" bgcolor='#CCCCCC'>
+            <tr>
+              <td>
+              	<div style="float:left;width:12%;">自動即時更新：</div>
+              	<div style="float:left;">
+              		<input type="radio" id="autoupdate_yes" name="autoupdate" value="yes">
+              		<label for="autoupdate_yes">是</label>&nbsp;&nbsp;&nbsp;
+                  <input type="radio" id="autoupdate_no" name="autoupdate" value="no" checked>
+                  <label for="autoupdate_no">否</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="subject_all" name="gamesubject" value="所有">
+             		  <label for="subject_all">所有</label>
+             		</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="subject_individual" name="gamesubject" value="個別" checked>
+             		  <label for="subject_individual">個別</label>
+             		</div>
+              	<div id="game_subject_lists" style="float:left;width:90%;"></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </li>
+    </ul>
+    <div id="queryapp">
+      <table bgcolor="#cccccc">
+      	<tr>
+      		<td style='border:0'>
+      	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a hfre="#" class="wrapper" onclick="queryResult()"><span class="t1">查詢</span><img id='img1' src='/images/button_2green.png'></a></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+    <div id="div_subjectquery">
+      <!--<table>
+        <tr><td>
+          <div id="subjectquery" style="width: 50%;float:left;border:1px solid #000000;">
+            <div style="padding:10px 20px;background-color:#ffffff;">
+              <div style="float:left;text-align:left;width:35%;padding:16px 0 0 0;">馬雅歷險 (66/130)</div>
+            	<div style="float:left;text-align:right;width:65%;padding:16px 0 0 0;">
+                <div style="width:75%;float:left">
+                  更新時間：&nbsp;&nbsp;<span id='sec'></span>&nbsp;&nbsp;
+                 </div>
+                 <div style="width:10%;float:left>
+                   <a href="#" class="wrapper" onclick="location.href='/game/game_monitor'"><span class="t4">擷取最新</span><img id='img2' src='/images/button_6blue.png'></a>
+                 </div>
+              </div>
+            </div>
+            <ul class="collapsible" data-collapsible="expandable">
+              <li>
+                <div id="" class="collapsible-header"><i class="material-icons">play_arrow</i>最新情報</div>
+                <div id="" class="collapsible-body" style="text-align:center;">
+                	<div style='width:100%;float:left;padding:0 20px;'>
+                    <table id="newintelligence" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;" bgcolor='#ffffff'>
+                      <tbody>
+                        <tr>
+                           <td style="width:26%;">使用人數：</td>
+                           <td style="width:24%;">54 (測:10)</td>
+                           <td style="width:50%;">開始統計時間：</td>
+                        </tr>
+                        <tr>
+                           <td>保留人數：</td>
+                           <td>12</td>
+                           <td>2016/9/2  16:45:33</td>
+                        </tr>
+                        <tr>
+                           <td>遊戲局數：</td>
+                           <td>9,541,124</td>
+                        </tr>
+                        <tr>
+                           <td>總押注：</td>
+                           <td>9,541,124</td>
+                        </tr>
+                        <tr>
+                           <td>總得分：</td>
+                           <td>50,000,000</td>
+                        </tr>
+                        <tr>
+                           <td>最後總得分：</td>
+                           <td>50,004,100</td>
+                        </tr>
+                        <tr>
+                           <td>遊戲實際RTP：</td>
+                           <td>99.6927</td>
+                        </tr>
+                        <tr>
+                           <td>遊戲總輸贏：</td>
+                           <td>150,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="collapsible-header active"><i class="material-icons">play_arrow</i>遊戲設定</div>
+                <div class="collapsible-body" style="text-align:center;">
+                	<div style='width:100%;float:left;padding:0 20px;background-color:#ffffff;'>
+                    <table id="gameConditionSetting" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:100%;" bgcolor='#ffffff'>
+                      <tbody>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	<div>進入條件：&nbsp;LV <input type="text" name="lv" value="1" size="3"> (含)以上</div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	 遊戲開關：<br>
+                           	 <table id="game_switch" bgcolor="#EAEAEA">
+                               <tbody>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">安卓開關：</td>
+                           	 	   	 <td style="text-align:center;width:75%">
+                                     <select id='android_switch' name='android_switch'>
+                                       <option value="close_comingsoon" selected>關閉遊戲_預告掛維護(預設)</option>
+                                       <option value="close_staytuned">關閉遊戲_敬請期待</option>
+                                       <option value="close_off">關閉遊戲_下架</option>
+                                       <option value="open">打開遊戲</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">WEB開關：</td>
+                           	 	   	 <td style="text-align:center;width:75%">
+                                     <select id='web_switch' name='web_switch'>
+                                       <option value="close_comingsoon">關閉遊戲_預告掛維護(預設)</option>
+                                       <option value="close_staytuned">關閉遊戲_敬請期待</option>
+                                       <option value="close_off">關閉遊戲_下架</option>
+                                       <option value="open" selected>打開遊戲</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">踢離時間：</td>
+                           	 	   	 <td style="text-align:left;width:75%">
+                                     <input type='text' id='kick_off_time' name='kick_off_time' maxlength=4 style='text-align:center;' onkeypress='return (event.charCode>=48&&event.charCode<=57)'></input>&nbsp;秒
+                           	 	   	 </td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 		   <td colspan=2><font color="#666666">(時間到開始踢除主題內玩家至大廳，於下次開啟後進入保留)</font></td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">預告時間：</td>
+                           	 	   	 <td style="text-align:left;width:75%">
+                                     <input type='text' id='comingsoon_time' name='comingsoon_time' maxlength=4 style='text-align:center;' onkeypress='return (event.charCode>=48&&event.charCode<=57)'></input>&nbsp;秒
+                           	 	   	 </td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">預告內容：</td>
+                           	 	   	 <td style="text-align:center;width:75%">
+                                     <textarea id="comingsoon_content" style="background-color:#ffffff">海底樂園將於[%time]秒後關閉維護</textarea>
+                           	 	   	 </td>
+                           	 	   </tr>
+                              	 <tr>
+                           	 		   <td colspan=2><font color="#666666">(出現時間各於 一開始 、預告時間與倒數10秒 各出現一次)</font></td>
+                           	 	   </tr>
+                           	 	 </tbody>
+                             </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	 <div style="float:left;width:18%;">比倍開關：</div>
+                           	 <div style="float:left;width:82%;">
+                           	   <select id="multiple_switch" name="multiple_switch">
+                                 <option value="open">打開(預設)</option>
+                                 <option value="close">關閉</option>
+                               </select>
+                             </div>
+                           </td>
+                        </tr>
+                        <tr>
+                          <td style='width:100%' colspan=2>
+                           	<div style="float:left;width:23%;">
+                      		    <input type="checkbox" id="ckb_largest_winscore" name="ckb_largest_winscore" class="filled-in">
+                      		    <label for="ckb_largest_winscore">最大贏分：</label>
+                      		  </div>
+                            <div style="float:left;width:77%;">
+                              <input type="text" name="largest_winscore" id='largest_winscore' value="100,000,000" size="40%" style="background-color:#cccccc;width:100%">
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	 押注設定：<br>
+                           	 <table id="bet_setting" bgcolor="#EAEAEA">
+                           	 	<tr>
+                           	 		<td style="width:25%;">基礎單線押注：</td>
+                           	 		<td style="width:25%;"><input type="text" name="basic_singlelinebet" id='basic_singlelinebet' value="10" size="40%" style="width:100%"></td>
+                           	 		<td style="width:21%;">押注層數：</td>
+                           	 		<td style="width:29%;"><input type="text" name="bet_level" id='bet_level' value="10" size="40%" style="width:100%"></td>
+                           	 	</tr>
+                             </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                              分台、押分與台數設定：<br>
+                              <div id="table-wrapper">
+                                <div id="table-scroll">
+                                  <table id="howmanyscoremachine" class="bordered" border="1" cellpadding="0" cellspacing="0" style="width:200%;">
+                                    <thead style="background-color:#666666;color:white;">
+                                        <tr>
+                                          <th style="width:7%">分台編號</th>
+                                          <th style="width:6%">總開關</th>
+                                          <th style="width:7%">單線押注</th>
+                                          <th style="width:7%">押注層數</th>
+                                          <th style="width:7%">開運金層</th>
+                                          <th style="width:7%">外贈開關</th>
+                                          <th style="width:12%">頁籤名稱顯示</th>
+                                          <th style="width:7%">開放台數</th>
+                                          <th style="width:7%">台數上限</th>
+                                          <th style="width:10%">台號範圍</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="background-color:#EAEAEA">
+                                      <tr>
+                                      	<td style="text-align:center;">1</td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="switch_g1" name="switch_g1" class="filled-in">
+                      		                <label for="switch_g1"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="single_bet1" id='single_bet1' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="bet_level1" id='bet_level1' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="luckymoney_level1" id='luckymoney_level1' value="1" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="outsidegifts_switch1" name="outsidegifts_switch1" class="filled-in">
+                      		                <label for="outsidegifts_switch1"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="page_name1" id='page_name1' value="900分台" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="open_machinenum1" id='open_machinenum1' value="80" style="width:100%;background-color:#cccccc;"></td>
+                                        <td name="m_uplimit1" id='m_uplimit1'>500</td>
+                                        <td name="m_range1" id='m_range1'>1~80</td>
+                                      </tr>
+                                      <tr>
+                                      	<td style="text-align:center;">2</td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="switch_g2" name="switch_g2" class="filled-in">
+                      		                <label for="switch_g2"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="single_bet2" id='single_bet2' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="bet_level2" id='bet_level2' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="luckymoney_level2" id='luckymoney_level2' value="1" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="outsidegifts_switch2" name="outsidegifts_switch2" class="filled-in">
+                      		                <label for="outsidegifts_switch2"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="page_name2" id='page_name2' value="900分台" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="open_machinenum2" id='open_machinenum2' value="80" style="width:100%;background-color:#cccccc;"></td>
+                                        <td name="m_uplimit2" id='m_uplimit2'>500</td>
+                                        <td name="m_range2" id='m_range2'>1~80</td>
+                                      </tr>
+                                      <tr>
+                                      	<td style="text-align:center;">3</td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="switch_g3" name="switch_g3" class="filled-in">
+                      		                <label for="switch_g3"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="single_bet3" id='single_bet3' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="bet_level3" id='bet_level3' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="luckymoney_level3" id='luckymoney_level3' value="1" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="outsidegifts_switch3" name="outsidegifts_switch3" class="filled-in">
+                      		                <label for="outsidegifts_switch3"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="page_name3" id='page_name3' value="900分台" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="open_machinenum3" id='open_machinenum3' value="80" style="width:100%;background-color:#cccccc;"></td>
+                                        <td name="m_uplimit3" id='m_uplimit3'>500</td>
+                                        <td name="m_range3" id='m_range3'>1~80</td>
+                                      </tr>
+                                      <tr>
+                                      	<td style="text-align:center;">4</td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="switch_g4" name="switch_g4" class="filled-in">
+                      		                <label for="switch_g4"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="single_bet4" id='single_bet4' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="bet_level4" id='bet_level4' value="10" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="luckymoney_level4" id='luckymoney_level4' value="1" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;">
+                     		            		  <input type="checkbox" id="outsidegifts_switch4" name="outsidegifts_switch4" class="filled-in">
+                      		                <label for="outsidegifts_switch4"></label>
+                                      	</td>
+                                      	<td style="text-align:center;"><input type="text" name="page_name4" id='page_name4' value="900分台" style="width:100%;background-color:#cccccc;"></td>
+                                      	<td style="text-align:center;"><input type="text" name="open_machinenum4" id='open_machinenum4' value="80" style="width:100%;background-color:#cccccc;"></td>
+                                        <td name="m_uplimit4" id='m_uplimit4'>500</td>
+                                        <td name="m_range4" id='m_range4'>1~80</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	 <div style="float:left;width:18%;">機率設定：</div>
+                           	 <div style="float:left;width:82%;">
+                           	  <select id="probability_setting" name="probability_setting">
+                                <option value="96">預設值(96%)</option>
+                                <option value="98">98%</option>
+                                <option value="100">100%</option>
+                                <option value="102">102%</option>
+                                <option value="96">96%</option>
+                                <option value="94">94%</option>
+                                <option value="92">92%</option>
+                                <option value="90">90%</option>
+                                <option value="88">88%</option>
+                                <option value="80">80%</option>
+                                <option value="70">70%</option>
+                                <option value="60">60%</option>
+                              </select>
+                             </div>
+                           </td>
+                        </tr>
+                        <tr>
+                        	 <td style='width:100%' colspan=2>
+                             <div style="float:left;width:35%;">
+                      		     <input type="checkbox" id="compensate" name="compensate" class="filled-in">
+                      		     <label for="compensate">不中獎幾局補償：</label>
+                             </div>
+                             <div style="float:left;width:65%;">
+                             	 <input type="text" id="compensate_set" name="compensate_set" value="10" size="5%" style="background-color:#cccccc;">&nbsp;局
+                             </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	 獨立彩金設定：<br>
+                           	 <table id="bet_setting" bgcolor="#EAEAEA">
+                           	 	<tr>
+                           	 		<td style="width:35%;">獨立彩金抽取%數：</td>
+                           	 		<td style="width:20%;"><input type="text" name="individual_winnings_retrieve_pa" id='individual_winnings_retrieve_pa' value="1.5" size="40%" style="width:50%">%</td>
+                           	 		<td style="width:20%;">基本水位：</td>
+                           	 		<td style="width:25%;"><input type="text" name="basic_level" id='basic_level' value="500,000" size="40%" style="width:100%"></td>
+                           	 	</tr>
+                             </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td style='width:100%' colspan=2>
+                           	 自動模式 預設值設定：<br>
+                           	 <table id="automode_defaultsetting" bgcolor="#EAEAEA">
+                               <thead>
+                                 <tr>
+                                   <th style="text-align:center;width:25%;background-color:#303030;color:#ffffff;">項目</th>
+                                   <th style="text-align:center;width:25%;background-color:#303030;color:#ffffff;">是否勾選</th>
+                                   <th style="text-align:center;width:25%;background-color:#303030;color:#ffffff;">設定值</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">局數</td>
+                           	 	   	 <td style="text-align:center;width:25%">
+                                     <select id='board_switch' name='board_switch'>
+                                       <option value="yes">是</option>
+                                       <option value="no>否</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   	 <td style="text-align:center;width:25%"><input type="text" id="number_of_board" name="number_of_board" value="1" size="5%" style="text-align:center;width:100%;"></td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">G幣</td>
+                           	 	   	 <td style="text-align:center;width:25%">
+                                     <select id='g_switch' name='g_switch'>
+                                       <option value="yes">是</option>
+                                       <option value="no">否</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   	 <td style="text-align:center;width:25%"><input type="text" id="g_money" name="g_money" value="1" size="5%" style="text-align:center;width:100%;"></td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">進入Bonus</td>
+                           	 	   	 <td style="text-align:center;width:25%">
+                                     <select id='bonus_switch' name='bonus_switch'>
+                                       <option value="yes">是</option>
+                                       <option value="no">否</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   	 <td style="text-align:center;width:25%"></td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">中獎倍數</td>
+                           	 	   	 <td style="text-align:center;width:25%">
+                                     <select id='winning_multiple_switch' name='winning_multiple_switch'>
+                                       <option value="yes">是</option>
+                                       <option value="no">否</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   	 <td style="text-align:center;width:25%"><input type="text" id="winning_multiple" name="winning_multiple" value="1" size="5%" style="text-align:center;width:100%;"></td>
+                           	 	   </tr>
+                           	 	   <tr>
+                           	 	   	 <td style="text-align:center;width:25%">中彩金</td>
+                           	 	   	 <td style="text-align:center;width:25%">
+                                     <select id='winnings_switch' name='winnings_switch'>
+                                       <option value="yes">是</option>
+                                       <option value="no">否</option>
+                                     </select>
+                           	 	   	 </td>
+                           	 	   	 <td style="text-align:center;width:25%"></td>
+                           	 	   </tr>
+                           	 	 </tbody>
+                             </table>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>
+                      		   <input type="checkbox" id="lucky_money_use" name="lucky_money_use" class="filled-in">
+                      		   <label for="lucky_money_use">可否使用開運金</label>
+                           </td>
+                           <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td>
+                      		   <input type="checkbox" id="gift_switch" name="gift_switch" class="filled-in">
+                      		   <label for="gift_switch">外贈開關</label>
+                           </td>
+                           <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td colspan=2 style="text-align:center;">
+                             <a href="#" class="wrapper" onclick="location.href='/game/game_monitor'"><span class="t4">擷取最新</span><img id='img2' src='/images/button_6blue.png'></a>
+                           </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+               </div>
+              </li>
+            </ul>
+          </div>
+        </td></tr>
+      </table>-->
+    </div>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+    <!-- Modal Structure -->
+<% include save_dialog.html %>
+  </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<script src="/js/game_monitor.js"></script>
+</body>
+</html>

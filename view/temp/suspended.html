@@ -1,0 +1,534 @@
+﻿<% include includer.html %>
+<!--<script src="/js/data2.js"></script>-->
+<style>
+select {
+ border:2px solid #9A9A9A;
+}
+select option span {
+ color:red;
+}
+.redText {
+ color:red;
+}
+.greenText {
+ color:green;
+}
+.blueText {
+ color:blue;
+}
+[type="checkbox"]+label {
+ padding-left:25px;
+}
+label {
+ color: #000000;
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+ padding-left: 25px;
+}
+</style>
+
+<body>
+<!-- ================================= top ===================================================== -->
+<% include top.html %>
+<!-- ================================= menu ==================================================== -->
+<% include menu.html %>
+<!-- ================================= content ================================================= -->
+  <div class="inside single">
+    <div id="basicformModal" style="text-align:left"><%= Content %></div><!--<hr id="line-content">-->
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>欄位清單</div>
+        <div class="collapsible-body" style="text-align:center;"><br />
+          <table id="basicReportFieldLists" class="bordered" border="1" cellpadding="0" cellspacing="0" style="padding-left:20px; width:700px;" bgcolor='#CCCCCC'>
+            <tbody>
+              <tr>
+                 <td style='width:30%'>可用欄位</td>
+                 <td>&nbsp;</td>
+                 <td style='width:30%'>已選取的欄位</td>
+                 <td>&nbsp;</td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td rowspan=4>
+                   <select id="avail_fields" name="available_field" multiple size="10"></select>
+                 </td>
+                 <td>&nbsp;</td>
+                 <td rowspan=4>
+                   <select id="selected_fields" name="selected_field" multiple size="10"></select>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="upup_action" name="upup_action" v-on:click="clickBasicReportMoveTop" v-on:keyup.enter="clickBasicReportMoveTop"><img src="/images/upup.png"></a>-->
+                 	 <a href="javascript:void(0);" id="upup_action" name="upup_action" onclick="moveOptionTop('selected_fields');genField('FilterLists');"><img src="/images/upup.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="right_action" name="right_action" v-on:click="clickBasicReportMoveRight" v-on:keyup.enter="clickBasicReportMoveRight"><img src="/images/right.png"></a>-->
+                 	 <a href="javascript:void(0);" id="right_action" name="right_action" onclick="moveSelectedOptions('avail_fields','selected_fields',false);genField('FilterLists');"><img src="/images/right.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="up_action" name="up_action" v-on:click="clickBasicReportMoveUp" v-on:keyup.enter="clickBasicReportMoveUp"><img src="/images/up.png"></a>-->
+                 	 <a href="javascript:void(0);" id="up_action" name="up_action" onclick="moveOptionUp('selected_fields');genField('FilterLists');"><img src="/images/up.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="left_action" name="left_action" v-on:click="clickBasicReportMoveLeft" v-on:keyup.enter="clickBasicReportMoveLeft"><img src="/images/left.png"></a>-->
+                 	 <a href="javascript:void(0);" id="left_action" name="left_action" onclick="moveSelectedOptions('selected_fields','avail_fields',false,'*');genField('FilterLists');"><img src="/images/left.png"></a>
+                 </td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="down_action" name="down_action" v-on:click="clickBasicReportMoveDown" v-on:keyup.enter="clickBasicReportMoveDown"><img src="/images/down.png"></a>-->
+                 	 <a href="javascript:void(0);" id="down_action" name="down_action" onclick="moveOptionDown('selected_fields');genField('FilterLists');"><img src="/images/down.png"></a>
+                 </td>
+                 <td>&nbsp;</td>
+              </tr>
+              <tr>
+               	 <td>&nbsp;</td>
+                 <td style='text-align:center'>
+                 	 <!--<a href="javascript:void(0);" id="downdown_action" name="downdown_action" v-on:click="clickBasicReportMoveBottom" v-on:keyup.enter="clickBasicReportMoveBottom"><img src="/images/downdown.png"></a>-->
+                 	 <a href="javascript:void(0);" id="downdown_action" name="downdown_action" onclick="moveOptionBottom('selected_fields');genField('FilterLists');"><img src="/images/downdown.png"></a>
+                 </td>
+                 <!--<td style='text-align:center;'>
+                   <a href="javascript:;" class="wrapper" onclick="SaveCancel(1)"><span class="t4">另存報表</span><img id="img2" src="/images/button_6blue.png"></a>
+                 </td>-->
+              </tr>
+            </tbody>
+          </table>
+          <!-- Modal Structure -->
+          <div id="dialog-form" title="Save Form">
+            <form>
+              <table>
+                <tr><td>報表名稱</td></tr>
+                <tr><td><input type="text" name="formname" id="formname" v-model="formname" value="" class="text ui-widget-content ui-corner-all" style="width:60%"></td></tr>
+                <!--<tr><td><input type="submit" tabindex="-1" style="position:absolute; top:-1000px" v-on:click="SaveBasicReportForm" v-on:keyup.enter="SaveBasicReportForm"></td></tr>-->
+              </table>
+            </form>
+          </div>
+          <br />
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>篩選條件</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <div id="filterLists">
+            <table cellspacing=0 cellpadding=0>
+              <tr id="switch_gametime" style="display:none;">
+                <td id='gametimetable'>
+                  <!--<table cellspacing=0 cellpadding=0 width="100%" border=0>
+                    <tr>
+                      <td style="width:15%;">遊戲幣異動時間</td>
+                      <td style="font-weight:bold;text-align:left;">
+                      	<div style="float:left;width:4%;">從</div>
+                      	<div style="float:left;width:46%;">
+    	     				    	  <div style="float:left;width:24%;">
+    	     				    	  	<div style="float:left;width:75%">
+                      	      <select style="font-size: 12px" onchange=adjDate("fYEAR","fMON","fDAY"); size=1 name=fYEAR id=fYEAR>
+                                 <script>createSelectTagChild(2016,2026,d.getFullYear(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:25%">年</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                      	      <select style="font-size: 12px" onchange=adjDate("fYEAR","fMON","fDAY"); size=1 name=fMON id=fMON>
+                                <script>createSelectTagChild(1,12,d.getMonth()+1,"month")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">月</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                      	      <select style="font-size: 12px" size=1 name=fDAY id=fDAY>
+                                <script>createSelectTagChild(1,31,d.getDate(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">日</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                              <select style="font-size: 12px" size=1 name=fHOUR id=fHOUR>
+                                 <script>createSelectTagChild(0,23,d.getHours(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">時</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                              <select style="font-size: 12px" size=1 name=fMIN id=fMIN>
+                                 <script>createSelectTagChild(0,59,d.getMinutes(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">分</div>
+    	     				    	  </div>
+    	     				    	</div>
+    	     				    	<div style="float:left;width:4%;">到</div>
+    	     				    	<div style="float:left;width:46%;">
+    	     				    	  <div style="float:left;width:24%;">
+    	     				    	  	<div style="float:left;width:75%">
+                      	      <select style="font-size: 12px" onchange=adjDate("tYEAR","tMON","tDAY"); size=1 name=tYEAR id=tYEAR>
+                                 <script>createSelectTagChild(2016,2026,d.getFullYear(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:25%">年</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                      	      <select style="font-size: 12px" onchange=adjDate("tYEAR","tMON","tDAY"); size=1 name=tMON id=tMON>
+                                <script>createSelectTagChild(1,12,d.getMonth()+1,"month")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">月</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                      	      <select style="font-size: 12px" size=1 name=tDAY id=tDAY>
+                                <script>createSelectTagChild(1,31,d.getDate(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">日</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                              <select style="font-size: 12px" size=1 name=tHOUR id=tHOUR>
+                                 <script>createSelectTagChild(0,23,d.getHours(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">時</div>
+    	     				    	  </div>
+    	     				    	  <div style="float:left;width:19%;">
+    	     				    	  	<div style="float:left;width:70%">
+                              <select style="font-size: 12px" size=1 name=tMIN id=tMIN>
+                                 <script>createSelectTagChild(0,59,d.getMinutes(),"")</script>
+                              </select>
+                            </div>
+                            <div style="float:left;width:30%">分</div>
+    	     				    	  </div>
+    	     				    	</div>
+    	     				    </td>
+                    </tr>
+                  </table>-->
+                </td>
+              </tr>
+              <tr id="switch_gametime_quick" style="display:none;">
+                <td style="padding:0;">
+                  <table cellspacing=0 cellpadding=0 width="100%" border=0>
+                    <tr>
+                      <td style="width:15%;">&nbsp;</td>
+                      <td style="font-weight:bold;text-align:left;">
+                      	<div style="float:left;width:4%;">&nbsp;</div>
+                      	<div style="float:left;width:46%;">
+                      		<div>
+                      			<div style="float:left;width:24%;">
+                              <a href="javascript:;" id="1hourago" class="wrapper"><span class="t9">1時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:24%;">
+                              <a href="javascript:;" id="6hourago" class="wrapper"><span class="t9">6時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                              <a href="javascript:;" id="today" class="wrapper"><span class="t8">今日</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="this_week" class="wrapper"><span class="t8">本週</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="this_month" class="wrapper"><span class="t8">本月</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      		</div>
+                      		<div>
+                      			<div style="float:left;width:24%;">
+                      				<a href="javascript:;" id="3hourago" class="wrapper"><span class="t9">3時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:24%;">
+                      				<a href="javascript:;" id="12hourago" class="wrapper"><span class="t9">12時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="yesterday" class="wrapper"><span class="t8">昨日</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="last_week" class="wrapper"><span class="t8">上週</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="last_month" class="wrapper"><span class="t8">上月</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      		</div>
+                      	</div>
+                      	<!--<div style="float:left;width:20%;">&nbsp;</div>-->
+                      	<div style="float:left;width:50%;">&nbsp;</div>
+    	     				    </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr id="switch_gbid" style="display:none;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<td style="width:15%;">&nbsp;</td>   
+                			<td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:8%;">
+              		        <input type="radio" id="filter_gbid" name="filter" value="gbid">
+               		        <label for="filter_gbid">GBID</label>
+               		      </div>
+                	      <div style="float:left;width:10%;">
+                	      	<input type="text" name="gbid" id='gbid' value="N/A" size="40%" style="width:100%">
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+              <tr id="switch_nickname" style="display:none;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<td style="width:15%;">&nbsp;</td>   
+                			<td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:8%;">
+              		        <input type="radio" id="filter_nickname" name="filter" value="nickname" checked>
+               		        <label for="filter_nickname">暱稱</label>
+               		      </div>
+                	      <div style="float:left;width:10%;">
+                	      	<input type="text" name="nickname" id='nickname' value="N/A" size="40%" style="width:100%">
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+              <tr id="switch_gamesubject" style="display:;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<td style="width:15%;">
+                        <input type="checkbox" name="ckb_gamesubject_title" id="ckb_gamesubject_title" class="filled-in" checked="">
+                        <label for="ckb_gamesubject_title">遊戲主題</label>
+                			</td>   
+                			<td id="gs_selection" style="font-weight:bold;text-align:left;">
+                      	<!--<div style='width:10%;float:left'>
+                         <select id='sel_gamesubject' name='sel_gamesubject'>
+                           <option value='offline'>離線</option>
+                           <option value='officewebsite'>官網</option>
+                           <option value='lobby'>大廳</option>
+                           <option value='game_platform'>遊戲名_選台頁</option>
+                           <option value='game_machine'>遊戲名_機台編號</option>
+                         </select>
+                        </div>
+                        <div id='more' style='float:left;cursor:pointer;'>
+                         &nbsp;<img src='/images/more.png' onclick="showHide('gamesubject1',1);
+                                                                    showHide('or',1);showHide('more',0);
+                                                                    showHide('more1',1);
+                                                                    showHide('less',1)">
+                        </div>
+                        <div id='or' style='float:left;display:none;'>
+                         &nbsp;or&nbsp;
+                        </div>
+                      	<div id='gamesubject1' style='width:10%;float:left;display:none;'>
+                         <select id='sel_gamesubject1' name='sel_gamesubject1'>
+                           <option value='offline'>離線</option>
+                           <option value='officewebsite'>官網</option>
+                           <option value='lobby'>大廳</option>
+                           <option value='game_platform'>遊戲名_選台頁</option>
+                           <option value='game_machine'>遊戲名_機台編號</option>
+                         </select>
+                        </div>
+                        <div id='more1' style='float:left;display:none;cursor:pointer;'>
+                         &nbsp;<img src='/images/more.png' onclick="showHide('gamesubject2',1);
+                                                                    showHide('or1',1);
+                                                                    showHide('more1',0);
+                                                                    showHide('less',0);
+                                                                    showHide('less1',1);">
+                        </div>
+                        <div id='or1' style='float:left;display:none;'>
+                         &nbsp;or&nbsp;
+                        </div>
+                        <div id='less' style='float:left;display:none;cursor:pointer;'>
+                         &nbsp;<img src='/images/less.png' onclick="showHide('gamesubject1',0);
+                                                                    showHide('or',0);
+                                                                    showHide('more',1);
+                                                                    showHide('more1',0);
+                                                                    showHide('less',0)">
+                        </div>
+                      	<div id='gamesubject2' style='width:10%;float:left;display:none;'>
+                         <select id='sel_gamesubject2' name='sel_gamesubject2'>
+                           <option value='offline'>離線</option>
+                           <option value='officewebsite'>官網</option>
+                           <option value='lobby'>大廳</option>
+                           <option value='game_platform'>遊戲名_選台頁</option>
+                           <option value='game_machine'>遊戲名_機台編號</option>
+                         </select>
+                        </div>
+                        <div id='less1' style='float:left;display:none;cursor:pointer;'>
+                         &nbsp;<img src='/images/less.png' onclick="showHide('gamesubject2',0);
+                                                                    showHide('or1',0);
+                                                                    showHide('more1',1);
+                                                                    showHide('less1',0);
+                                                                    showHide('less',1);">
+                        </div>-->
+                      </td>
+                	      <!--<div style="float:left;width:18%;">
+                          <select id="gc_alertreason">
+                            <option value="backend_op">後台操作</option>
+                            <option value="gameplay">gameplay</option>
+                            <option value="gift_GooglePlay">儲值_GooglePlay</option>
+                            <option value="gift_Master">儲值_Master</option>
+                            <option value="gift_AppStore">儲值_AppStore</option>
+                            <option value="propsuse">道具使用</option>
+                            <option value="itemsuse">虛寶卡使用</option>
+                            <option value="insok">轉入成功</option>
+                            <option value="outsok">轉出成功</option>
+                            <option value="total">全部(預設)</option>
+                          </select>
+               		      </div>
+                	      <div style="float:left;width:2%;">&nbsp;</div>
+                	      <div id="backend_account" style="float:left;width:25%;display:none;">
+                	        <div id="backendaccount_title" style="float:left;width:30%;padding-top:2px">後台帳號</div>
+                	        <div id="backendaccount" style="float:left;width:70%;">
+                	      	  <input type="text" name="account" id='account' value="N/A" style="width:100%">
+               		        </div>
+               		      </div>-->
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        <br />
+        </div>
+      </li>
+    </ul>
+    <div>
+      <div id="queryapp" style="padding-right:18px">
+        <table>
+        	<tr>
+        		<td style='border:0'>
+        	     <div id="basicformModal" style="width:20%;float:left;text-align:left"><a href="#" class="wrapper" onclick="queryResult()"><span class="t1">查詢</span><img id='img1' src='/images/button_2green.png'></a></div>
+        	     <div id="basicformModal_str" style="width:80%;float:left;line-height:36px;text-align:right;">請按下查詢；或進行[欄位清單]或[篩選條件]設定後再進行查詢。</div>
+               <div id="basicformModal_qpage" class="pagination" style='width:80%;float:left;line-height:36px;text-align:left;display:none'>
+                 <ul id='ind1'>
+                   <li v-bind:class="{'disabled': (currPage === 1)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage-1)"><上頁</span>
+                         <img v-if="(currPage === 1)" id='img2' src='/images/button_2gray.png'>
+                       	 <img v-else id='img2' src='/images/button_2blue.png'>
+                       </a></li>
+                   <li v-for="n in totalPage"
+                       v-bind:class="{'active': (currPage === (n+1))}" 
+                       @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                   <li v-bind:class="{'disabled': (currPage === totalPage)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage+1)">下頁></span>
+                         <img v-if="(currPage === totalPage)" id='img2' src='/images/button_2gray.png'>
+                       	 <img v-else id='img2' src='/images/button_2blue.png'>
+                       </a></li>
+                   <li><input type=text size=3 maxlength=3 v-model='gotopageval' style='text-align:center;'></li>
+                   <li><a href='javascript:;' class="wrapper"><span class="t3" @click="setPage({{gotopageval}})">跳頁</span><img id='img2' src='/images/button_2blue.png'></a></li>
+                   <li>
+                   	Results 301 - 350 of 46045 筆
+                   </li>
+                   <li id='divexportExcel' style='padding-top:6px;text-align:right'>
+                     	<a href='javascript:;' class="wrapper"><span class="t4" id="exportExcel">匯出報表</span><img id='img2' src='/images/button_6blue.png'></a>
+                   </li>
+                 </ul>
+               </div>
+            </td>
+          </tr>
+        </table>
+        <div id='searchresult' style='display:none;'>
+          <!--<table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>age</th>
+                <th>gender </th>
+              </tr>
+            </thead>   
+            <tbody>
+              <tr v-for="r in rows 
+                | filterBy filter_name in 'name' 
+                | recordLength 'filteredRowCount' 
+                | limitBy countOfPage pageStart">
+                <td>{{ (currPage-1) * countOfPage + $index + 1 }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.age }}</td>
+                <td>{{ r.gender }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table id="querytable" style='display:none;'>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>name</th>
+                <th>age</th>
+                <th>gender</th>
+              </tr>
+            </thead>   
+            <tbody>
+              <tr v-for="r in rows">
+                <td>{{ r.index + 1 }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.age }}</td>
+                <td>{{ r.gender }}</td>
+              </tr>
+            </tbody>
+          </table>-->
+        </div>
+        <table id="basicformModal_qpage1" style='display:none;'>
+        	<tr>
+        		<td colspan=4 style='border:0'>
+               <div id="basicformModal" style="width:20%;float:left;text-align:left">&nbsp;</div>
+               <div id="basicformModal_qpage" class="pagination" style='width:80%;float:left;line-height:36px;text-align:left'>
+                  <ul id='ind2'>
+                    <li v-bind:class="{'disabled': (currPage === 1)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage-1)"><上頁</span>
+                          <img v-if="(currPage === 1)" id='img2' src='/images/button_2gray.png'>
+                        	<img v-else id='img2' src='/images/button_2blue.png'>
+                        </a></li>
+                    <li v-for="n in totalPage"
+                        v-bind:class="{'active': (currPage === (n+1))}" 
+                        @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                    <li v-bind:class="{'disabled': (currPage === totalPage)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage+1)">下頁></span>
+                          <img v-if="(currPage === totalPage)" id='img2' src='/images/button_2gray.png'>
+                        	<img v-else id='img2' src='/images/button_2blue.png'>
+                        </a></li>
+                   <li><input id=gotopageval1 type=text size=3 maxlength=3 style='text-align:center;'></li>
+                   <li><a href='javascript:;' class="wrapper"><span class="t3" @click="setPage({{gotopageval}})">跳頁</span><img id='img2' src='/images/button_2blue.png'></a></li>
+                   <li>
+                   	Results 301 - 350 of 46045 筆
+                   </li>
+                   <li id='divexportExcel1' style='padding-top:6px;text-align:right'>
+                     	<a href='javascript:;' class="wrapper"><span class="t4" id="exportExcel1">匯出報表</span><img id='img2' src='/images/button_6blue.png'></a>
+                   </li>
+                 </ul>
+                  <!--
+                  <ul id='ind2'>
+                    <li v-bind:class="{'disabled': (currPage === 1)}" 
+                        @click.prevent="setPage(currPage-1)"><a href="#">Prev</a></li>
+                    <li v-for="n in totalPage"
+                        v-bind:class="{'active': (currPage === (n+1))}" 
+                        @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                    <li v-bind:class="{'disabled': (currPage === totalPage)}" 
+                        @click.prevent="setPage(currPage+1)"><a href="#">Next</a></li>
+                  </ul>
+                  -->
+               </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  <br/>
+  </div>
+ </div>
+</div>
+
+<!-- ================================= bottom =========================================================== -->
+<% include footer.html %>
+<!--<script src="/js/filesaver.min.js"></script>
+<script src="/js/tableexport.min.js"></script>-->
+<!--<script src="/js/accounting.min.js"></script>-->
+<script src="/js/jquery.tabletoCSV.js"></script>
+<script src="/js/selectbox.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/suspended.js"></script>
+</body>
+</html>
