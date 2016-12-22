@@ -1,0 +1,134 @@
+﻿    <!-- ================================= Query Table Begin ========================================================= -->
+    <div>
+      <div id="queryapp" style="padding-right:18px">
+        <table>
+        	<tr>
+        		<td style='border:0'>
+        	     <div id="basicformModal" style="width:20%;float:left;padding-top:6px;text-align:left"><a href="#" class="wrapper" onclick="queryResult()"><span class="t1">查詢</span><img id='img1' src='/images/button_2green.png'></a></div>
+        	     <!--<div id="basicformModal" style="width:20%;float:left;text-align:left">
+        	     	  <div style="font-weight:bold;text-align:left;border:0;background-color:#cccccc;width:50%;float:left;">流失數清單</div>
+        	     	  <div style="font-weight:bold;text-align:left;border:0;background-color:#cccccc;float:left;">11/21</div>
+        	     </div>-->
+        	     <div id="basicformModal_str" style="width:80%;float:left;line-height:36px;text-align:right;">請按下查詢；或進行[欄位清單]或[篩選條件]設定後再進行查詢。</div>
+               <div id="basicformModal_qpage" class="pagination" style='width:80%;float:left;line-height:36px;text-align:left;display:none;'>
+                 <ul id='ind1'>
+                   <li v-bind:class="{'disabled': (currPage === 1)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage-1)"><上頁</span>
+                         <img v-if="(currPage === 1)" id='img2' src='/images/button_2gray.png'>
+                       	 <img v-else id='img2' src='/images/button_2blue.png'>
+                       </a></li>
+                   <li v-for="n in totalPage"
+                       v-bind:class="{'active': (currPage === (n+1))}" 
+                       @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                   <li v-bind:class="{'disabled': (currPage === totalPage)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage+1)">下頁></span>
+                         <img v-if="(currPage === totalPage)" id='img2' src='/images/button_2gray.png'>
+                       	 <img v-else id='img2' src='/images/button_2blue.png'>
+                       </a></li>
+                   <li><input type=text size=3 maxlength=3 v-model='gotopageval' id='gotopageval' style='text-align:center;'></li>
+                   <li><a href='javascript:;' class="wrapper"><span class="t3" @click.prevent="setPage(gotopageval)">跳頁</span><img id='img2' src='/images/button_2blue.png'></a></li>
+                   <li>
+                   	<template v-if="rows.length>0">
+                   		<template v-if="(currPage === totalPage) || (rows.length <= countOfPage)">
+                   			Results {{ (currPage-1) * countOfPage + 1 }} - {{rows.length}} of {{rows.length}} 筆
+                   	  </template>
+                   	  <template v-else>
+                   	    Results {{ (currPage-1) * countOfPage + 1 }} - {{ (currPage-1) * countOfPage + countOfPage }} of {{rows.length}} 筆
+                   	  </template>
+                   	</template>
+                   	<template v-else>
+                   	    Results 0 - 0 of {{rows.length}} 筆
+                   	</template>
+                   </li>
+                   <li id='divexportExcel' style='padding-top:6px;text-align:right'>
+                     	<a href='javascript:;' class="wrapper"><span class="t4" id="exportExcel">匯出報表</span><img id='img2' src='/images/button_6blue.png'></a>
+                   </li>
+                 </ul>
+               </div>
+            </td>
+          </tr>
+        </table>
+        <div id='searchresult' style='display:none;'>
+          <table id="querytable">
+            <thead>
+              <tr>
+                <th v-for="(key, value) in title_rows">{{ key }}</th>
+              </tr>
+            </thead>
+            <tbody id="tbody1" class="table-body" style='display:none;'>
+            	<template v-if="rows.length>0">
+                <tr v-for="r in rows 
+                  | limitBy countOfPage pageStart">
+                  <td v-for="(key, value) in r">{{ value }}</td>
+                </tr>
+              </template>
+              <template v-else>
+              	<tr>
+              		<td colspan={{title_rows_length}} style="text-align:center;font-size:26px;height:300px;">
+              			未查詢到符合的資料
+              		</td>
+               </tr>
+              </template>
+            </tbody>
+            <tbody id="tbody2" class="table-body" style='display:none;'>
+              	<tr>
+              		<td colspan={{title_rows_length}} style="text-align:center;font-size:26px;height:300px;">
+              			查詢中,請稍候 ...<br><br><img src="/images/progress.gif">
+              		</td>
+               </tr>
+            </tbody>
+          </table>
+          <table id="querytable1" style='display:none;'>
+            <thead>
+              <tr v-for="r in rows | | limitBy 1 0">
+                 <th v-for="(key, value) in r">{{ key }}</th>
+              </tr>
+            </thead>   
+            <tbody>
+              <tr v-for="r in rows">
+                <td v-for="(key, value) in r">{{ value }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <table id="basicformModal_qpage1" style='display:none;'>
+        	<tr>
+        		<td colspan=4 style='border:0'>
+               <div id="basicformModal" style="width:20%;float:left;text-align:left">&nbsp;</div>
+               <div id="basicformModal_qpage" class="pagination" style='width:80%;float:left;line-height:36px;text-align:left'>
+                  <ul id='ind2'>
+                    <li v-bind:class="{'disabled': (currPage === 1)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage-1)"><上頁</span>
+                          <img v-if="(currPage === 1)" id='img2' src='/images/button_2gray.png'>
+                        	<img v-else id='img2' src='/images/button_2blue.png'>
+                        </a></li>
+                    <li v-for="n in totalPage"
+                        v-bind:class="{'active': (currPage === (n+1))}" 
+                        @click.prevent="setPage(n+1)"><a href="#">{{n+1}}</a></li>
+                    <li v-bind:class="{'disabled': (currPage === totalPage)}"><a href='javascript:;' class="wrapper"><span class="t2" @click.prevent="setPage(currPage+1)">下頁></span>
+                          <img v-if="(currPage === totalPage)" id='img2' src='/images/button_2gray.png'>
+                        	<img v-else id='img2' src='/images/button_2blue.png'>
+                        </a></li>
+                   <li><input type=text size=3 maxlength=3 v-model='gotopageval' style='text-align:center;'></li>
+                   <li><a href='javascript:;' class="wrapper"><span class="t3" @click="setPage(gotopageval)">跳頁</span><img id='img2' src='/images/button_2blue.png'></a></li>
+                   <li>
+                   	<template v-if="rows.length>0">
+                   		<template v-if="(currPage === totalPage) || (rows.length <= countOfPage)">
+                   			Results {{ (currPage-1) * countOfPage + 1 }} - {{rows.length}} of {{rows.length}} 筆
+                   	  </template>
+                   	  <template v-else>
+                   	    Results {{ (currPage-1) * countOfPage + 1 }} - {{ (currPage-1) * countOfPage + countOfPage }} of {{rows.length}} 筆
+                   	  </template>
+                   	</template>
+                   	<template v-else>
+                   	    Results 0 - 0 of {{rows.length}} 筆
+                   	</template>
+                   </li>
+                   <li id='divexportExcel1' style='padding-top:6px;text-align:right'>
+                     	<a href='javascript:;' class="wrapper"><span class="t4" id="exportExcel1">匯出報表</span><img id='img2' src='/images/button_6blue.png'></a>
+                   </li>
+                 </ul>
+               </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- ================================= Query Table End =========================================================== -->

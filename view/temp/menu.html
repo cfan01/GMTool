@@ -178,7 +178,7 @@
                 <a href="/game/luckymoney" class="dropdown-button m1<% if (Page=='luckymoney'){%> select_active<%}%>" data-activates='rl18'>開運金設置</a>
             </div>
             <div id="it19">
-                <a href="/game/game_query_history" class="dropdown-button m1<% if (Page=='game_query_history'){%> select_active<%}%>" data-activates='rl19'>遊戲查詢與歷程</a>
+                <a href="/game/game_statistics_query" class="dropdown-button m1<% if (Page=='game_statistics_query'){%> select_active<%}%>" data-activates='rl19'>遊戲統計資料查詢</a>
             </div>
             <div id="it110">
                 <a href="/game/machine_query_history" class="dropdown-button m1<% if (Page=='machine_query_history'){%> select_active<%}%>" data-activates='rl110'>機台遊戲歷程查詢</a>
@@ -210,11 +210,25 @@
             <div id="it25">
                 <a href="/business/retention" class="dropdown-button m1<% if (Page=='retention'){%> select_active<%}%>" data-activates='rl25'>留存率</a>
             </div>
-            <div id="it26">
+            <!--<div id="it26">
                 <a href="/business/numberloss" class="dropdown-button m1<% if (Page=='numberloss'){%> select_active<%}%>" data-activates='rl26'>流失數</a>
+            </div>-->
+            <div id="it26">
+                <a href="javascript: void(0);" class="dropdown-button m1<% if (Page=='numberloss'||Page=='registered_numberloss'||Page=='paymember_numberloss'){%> select_active<%}%>" data-activates='rl26'>流失數</a>
+                <ul id="rl26" class='dropdown-content'>
+                  <li><a href="/business/numberloss"<% if (Page=='numberloss'){%> class="current"<%}%>><span></span>流失數</a></li>
+                  <li><a href="/business/registered_numberloss"<% if (Page=='registered_numberloss'){%> class="current"<%}%>><span></span>新註冊會員流失數</a></li>
+                  <li><a href="/business/paymember_numberloss"<% if (Page=='paymember_numberloss'){%> class="current"<%}%>><span></span>付費會員流失數</a></li>
+                </ul>
             </div>
             <div id="it27">
                 <a href="/business/reflux" class="dropdown-button m1<% if (Page=='reflux'){%> select_active<%}%>" data-activates='rl27'>回流數</a>
+            </div>
+            <div id="it28">
+                <a href="/business/pn_settings" class="dropdown-button m1<% if (Page=='pn_settings'){%> select_active<%}%>" data-activates='rl28'>產包序號設定</a>
+            </div>
+            <div id="it29">
+                <a href="/business/pn_query" class="dropdown-button m1<% if (Page=='pn_query'){%> select_active<%}%>" data-activates='rl29'>產包序號查詢</a>
             </div>
         	</div>
 
@@ -274,7 +288,6 @@
                 <a href="/chat/customer" class="dropdown-button m1<% if (Page=='customer'){%> select_active<%}%>" data-activates='rl46'>客服</a>
             </div>
         	</div>
-
 
         	<div id="lv5" class="col s12 grey darken-2">
             <div id="it50">

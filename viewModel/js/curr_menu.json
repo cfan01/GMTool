@@ -31,7 +31,7 @@
                   {"category":"game","page":"robot_stress_test","url":"/game/robot_stress_test","content":"設定壓測"},
                   {"category":"game","page":"demo_management","url":"/game/demo_management","content":"試玩管理"},
                   {"category":"game","page":"luckymoney","url":"/game/luckymoney","content":"開運金設置"},
-                  {"category":"game","page":"game_query_history","url":"/game/game_query_history","content":"遊戲查詢與歷程"},
+                  {"category":"game","page":"game_statistics_query","url":"/game/game_statistics_query","content":"遊戲統計資料查詢"},
                   {"category":"game","page":"machine_query_history","url":"/game/machine_query_history","content":"機台遊戲歷程查詢"},
                   {"category":"game","page":"machine_status","url":"/game/machine_status","content":"單一機台狀態查詢"},
                   {"category":"game","page":"game_sort","url":"/game/game_sort","content":"遊戲排序設定"},
@@ -43,7 +43,11 @@
                   {"category":"business","page":"history_online","url":"/business/history_online","content":"歷史在線"},
                   {"category":"business","page":"retention","url":"/business/retention","content":"留存率"},
                   {"category":"business","page":"numberloss","url":"/business/numberloss","content":"流失數"},
+                  {"category":"business","page":"registered_numberloss","url":"/business/registered_numberloss","content":"新註冊會員流失數"},
+                  {"category":"business","page":"paymember_numberloss","url":"/business/paymember_numberloss","content":"付費會員流失數"},
                   {"category":"business","page":"reflux","url":"/business/reflux","content":"回流數"},
+                  {"category":"business","page":"pn_settings","url":"/business/pn_settings","content":"產包序號設定"},
+                  {"category":"business","page":"pn_query","url":"/business/pn_query","content":"產包序號查詢"},
 
                   {"category":"announcement","page":"officialwebsite","url":"/announcement/officialwebsite","content":"官網公告"},
                   {"category":"announcement","page":"officialwebsite_banner","url":"/announcement/officialwebsite_banner","content":"官網Banner"},
@@ -63,5 +67,14 @@
                   {"category":"backend","page":"account_management","url":"/backend/account_management","content":"帳號管理"},
                   {"category":"backend","page":"account_management_edit","url":"/backend/account_management_edit","content":"帳號編輯"},
                   {"category":"backend","page":"log","url":"/backend/log","content":"後台操作log"}
-                ]
+                ],
+
+  "user_reportforms":[],
+  "user_historyquery":{"game_currency":[],
+                       "game_history":[],
+                       "gift_history":[],
+                       "point_history":[],
+                       "pullcolor_history":[],
+                       "login_history":[]
+                      }
 }

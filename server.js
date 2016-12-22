@@ -1,4 +1,4 @@
-﻿
+﻿var port = process.env.PORT || 3000;
 var Passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var express =   require("express");
@@ -13,34 +13,31 @@ var session = require('express-session');
 var ip = require('ip');
 var data = require('./viewModel/js/menu.json');
 var fs = require('fs');
-//var obj;
-//var obj = JSON.parse(fs.readFileSync('file', 'utf8'));
-/*fs.readFile('./viewModel/js/menu.json', 'utf8', function (err, data) {
-  if (err) throw err;
-  obj = JSON.parse(data);
-  console.log("11111111111111111 obj="+JSON.stringify(obj));
-});
+//const ejs = require('ejs');
+//const http = require('http');
+var moment = require('moment');
+var os = require('os');
+var dns = require('dns');
+var _ = require('underscore');
+var amqp = require('amqplib/callback_api');
+var rpc_client = require('./api/v1/rpc_client.js');
+//var server = http.createServer(app);
+//let io = require('socket.io').listen(server);
+//var client = require('./websocketclient.js');
+var Tools = require('./api/v1/tools.js');
+var save = {};
 
-fs.writeFile("./viewModel/js/curr_menu.json", "Hey there!", function(err) {
- if(err) {
-     return console.log(err);
- }
- console.log("The file was saved!");
-});
-*/
-/*var jsonfile = require('jsonfile');
-var file = './viewModel/js/menu.json';
-jsonfile.readFile(file, function(err, obj) {
-  console.dir(obj)
-});
-var file = './viewModel/js/currmenudata.json';
-var obj = {name: 'JP'};
- 
-jsonfile.writeFile(file, obj, function (err) {
-  console.log("err================");
-  console.error(err)
-});
-*/
+function saveData(data){
+	for(var key in data){
+		save[key] = data[key];
+	}
+}
+
+//app.set('views', __dirname + '/views');
+//app.engine('html', ejs.renderFile);
+//app.set('view engine', 'html');
+//app.use(cors());
+
 // Register ejs as .html. If we did
 // not call this, we would need to
 // name our views foo.ejs instead
@@ -61,8 +58,9 @@ app.set('views', __dirname + '/view');
 // supply the extension to res.render()
 // ex: res.render('users.html').
 app.set('view engine', 'html');
-
 app.use(cors()); //Cross-Origin Resource Sharing (CORS)
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true})); // support encoded bodies
 
 // passport needs ability to serialize and unserialize users out of session
 Passport.serializeUser(function (user, done) {
@@ -76,15 +74,6 @@ Passport.deserializeUser(function (user, done) {
     //console.log(user);
     done(null, user);
 });
-/*
-Passport.deserializeUser(function(id, done) {
-	console.log('----------Passport.deserializeUser-------------');
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-*/
-var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/doc'));
 app.use(express.static(__dirname + '/bower_components'));
@@ -161,9 +150,6 @@ var setMenuLists =  function (req, res) {
       //app.get(data.menuLists[i].url, isAuthenticated, eventHandler(data.menuLists[i]));
     }
   }
-  //app.use(Passport.initialize());
-  //app.use(Passport.session());
-  //Passport.authenticate('local');
 }
 
 exports.setMenuLists = setMenuLists;
@@ -369,10 +355,6 @@ async.series([
             //return res.redirect('/users/' + user.username);
           });
         })(req, res, next);
-      });
-
-       app.get('/doc',function(req,res){
-           res.sendFile(__dirname + "/doc/index.html");
        });
 
        app.get('/api/v1/accounts', account.findAll);
@@ -383,13 +365,6 @@ async.series([
        app.delete('/api/v1/accounts/:id', account.deleteAccount);
        app.get('/logout/:id', account.logout);
 
-       var wine = require('./api/v1/wines');
-       app.get('/api/v1/wines', wine.findAll);
-       app.get('/api/v1/wines/:id', wine.findById);
-       app.post('/api/v1/wines', wine.addWine);
-       app.put('/api/v1/wines/:id', wine.updateWine);
-       app.delete('/api/v1/wines/:id', wine.deleteWine);
-
        var privlists = require('./api/v1/privlists');
        app.get('/api/v1/privlists', privlists.findAll);
        app.get('/api/v1/privlists/:id', privlists.findById);
@@ -397,14 +372,437 @@ async.series([
        app.put('/api/v1/privlists/:id', privlists.updatePriv);
        app.delete('/api/v1/privlists/:id', privlists.deletePriv);
 
-       app.get('/logout', function (req, res) {
-          //console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
-          req.logout();
-          res.redirect('/');
+       /* middleware */
+       var rpc_client = require('./api/v1/rpc_client');
+       //app.get('/api/v1/gmCommandMsg', rpc_client.gmCommandMsg);
+       //app.get('/api/v1/queryAccountBasicData', rpc_client.queryAccountBasicData);
+       //app.post('/api/v1/privlists', rpc_client.addPriv);
+       //app.put('/api/v1/privlists/:id', rpc_client.updatePriv);
+       //app.delete('/api/v1/privlists/:id', rpc_client.deletePriv);
+       
+       app.post('/api', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+       	 var json = {
+       	 	 game: parseInt(data["game"]),
+       	 	 seat: parseInt(data["seat"]),
+       	 	 json: ""+data.json
+       	 }
+       	 //require('./rpc_client.js').gmCommandMsg(json, function(){
+       	 rpc_client.gmCommandMsg(json, function(){
+       	 	 res.send(json);
+       	 });
        });
 
-       app.listen(port,function(){
-           console.log("Run http://localhost:"+port);
+       //app.post('/api/account/basic', (req, res) => {
+       app.post('/api/account/basic', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+         
+       	 var query = {};
+         
+       	 if(_.has(data, "aid")){
+       	 	query["aid"] = data["aid"];
+       	 }
+       	 rpc_client.queryAccountBasicData(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+       
+       app.post('/api/memberlog/game', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+         
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 if(_.has(data, "aid")){
+       	 	if(data["aid"] !== ""){
+       	 		query["_v.playerInfo.aid"] = data["aid"];
+       	 	}
+       	 }
+       	 if(_.has(data, "aid")){
+       	 	if(data["aid"] !== ""){
+       	 		query["_v.playerInfo.aid"] = data["aid"];
+       	 	}
+       	 }
+       	 if(_.has(data, "nickname")){
+       	 	if(data["nickname"] !== ""){
+       	 		query["_v.playerInfo.name"] = data["nickname"];
+       	 	}
+       	 }
+       	 if(_.has(data, "gameid")){
+       	 	query["_v.gameid"] = {};
+       	 	query["_v.gameid"]["$in"] = [];
+       	 	var gamelist = data["gameid"];
+       	 	for(var i = 0; i < gamelist.length; i++){
+       	 		query["_v.gameid"]["$in"].push(parseInt(gamelist[i]));
+       	 	}
+       	 }
+       	 console.log(query);
+         
+       	 // let limit = 1;
+       	 require('./api/v1/dbaction.js').findMemberLogGame(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/image/headiconupload', function(req, res) {
+       	 const data = req.body;
+       	 console.log(`${req.path}`);
+       	 //console.log(data);
+       	 console.log(`${JSON.stringify(data)}`);
+       	 console.log('aid='+data.userid);
+       	 console.log('photo='+data.imgurl);
+          var packet = {
+            type: "account.modifyphoto.req",
+            aid: data.userid,
+            photo: data.img
+          }
+          var q = 'account';
+         	rpc_client.rpcCall(packet, q, function(result){
+       	 	res.send(result);
+       	 });
+       });
+
+       app.post('/api/business/memberstatistics', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/memberstatistics.js').findBusinessStatistics(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/giftstatistics', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/giftstatistics.js').findGiftStatistics(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/historyvipmember', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/historyvipmember.js').findHistoryVIPMember(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/realtime_online', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/realtime_online.js').findRealTimeOnline(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/history_online', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/history_online.js').findHistoryOnline(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/retention', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/retention.js').findRetention(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/numberloss', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/numberloss.js').findNumberLoss(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/numberloss_details', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/numberloss.js').findNumberLossDetails(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/registered_numberloss', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/registered_numberloss.js').findRegisteredNumberloss(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/registered_numberloss_details', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/registered_numberloss.js').findRegisteredNumberLossDetails(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/paymember_numberloss', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/paymember_numberloss.js').findPaymemberNumberloss(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/paymember_numberloss_details', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/paymember_numberloss.js').findPaymemberNumberLossDetails(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/reflux', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/reflux.js').findReflux(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/reflux_details', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/reflux.js').findRefluxDetails(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+
+       app.post('/api/business/pn_query', function(req, res) {
+       	 var data = req.body;
+       	 console.log(`${req.path}`);
+       	 console.log(data);
+
+       	 var query = {};
+       	 query["_v.time"] = {};
+       	 if(_.has(data, "begin")){
+       	 	var begin = new Date(data["begin"]);
+       	 	query["_v.time"]["$gte"] = begin; 
+       	 }
+       	 if(_.has(data, "end")){
+       	 	var end = new Date(data["end"]);
+       	 	query["_v.time"]["$lte"] = end; 
+       	 }
+       	 console.log(query);
+       	 require('./api/v1/business/pn_query.js').findPnQuery(query, function(result){
+       	 	res.send(result);
+       	 })
+       });
+       /* middleware */
+
+       app.get('/doc',function(req,res){
+         res.sendFile(__dirname + "/doc/index.html");
+       });
+
+       app.get('/logout', function (req, res) {
+         //console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+         req.logout();
+         res.redirect('/');
+       });
+
+       app.listen(port,function() {
+         console.log("Run http://localhost:"+port);
        });
        cb();
      }

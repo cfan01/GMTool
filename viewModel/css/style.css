@@ -2071,6 +2071,118 @@ textarea.materialize-textarea {
 	background-color: #FF0000;
 }
 
+/* #rt28 #rl28 */
+#temp .article #nav .btns #lv2 #it28 {
+	float: left;
+	width: 145px;
+	position: relative;
+}
+#temp .article #nav .btns #lv2 #it28:hover .m1{
+	background-color: #C1272D;
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 {
+	float: left;
+	width: 90%;
+	background-color: #000;
+	padding: 10%;
+	visibility: hidden;
+	position: relative;
+	z-index: 999;
+}
+#temp .article #nav .btns #lv2 #it28:hover #rl28 {
+	visibility: visible;
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a {
+	float: left;
+	width: 100%;
+	font-size: 13px;
+	color: #CCCCCC;
+	background-color: #000;
+	text-decoration: none;	
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a span {
+	float: left;
+	height: 12px;
+	width: 3px;
+	background-color: #CCCCCC;
+	margin-top: 4px;
+	margin-right: 10px;
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a:hover {
+	color: #FFF;
+	background-color: #0DC100;
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a:hover span{
+	/*background-color: #FF0000;*/
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a.current {
+	color: #FFF;
+	background-color: #4BCCCC;
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a.current:hover {
+	/*color: #FFF;*/
+	background-color: #0DC100;
+}
+#temp .article #nav .btns #lv2 #it28 #rl28 a.current span{
+	background-color: #FF0000;
+}
+
+/* #rt29 #rl29 */
+#temp .article #nav .btns #lv2 #it29 {
+	float: left;
+	width: 145px;
+	position: relative;
+}
+#temp .article #nav .btns #lv2 #it29:hover .m1{
+	background-color: #C1272D;
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 {
+	float: left;
+	width: 90%;
+	background-color: #000;
+	padding: 10%;
+	visibility: hidden;
+	position: relative;
+	z-index: 999;
+}
+#temp .article #nav .btns #lv2 #it29:hover #rl29 {
+	visibility: visible;
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a {
+	float: left;
+	width: 100%;
+	font-size: 13px;
+	color: #CCCCCC;
+	background-color: #000;
+	text-decoration: none;	
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a span {
+	float: left;
+	height: 12px;
+	width: 3px;
+	background-color: #CCCCCC;
+	margin-top: 4px;
+	margin-right: 10px;
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a:hover {
+	color: #FFF;
+	background-color: #0DC100;
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a:hover span{
+	/*background-color: #FF0000;*/
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a.current {
+	color: #FFF;
+	background-color: #4BCCCC;
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a.current:hover {
+	/*color: #FFF;*/
+	background-color: #0DC100;
+}
+#temp .article #nav .btns #lv2 #it29 #rl29 a.current span{
+	background-color: #FF0000;
+}
+
 /**************** lv3 **************/
 /* #rt30 #rl30 */
 #temp .article #nav .btns #lv3 #it30 {
@@ -3451,13 +3563,18 @@ textarea.materialize-textarea {
 .table-head table,.table-body table, .table-head_nopadding table,.table-body_noheight table {width:100%;}
 .table-body table tr:nth-child(2n+1){background-color:#f2f2f2;}
 .table-body_noheight table tr:nth-child(2n+1){background-color:#f2f2f2;}
+#div_searchresult table thead tr th,
 #searchresult table thead tr th {
 	background-color:#666666;
 	color:#ffffff;
 }
-#searchresult table tbody tr td {
+#div_searchresult table tbody tr,
+#searchresult table tbody tr {
 	background-color:#ffffff;
 }
+
+#div_searchresult table thead tr th,
+#div_searchresult table tbody tr td,
 #searchresult table thead tr th,
 #searchresult table tbody tr td {
 	padding:5px;

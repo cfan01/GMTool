@@ -23,8 +23,11 @@ label {
 }
 [type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
  padding-left: 25px;
- width: 15%;
 }
+/*.expired{
+	color:red;
+	font-weight:bold;
+}*/
 </style>
 
 <body>
@@ -41,8 +44,33 @@ label {
         <div class="collapsible-body" style="text-align:center;">
           <div id="filterLists">
             <table cellspacing=0 cellpadding=0>
-              <tr id="switch_timerange" style="display:;">
-                <td id='timerangetable'></td>
+              <tr id="switch_aid" style="display:;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<td style="font-weight:bold;text-align:left;width:15%;">序號：</td>
+               		    <td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:38%;">
+                	      	<input type="text" name="sn" id='sn' value="" size="40%" style="width:100%">
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+              <tr id="switch_nickname" style="display:;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<td style="font-weight:bold;text-align:left;width:15%;">使用者暱稱：</td>
+               		    <td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:38%;">
+                	      	<input type="text" name="nickname" id='nickname' value="" size="40%" style="width:100%">
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
               </tr>
             </table>
           </div>
@@ -66,6 +94,6 @@ label {
 <script src="/js/jquery.tabletoCSV.js"></script>
 <script src="/js/selectbox.js"></script>
 <script src="/js/filters.js"></script>
-<script src="/js/gift_statistics.js"></script>
+<script src="/js/pn_query.js"></script>
 </body>
 </html>

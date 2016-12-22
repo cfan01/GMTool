@@ -4595,7 +4595,7 @@ function queryResult() {
     s+='</table>';
   }
   $('#searchresult').html(s);
-  initVueInstance();
+  //initVueInstance();
 }
 
 //var app=null;
@@ -4623,6 +4623,8 @@ function setVueInstanceData(n,q) {
 	if(n==2)
 	  app.rows=q;
 	//alert('app.title_rows_length = '+app.title_rows_length);
+	if(n==3)
+	  app.countOfPage=q;
 }
 
 //function initVueInstance(qData,qFields) {

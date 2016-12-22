@@ -1,4 +1,30 @@
 ﻿<% include includer.html %>
+<style>
+select {
+ border:2px solid #9A9A9A;
+}
+select option span {
+ color:red;
+}
+.redText {
+ color:red;
+}
+.greenText {
+ color:green;
+}
+.blueText {
+ color:blue;
+}
+[type="checkbox"]+label {
+ padding-left:25px;
+}
+label {
+ color: #000000;
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+ padding-left: 25px;
+}
+</style>
 
 <body>
 <!-- ================================= top ===================================================== -->
@@ -7,20 +33,152 @@
 <% include menu.html %>
 <!-- ================================= content ================================================= -->
   <div class="inside single">
-  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
-    <tbody>
-        <tr>
-            <td style="text-align:center; vertical-align: top;"> 這是 <%= Content %> 頁面!
-            </td>
-        </tr>
-    </tbody>
-  </table>
-  <br />
+    <div id="basicformModal" style="text-align:left"><%= Content %></div><!--<hr id="line-content">-->
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>篩選條件</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <div id="filterLists">
+            <table cellspacing=0 cellpadding=0>
+              <tr id="switch_querytimetable" style="display:;">
+                <td id='querytimetable'></td>
+              </tr>
+              <tr id="switch_gametime_quick" style="display:none;">
+                <td style="padding:0;">
+                  <table cellspacing=0 cellpadding=0 width="100%" border=0>
+                    <tr>
+                      <td style="width:15%;">&nbsp;</td>
+                      <td style="font-weight:bold;text-align:left;">
+                      	<div style="float:left;width:4%;">&nbsp;</div>
+                      	<div style="float:left;width:46%;">
+                      		<div>
+                      			<div style="float:left;width:24%;">
+                              <a href="javascript:;" id="1hourago" class="wrapper"><span class="t9">1時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:24%;">
+                              <a href="javascript:;" id="6hourago" class="wrapper"><span class="t9">6時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                              <a href="javascript:;" id="today" class="wrapper"><span class="t8">今日</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="this_week" class="wrapper"><span class="t8">本週</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="this_month" class="wrapper"><span class="t8">本月</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      		</div>
+                      		<div>
+                      			<div style="float:left;width:24%;">
+                      				<a href="javascript:;" id="3hourago" class="wrapper"><span class="t9">3時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:24%;">
+                      				<a href="javascript:;" id="12hourago" class="wrapper"><span class="t9">12時前</span><img id="img2" src="/images/button_6blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="yesterday" class="wrapper"><span class="t8">昨日</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="last_week" class="wrapper"><span class="t8">上週</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      			<div style="float:left;width:15%;">
+                      				<a href="javascript:;" id="last_month" class="wrapper"><span class="t8">上月</span><img id="img2" src="/images/button_2blue.png"></a>
+                      			</div>
+                      		</div>
+                      	</div>
+                      	<!--<div style="float:left;width:20%;">&nbsp;</div>-->
+                      	<div style="float:left;width:50%;">&nbsp;</div>
+    	     				    </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr id="switch_aid" style="display:;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<!--<td style="width:15%;">&nbsp;</td>-->
+                			<td style="font-weight:bold;text-align:left;width:15%;">
+                	      <div style="float:left;width:100%;">
+              		        <input type="radio" id="filter_aid" name="filter" value="aid" checked>
+               		        <label for="filter_aid">GBID</label>
+               		      </div>
+               		    </td>
+               		    <td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:38%;">
+                	      	<input type="text" name="aid" id='aid' value="" size="40%" style="width:100%">
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+              <tr id="switch_nickname" style="display:;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<!--<td style="width:15%;">&nbsp;</td>-->
+                			<td style="font-weight:bold;text-align:left;width:15%;">
+                	      <div style="float:left;width:100%;">
+              		        <input type="radio" id="filter_nickname" name="filter" value="nickname">
+               		        <label for="filter_nickname">暱稱</label>
+               		      </div>
+               		    </td>
+               		    <td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:38%;">
+                	      	<input type="text" name="nickname" id='nickname' value="" size="40%" style="width:100%">
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+              <tr id="switch_thenvip" style="display:;">
+                <td style="padding:0;">
+                	<table>
+                		<tr>
+                			<!--<td style="width:15%;">&nbsp;</td>-->
+                			<td style="font-weight:bold;text-align:left;width:15%;">
+                	      <div style="float:left;width:100%;">當時VIP</div>
+               		    </td>
+               		    <td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:38%;">
+                          <select id="sel_thenvip">
+                            <option value="all">所有</option>
+                            <option value="normal">一般</option>
+                            <option value="whitediamond">白鑽</option>
+                            <option value="bluediamond">藍鑽</option>
+                            <option value="goldendiamond">金鑽</option>
+                            <option value="reddiamond">紅鑽</option>
+                          </select>
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        <br />
+        </div>
+      </li>
+    </ul>
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+<% include query_table.html %>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+  <br/>
   </div>
  </div>
 </div>
 
 <!-- ================================= bottom =========================================================== -->
 <% include footer.html %>
+<!--<script src="/js/filesaver.min.js"></script>
+<script src="/js/tableexport.min.js"></script>-->
+<!--<script src="/js/accounting.min.js"></script>-->
+<script src="/js/jquery.tabletoCSV.js"></script>
+<script src="/js/selectbox.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/historyvipmember.js"></script>
 </body>
 </html>

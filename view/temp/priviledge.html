@@ -38,6 +38,10 @@
   }
   #pagePrivTable tbody tr td {
   	padding: 0 2px;
+  	/*height:30px;*/
+  }
+  .blue {
+    background-color: #0011AA;
   }
   .btn {
     background-color: #287B00;
@@ -110,6 +114,9 @@
   .width_20pa {
   	width:20%;
   }
+  .width_100pa {
+  	width:100%;
+  }
 </style>
 
 <body>
@@ -179,12 +186,12 @@
         <div id="classifyPrivModal" style="text-align:left">classifyPrivModal</div>
         <div id="_idPrivModal" style="display:none;">_idPrivModal</div>
         <ul class="collapsible" data-collapsible="accordion">
-          <li>
-            <div class="collapsible-header active"><i class="material-icons">play_arrow</i>報表欄位查看權限設定</div>
+          <!--<li>
+            <div class="collapsible-header active"><i class="material-icons">play_arrow</i>頁面欄位查看權限設定</div>
             <div id="rf_fieldPrivModal" class="collapsible-body" style="text-align:center;padding-right:18px;"></div>
-          </li>
+          </li>-->
           <li>
-            <div class="collapsible-header"><i class="material-icons">play_arrow</i>頁面進入權限設定</div>
+            <div class="collapsible-header active"><i class="material-icons">play_arrow</i>頁面欄位查看權限設定</div>
             <div id="pagePrivModal" class="collapsible-body" style="text-align:center;padding-right:18px;">
               <table id="pagePrivTable" class="bordered" border="0" cellpadding="0" cellspacing="0" style="width: 950px;" bgcolor='#ffffff'>
                 <thead>
@@ -198,43 +205,110 @@
                        	 <table>
                        	 	 <tr>
                        	 	 	 <td>
-                       	 	 	 	<div>
-                       	 	 	 		<input type="radio" id="backend_all" name="backend_all"><label for="backend_all" class="width_12pa">全選</label><br>
-                       	 	 	 		<a id="backend_management" class="btn width_12pa">後台管理</a>
-                       	 	 	 	</div>
+                       	 	 	 	 <div style="padding-top:5px;">
+                       	 	 	 	 	<a id="backend_management" class="btn width_100pa blue">後台管理</a>
+                       	 	 	 	 </div>
+                       	 	 	 	 <div>
+                       	 	 	 	 	<input type="radio" id="backend_all" name="backend_radio" value="backend_all"><label for="backend_all" class="width_12pa">全選</label>
+                       	 	 	 	 	<input type="radio" id="backend_individual" name="backend_radio" value="backend_individual"><label for="backend_individual" class="width_12pa">個別設定</label>
+                       	 	 	 	 	<hr>
+                       	 	 	 	 </div>
                        	 	 	 </td>
                        	 	 </tr>
                        	 	 <tr>
                        	 	 	 <td>
                        	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
-                       	 	 	 	  <input type="checkbox" id="backend_home_q" name="backend_home_q">查
+                       	 	 	 	 <input type="checkbox" id="backend_home_q" name="backend_home_q">進入
                        	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<a id="backend_home" class="btn width_12pa">首頁</a>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<table id="table_home" style="border:1px solid #000000;">
+                       	 	 	 		<tr>
+                       	 	 	 			<th style="background-color:#CCCC99;">遊戲狀況欄位查看權限</th>
+                       	 	 	 		</tr>
+                       	 	 	 		<tr>
+                       	 	 	 			<td>
+                       	 	 	 				<div style="height:40px;padding:10px;">
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_people" name="backend_home_people">人數</div>
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_tester" name="backend_home_tester">測試人數</div>
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_chargepoints" name="backend_home_chargepoints">押分</div>
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_finalwinlose" name="backend_home_finalwinlose">最後輸贏</div>
+                       	 	 	 				  <div style="float:left;width:20%;"></div>
+                       	 	 	 				</div>
+                       	 	 	 			</td>
+                       	 	 	 		</tr>
+                       	 	 	 		<tr>
+                       	 	 	 			<th style="background-color:#CCCC99;">本日營運數據欄位查看權限</th>
+                       	 	 	 		</tr>
+                       	 	 	 		<tr>
+                       	 	 	 			<td>
+                       	 	 	 				<div style="height:40px;padding:10px;">
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_totallogin" name="backend_home_totallogin">總登入人數-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_registers" name="backend_home_registers">註冊人數-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_pcu" name="backend_home_pcu">最高在線(PCU)-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_acu" name="backend_home_acu">平均在線(ACU)-今日數據</div>
+                       	 	 	 				</div>
+                       	 	 	 				<div style="height:40px;padding:10px;">
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_dau" name="backend_home_dau">活躍人數(DAU)-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_giftamount" name="backend_home_giftamount">儲值金額NT$-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_pointGc" name="backend_home_pointGc">轉點G幣-今日數據</div>
+                       	 	 	 				</div>
+                       	 	 	 			</td>
+                       	 	 	 		</tr>
+                       	 	 	 	</table>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
                        	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
                        	 	 	 	  <div style="width:50%;float:left;">
-                       	 	 	 	    <input type="checkbox" id="backend_priviledge_q" name="backend_priviledge_q">查
+                       	 	 	 	    <input type="checkbox" id="backend_priviledge_q" name="backend_priviledge_q">進入
                        	 	 	 	  </div>
                        	 	 	 	  <div style="width:50%;float:left;">
                        	 	 	 	    <input type="checkbox" id="backend_priviledge_s" name="backend_priviledge_s">設
                        	 	 	 	  </div>
                        	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	<td>
+                       	 	 		<a id="backend_priviledge" class="btn width_12pa">權限設置</a>
+                       	 	 	</td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	<td>
                        	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
                        	 	 	 	  <div style="width:50%;float:left;">
-                       	 	 	 	    <input type="checkbox" id="backend_account_management_q" name="backend_account_management_q">查
+                       	 	 	 	    <input type="checkbox" id="backend_account_management_q" name="backend_account_management_q">進入
                        	 	 	 	  </div>
                        	 	 	 	  <div style="width:50%;float:left;">
                        	 	 	 	    <input type="checkbox" id="backend_account_management_s" name="backend_account_management_s">設
                        	 	 	 	  </div>
                        	 	 	 	</div>
+                       	 	 	</td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	  <td>
+                       	 	  	<a id="backend_account_management" class="btn width_12pa">帳號管理</a>
+                       	 	  </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	<td>
                        	 	 	 	<div class="width_12pa" style="float:left;">
-                       	 	 	 	  <input type="checkbox" id="backend_log_q" name="backend_log_q"><span id="backend_log_q">查</span>
+                       	 	 	 	  <input type="checkbox" id="backend_log_q" name="backend_log_q"><span id="backend_log_q">進入</span>
                        	 	 	 	</div>
-                       	 	 	 	<div style="clear:both;">
-                       	 	 	 	  <a id="backend_home" class="btn width_12pa">首頁</a>
-                       	 	 	 	  <a id="backend_priviledge" class="btn width_12pa">權限設置</a>
-                       	 	 	 	  <a id="backend_account_management" class="btn width_12pa">帳號管理</a>
+                       	 	 	</td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 	<td>
                        	 	 	 	  <a id="backend_log" class="btn width_12pa">後台操作log</a>
-                       	 	 	 	  <hr>
-                       	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
                        	 </table>
@@ -244,18 +318,119 @@
                        <td>
                        	 <table>
                        	 	 <tr>
-                       	 	 	 <td>
+                       	 	 	 <td colspan=2>
+                       	 	 	 	<div style="padding-top:5px;">
+                       	 	 	 		<a id="member_related" class="btn width_100pa blue">會員相關</a>
+                       	 	 	 	</div>
                        	 	 	 	<div>
-                       	 	 	 		<input type="radio" id="member_all" name="member_all"><label for="member_all" class="width_17pa">全選</label><br>
-                       	 	 	 		<a id="member_related" class="btn width_17pa">會員相關</a>
+                       	 	 	 		<input type="radio" id="member_all" name="member_radio"><label for="member_all" class="width_12pa">全選</label>
+                       	 	 	 		<input type="radio" id="member_individual" name="member_radio"><label for="member_individual" class="width_12pa">個別設定</label>
+                       	 	 	 		<hr>
                        	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
                        	 	 <tr>
                        	 	 	 <td>
+                       	 	 	 	<div class="width_12pa" style="float:left;margin-right:4px;">
+                       	 	 	 	 <input type="checkbox" id="member_report_q" name="member_report_q">進入
+                       	 	 	 	</div>
+                       	 	 	 	<div id="div_br" class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="basic_report_q" name="basic_report_q">進入
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="basic_report_s" name="basic_report_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div id="div_gi" class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="game_info_q" name="game_info_q">進入
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="game_info_s" name="game_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div id="div_gift" class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="gift_info_q" name="gift_info_q">進入
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="gift_info_s" name="gift_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div id="div_point" class="width_17pa" style="float:left;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="point_info_q" name="point_info_q">進入
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="point_info_s" name="point_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 	<div id="div_login" class="width_17pa" style="float:left;margin-right:4px;">
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="login_info_q" name="login_info_q">進入
+                       	 	 	 	  </div>
+                       	 	 	 	  <div style="width:50%;float:left;">
+                       	 	 	 	    <input type="checkbox" id="login_info_s" name="login_info_s">設
+                       	 	 	 	  </div>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<div style="clear:both;">
+                       	 	 	 	  <a id="member_report" class="btn width_12pa">會員報表查詢</a>
+                       	 	 	 	  <a id="basic_report" class="btn width_17pa">基本報表查詢</a>
+                       	 	 	 	  <a id="game_info" class="btn width_17pa">會員遊戲概況查詢</a>
+                       	 	 	 	  <a id="gift_info" class="btn width_17pa">會員儲值概況查詢</a>
+                       	 	 	 	  <a id="point_info" class="btn width_17pa">會員轉點概況查詢</a>
+                       	 	 	 	  <a id="login_info" class="btn width_17pa">會員登入概況查詢</a>
+                       	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <tr>
+                       	 	 	 <td>
+                       	 	 	 	<table id="table_home" style="border:1px solid #000000;">
+                       	 	 	 		<tr>
+                       	 	 	 			<th style="background-color:#CCCC99;">基本報表欄位查看權限</th>
+                       	 	 	 		</tr>
+                       	 	 	 		<tr>
+                       	 	 	 			<td>
+                       	 	 	 				<div style="height:40px;padding:10px;">
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_people" name="backend_home_people">人數</div>
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_tester" name="backend_home_tester">測試人數</div>
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_chargepoints" name="backend_home_chargepoints">押分</div>
+                       	 	 	 				  <div style="float:left;width:20%;"><input type="checkbox" id="backend_home_finalwinlose" name="backend_home_finalwinlose">最後輸贏</div>
+                       	 	 	 				  <div style="float:left;width:20%;"></div>
+                       	 	 	 				</div>
+                       	 	 	 			</td>
+                       	 	 	 		</tr>
+                       	 	 	 		<tr>
+                       	 	 	 			<th style="background-color:#CCCC99;">會員遊戲概況欄位查看權限</th>
+                       	 	 	 		</tr>
+                       	 	 	 		<tr>
+                       	 	 	 			<td>
+                       	 	 	 				<div style="height:40px;padding:10px;">
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">總登入人數-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">註冊人數-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">最高在線(PCU)-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">平均在線(ACU)-今日數據</div>
+                       	 	 	 				</div>
+                       	 	 	 				<div style="height:40px;padding:10px;">
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">活躍人數(DAU)-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">儲值金額NT$-今日數據</div>
+                       	 	 	 				  <div style="float:left;width:25%;"><input type="checkbox" id="backend_home_q" name="backend_home_q">轉點G幣-今日數據</div>
+                       	 	 	 				</div>
+                       	 	 	 			</td>
+                       	 	 	 		</tr>
+                       	 	 	 	</table>
+                       	 	 	 </td>
+                       	 	 </tr>
+                       	 	 <!--<tr>
+                       	 	 	 <td>
                        	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
                        	 	 	 	  <div style="width:50%;float:left;">
-                       	 	 	 	    <input type="checkbox" id="member_report_q" name="member_report_q">查
+                       	 	 	 	    <input type="checkbox" id="member_report_q" name="member_report_q">進入
                        	 	 	 	  </div>
                        	 	 	 	  <div style="width:50%;float:left;">
                        	 	 	 	    <input type="checkbox" id="member_report_s" name="member_report_s">設
@@ -288,6 +463,8 @@
                        	 	 	 	    <input type="checkbox" id="member_suspended_s" name="member_suspended_s">設
                        	 	 	 	  </div>
                        	 	 	 	</div>
+                       	 	 	 </td>
+                       	 	 	 <td>
                        	 	 	 	<div style="clear:both;">
                        	 	 	 	  <a id="member_report" class="btn width_17pa">會員報表查詢</a>
                        	 	 	 	  <a id="member_settings" class="btn width_17pa">會員設定</a>
@@ -296,7 +473,7 @@
                        	 	 	 	  <a id="member_suspended" class="btn width_17pa">停權查詢</a>
                        	 	 	 	</div>
                        	 	 	 </td>
-                       	 	 </tr>
+                       	 	 </tr>-->
                        	 	 <tr>
                        	 	 	 <td>
                        	 	 	 	<div class="width_17pa" style="float:left;margin-right:4px;">
@@ -436,7 +613,7 @@
                        	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
                        	 	 	 	  <a id="login_history" class="btn width_17pa">個人登入歷程查詢</a>
                        	 	 	 	  <a class="btn width_17pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
-                       	 	 	 	  <hr>
+                       	 	 	 	  <!--<hr>-->
                        	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
@@ -448,9 +625,13 @@
                        	 <table>
                        	 	 <tr>
                        	 	 	 <td>
+                       	 	 	 	<div style="padding-top:5px;">
+                       	 	 	 		<a id="game_related" class="btn width_100pa blue">遊戲相關</a>
+                       	 	 	 	</div>
                        	 	 	 	<div>
-                       	 	 	 		<input type="radio" id="game_all" name="game_all"><label for="game_all" class="width_12pa">全選</label><br>
-                       	 	 	 		<a id="game_related" class="btn">遊戲相關</a>
+                       	 	 	 		<input type="radio" id="game_all" name="game_radio"><label for="game_all" class="width_12pa">全選</label>
+                       	 	 	 		<input type="radio" id="game_individual" name="game_radio"><label for="game_individual" class="width_12pa">個別設定</label>
+                       	 	 	 		<hr>
                        	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
@@ -730,7 +911,7 @@
                        	 	 	 	  <a id="robot_stress_test" class="btn width_10pa">設定壓測</a>
                        	 	 	 	  <a class="btn width_7pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
                        	 	 	 	  <a class="btn width_8pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
-                       	 	 	 	  <hr>
+                       	 	 	 	  <!--<hr>-->
                        	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
@@ -742,10 +923,14 @@
                        	 <table>
                        	 	 <tr>
                        	 	 	 <td>
-                       	 	 	 	<div>
-                       	 	 	 		<input type="radio" id="business_all" name="business_all"><label for="business_all" class="width_12pa">全選</label><br>
-                       	 	 	 		<a id="business_related" class="btn">營運相關</a>
+                       	 	 	 	<div style="padding-top:5px;">
+                       	 	 	 		<a id="business_related" class="btn width_100pa blue">營運相關</a>
                        	 	 	 	</div>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="business_all" name="business_radio"><label for="business_all" class="width_12pa">全選</label>
+                       	 	 	 		<input type="radio" id="business_individual" name="business_radio"><label for="business_individual" class="width_12pa">個別設定</label>
+                       	 	 	 		<hr>
+                      	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
                        	 	 <tr>
@@ -798,7 +983,7 @@
                        	 	 	 	  <a id="retention" class="btn width_12pa">留存率</a>
                        	 	 	 	  <a id="numberloss" class="btn width_12pa">流失數</a>
                        	 	 	 	  <a id="reflux" class="btn width_12pa">回流數</a>
-                       	 	 	 	  <hr>
+                       	 	 	 	  <!--<hr>-->
                        	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
@@ -810,11 +995,14 @@
                        	 <table>
                        	 	 <tr>
                        	 	 	 <td>
-                       	 	 	 	<div>
-                       	 	 	 		<input type="radio" id="announcement_all" name="announcement_all"><label for="announcement_all" class="width_12pa">全選</label><br>
-                       	 	 	 		<a id="announcement_management" class="btn">公告管理</a>
-                       	 	 	 		<!--<hr>-->
+                       	 	 	 	<div style="padding-top:5px;">
+                       	 	 	 		<a id="announcement_management" class="btn width_100pa blue">公告管理</a>
                        	 	 	 	</div>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="announcement_all" name="announcement_radio"><label for="announcement_all" class="width_12pa">全選</label>
+                       	 	 	 		<input type="radio" id="announcement_individual" name="announcement_radio"><label for="announcement_individual" class="width_12pa">個別設定</label>
+                       	 	 	 		<!--<hr>-->
+                      	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
                        	 	 <tr>
@@ -955,7 +1143,7 @@
                        	 	 	 	  <a id="winner_marquee" class="btn width_12pa">得獎跑馬燈</a>
                        	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
                        	 	 	 	  <a class="btn width_12pa" style="box-shadow:none;background-color: #ffffff;">&nbsp;</a>
-                       	 	 	 	  <hr>
+                       	 	 	 	  <!--<hr>-->
                        	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
@@ -967,11 +1155,14 @@
                        	 <table>
                        	 	 <tr>
                        	 	 	 <td>
-                       	 	 	 	<div>
-                       	 	 	 		<input type="radio" id="chat_all" name="chat_all"><label for="chat_all" class="width_12pa">全選</label><br>
-                       	 	 	 		<a id="chat_customerservice" class="btn">聊天客服</a>
-                       	 	 	 		<!--<hr>-->
+                       	 	 	 	<div style="padding-top:5px;">
+                       	 	 	 		<a id="chat_customerservice" class="btn width_100pa blue">聊天客服</a>
                        	 	 	 	</div>
+                       	 	 	 	<div>
+                       	 	 	 		<input type="radio" id="chat_all" name="chat_radio"><label for="chat_all" class="width_12pa">全選</label>
+                       	 	 	 		<input type="radio" id="chat_individual" name="chat_radio"><label for="chat_individual" class="width_12pa">個別設定</label>
+                       	 	 	 		<!--<hr>-->
+                      	 	 	 	</div>
                        	 	 	 </td>
                        	 	 </tr>
                        	 	 <tr>
@@ -1564,35 +1755,133 @@
     }
   });
 */
-  $('input[type=radio][name=backend_all]').click(function()
+var backend_items=['backend_home_q','backend_priviledge_q','backend_priviledge_s','backend_account_management_q','backend_account_management_s','backend_log_q',
+                   'backend_home_people','backend_home_tester','backend_home_chargepoints','backend_home_finalwinlose','backend_home_totallogin','backend_home_registers',
+                   'backend_home_pcu','backend_home_acu','backend_home_dau','backend_home_giftamount','backend_home_pointGc'];
+var member_items=['member_report_q','member_report_s','member_settings_q','member_settings_s','member_treasure_q','member_treasure_s','member_history_q','member_suspended_q','member_suspended_s'];
+//var backend_items=['backend_home_q','backend_priviledge_q','backend_priviledge_s','backend_account_management_q','backend_account_management_s','backend_log_q'];
+//var backend_items=['backend_home_q','backend_priviledge_q','backend_priviledge_s','backend_account_management_q','backend_account_management_s','backend_log_q'];
+//var backend_items=['backend_home_q','backend_priviledge_q','backend_priviledge_s','backend_account_management_q','backend_account_management_s','backend_log_q'];
+
+var table_lists={
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+	"backend_all": "table_home",
+};
+
+$(function(){
+	
+  function ifRadioChecked(id,items){
+	 if($('#'+id).is(':checked')) {
+     $.each(items, function(index,value) {
+       //alert(index+" : "+value);
+       $("#"+value).prop('checked', true);
+     });
+   }
+   else{
+     $.each(items, function(index,value) {
+       //alert(index+" : "+value);
+       $("#"+value).prop('checked', false);
+     });
+   }	
+	}
+  $('input[type=radio][name=backend_radio]').change(function()
   {
-  	$("#backend_home_q").prop('checked', true);
-  	$("#backend_priviledge_q").prop('checked', true);
-  	$("#backend_priviledge_s").prop('checked', true);
-  	$("#backend_account_management_q").prop('checked', true);
-  	$("#backend_account_management_s").prop('checked', true);
-  	$("#backend_log_q").prop('checked', true);
-/*
-     if (this.value == '所有')
-     {
-        $.each(subject_chkbox_id_lists, function(i,v)
-        {
-          $("#backend_home_q").prop('checked', true);
-          $("#"+v).prop("disabled", true);
-        });
-     }
-     else if (this.value == '個別')
-     {
-        $.each(subject_chkbox_id_lists, function(i,v)
-        {
-          $("#"+v).prop('checked', false);
-          $("#"+v).prop("disabled", false);
-        });
-     }
-*/
+  	ifRadioChecked('backend_all',backend_items);
+    if (this.value == 'backend_all')
+    {
+    	  $("#table_home").css("display","");
+    }
+    else
+    {
+    	  $("#table_home").css("display","none");
+    }
+  	//  $("#backend_home_q").prop('checked', true);
+  	//  $("#backend_priviledge_q").prop('checked', true);
+  	//  $("#backend_priviledge_s").prop('checked', true);
+  	//  $("#backend_account_management_q").prop('checked', true);
+  	//  $("#backend_account_management_s").prop('checked', true);
+  	//  $("#backend_log_q").prop('checked', true);
+    //}
+    //else// if (this.value == 'backend_individual')
+    //{
+  	//  $("#backend_home_q").prop('checked', false);
+  	//  $("#backend_priviledge_q").prop('checked', false);
+  	//  $("#backend_priviledge_s").prop('checked', false);
+  	//  $("#backend_account_management_q").prop('checked', false);
+  	//  $("#backend_account_management_s").prop('checked', false);
+  	//  $("#backend_log_q").prop('checked', false);
+    //}
   });
 
+  if($('#backend_priviledge_q').is(":checked")) {
+  	//alert("checked");
+  	$('#backend_priviledge_s').prop('disabled', false);
+  }
+  else{
+    $("#backend_priviledge_s").prop('disabled', true);
+    //$("#backend_priviledge_s").prop('checked', false);
+  }
+  if($('#backend_account_management_q').is(":checked")) {
+  	//alert("checked");
+  	$('#backend_account_management_s').prop('disabled', false);
+  }
+  else{
+    $("#backend_account_management_s").prop('disabled', true);
+    //$("#backend_account_management_s").prop('checked', false);
+  }
 
+  $('#backend_priviledge_q').change(function()
+  {
+    if($(this).is(":checked")) {
+    	//alert("checked");
+    	$('#backend_priviledge_s').prop('disabled', false);
+    }
+    else{
+  	  $("#backend_priviledge_s").prop('disabled', true);
+  	  //$("#backend_priviledge_s").prop('checked', false);
+    }
+  });
+  $('#backend_account_management_q').change(function()
+  {
+    if($(this).is(":checked")) {
+    	//alert("checked");
+    	$('#backend_account_management_s').prop('disabled', false);
+    }
+    else{
+  	  $("#backend_account_management_s").prop('disabled', true);
+  	  //$("#backend_account_management_s").prop('checked', false);
+    }
+  });
+  $('#backend_individual').prop('checked', true);
+  ifRadioChecked('backend_all',backend_items);
+  if($('#backend_home_q').is(":checked")) {
+ 	  $("#table_home").css("display","");
+  }
+  else{
+ 	  $("#table_home").css("display","none");
+ 	}
+  $('#backend_home_q').change(function()
+  {
+    if($('#backend_home_q').is(":checked")) {
+  	  $("#table_home").css("display","");
+    }
+    else{
+  	  $("#table_home").css("display","none");
+  	}
+  });
+});
 </script>
 </body>
 </html>

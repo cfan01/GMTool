@@ -1,4 +1,107 @@
 ﻿<% include includer.html %>
+<style>
+#temp .article .inside.single{
+  padding-top: 0px;
+  padding-left: 0px;
+  background-color: #cccccc;
+  /*padding-bottom: 0px;*/
+}
+label {
+  color: #000000;
+}
+[type="checkbox"]+label {
+  padding-left: 23px;
+  width: 17%;
+}
+#gameConditionSetting [type="checkbox"]+label {
+  width: auto;
+}
+#newintelligence [type="checkbox"]+label {
+  width: auto;
+}
+#temp .article .inside {
+	background-color: #ffffff;
+}
+.collapsible {
+  margin: 0px;
+}
+div#queryapp {
+	width:100%;
+	padding-left:20px;
+	background-color: #cccccc;
+}
+#subjectquery .collapsible-header, #subjectquery .collapsible-body {
+  background-color: #ffffff;
+}
+/*#temp .article {
+  width: 1480px;
+}*/
+input:not([type]), input[type=text] {
+  /*width: 36%;*/
+  width: auto;
+}
+#howmanyscoremachine, #howmanyscoremachine th, #howmanyscoremachine td,
+#game_switch, #game_switch th, #game_switch td,
+#automode_defaultsetting, #automode_defaultsetting th, #automode_defaultsetting td {
+ border: 1px solid black;
+}
+#newintelligence tbody tr td {
+  /*width: 26%;*/
+  font-weight: bold;
+  text-align:right;
+}
+/*#newintelligence tbody tr:nth-child(n+1){
+	width: 26%;
+} 
+#newintelligence tbody tr:nth-child(n+2){
+	width: 24%;
+} 
+#newintelligence tbody tr:nth-child(n+3){
+	width: 50%;
+}*/
+#gameConditionSetting tbody tr td {
+  /*width: 35%;*/
+  font-weight: bold;
+}
+textarea {
+  /*width: 360px;*/
+  height: 80px;
+}
+/*#alert_desc {
+  width: 455px;
+  height: 150px;
+}*/
+#table-wrapper {
+  position:relative;
+}
+#table-scroll {
+  /*height:150px;*/
+  height:195px;
+  overflow:auto;  
+  /*margin-top:20px;*/
+}
+#table-wrapper table {
+  width:100%;   
+}
+#table-wrapper table * {
+  /*background:yellow;*/
+  /*color:black;*/
+  /*padding-left:0;*/
+}
+#table-wrapper table thead th .text {
+  /*position:absolute;*/
+  top:-25px;
+  z-index:2;
+  height:25px;
+  width:47%;
+  /*border:1px solid red;*/
+  background-color:#666666;
+  color:white;
+}
+/*td, th {
+  padding:0;
+}*/
+</style>
 
 <body>
 <!-- ================================= top ===================================================== -->
@@ -7,20 +110,84 @@
 <% include menu.html %>
 <!-- ================================= content ================================================= -->
   <div class="inside single">
-  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
-    <tbody>
-        <tr>
-            <td style="text-align:center; vertical-align: top;"> 這是 <%= Content %> 頁面!
-            </td>
-        </tr>
-    </tbody>
-  </table>
-  <br />
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>查詢條件</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; width:950px;" bgcolor='#CCCCCC'>
+            <tr>
+              <td>
+              	<div style="float:left;width:12%;">自動即時更新：</div>
+              	<div style="float:left;">
+              		<input type="radio" id="autoupdate_yes" name="autoupdate" value="yes">
+              		<label for="autoupdate_yes">是</label>&nbsp;&nbsp;&nbsp;
+                  <input type="radio" id="autoupdate_no" name="autoupdate" value="no" checked>
+                  <label for="autoupdate_no">否</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              	<div style="float:left;width:12%;">遊戲主題：</div>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="subject_all" name="gamesubject" value="所有">
+             		  <label for="subject_all">所有</label>
+             		</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              	<div style="float:left;width:12%;">&nbsp;</div>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="subject_individual" name="gamesubject" value="個別" checked>
+             		  <label for="subject_individual">個別</label>
+             		</div>
+              	<div id="game_subject_lists" style="float:left;width:78%;"></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              	<div style="float:left;width:12%;">VIP篩選：</div>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="vipfilter_all" name="vipfilter" value="所有">
+             		  <label for="vipfilter_all">所有</label>
+             		</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              	<div style="float:left;width:12%;">&nbsp;</div>
+              	<div style="float:left;width:10%;">
+            		  <input type="radio" id="vipfilter_individual" name="vipfilter" value="個別" checked>
+             		  <label for="vipfilter_individual">個別</label>
+             		</div>
+              	<div id="vipfilter_lists" style="float:left;width:78%;">
+              		<input type="checkbox" id="normal" class="filled-in" checked><label for="normal" style="width:10%;">一般</label>
+              		<input type="checkbox" id="whitediamond" class="filled-in"><label for="whitediamond" style="width:10%;">白鑽</label>
+              		<input type="checkbox" id="bluediamond" class="filled-in"><label for="bluediamond" style="width:10%;">藍鑽</label>
+              		<input type="checkbox" id="goldendiamond" class="filled-in"><label for="goldendiamond" style="width:10%;">金鑽</label>
+              		<input type="checkbox" id="reddiamond" class="filled-in"><label for="reddiamond" style="width:10%;">紅鑽</label>
+              	</div>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+      </li>
+    </ul>
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+<% include query_table.html %>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+  <br/>
+    </div>
   </div>
- </div>
 </div>
 
 <!-- ================================= bottom =========================================================== -->
 <% include footer.html %>
+<script src="/js/jquery.tabletoCSV.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/realtime_online.js"></script>
 </body>
 </html>

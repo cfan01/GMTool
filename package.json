@@ -9,19 +9,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.4.2",
     "async": "^2.1.4",
     "body-parser": "^1.15.0",
     "client-ip": "^0.2.0",
+    "bson": "^0.5.4",
     "cors": "^2.8.1",
-    "ejs": "latest",
+    "ejs": "^2.5.2",
     "express": "^4.13.4",
     "express-session": "^1.14.2",
     "ip": "^1.1.4",
     "jsonfile": "^2.4.0",
     "mongodb": "2.1.21",
+    "moment": "^2.16.0",
     "my-local-ip": "^1.0.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "quick-local-ip": "^1.0.7"
+    "quick-local-ip": "^1.0.7",
+    "underscore": "^1.8.3"
   }
 }

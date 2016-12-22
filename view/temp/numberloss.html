@@ -1,4 +1,30 @@
 ﻿<% include includer.html %>
+<style>
+select {
+ border:2px solid #9A9A9A;
+}
+select option span {
+ color:red;
+}
+.redText {
+ color:red;
+}
+.greenText {
+ color:green;
+}
+.blueText {
+ color:blue;
+}
+[type="checkbox"]+label {
+ padding-left:25px;
+}
+label {
+ color: #000000;
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+ padding-left: 25px;
+}
+</style>
 
 <body>
 <!-- ================================= top ===================================================== -->
@@ -7,20 +33,78 @@
 <% include menu.html %>
 <!-- ================================= content ================================================= -->
   <div class="inside single">
-  <table border="0" cellpadding="0" cellspacing="0" style="width: 950px;">
-    <tbody>
-        <tr>
-            <td style="text-align:center; vertical-align: top;"> 這是 <%= Content %> 頁面!
+    <div id="formModal" style="text-align:left"><%= Content %></div><!--<hr id="line-content">-->
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">play_arrow</i>篩選條件</div>
+        <div class="collapsible-body" style="text-align:center;">
+          <div id="filterLists">
+            <table cellspacing=0 cellpadding=0>
+              <tr id="switch_querytimetable" style="display:;">
+                <td id='querytimetable'></td>
+              </tr>
+              <tr id="switch_dayloss" style="display:;">
+                <td style="padding:5px;">
+                	<table>
+                		<tr>
+                			<!--<td style="width:15%;">&nbsp;</td>-->
+                			<td style="font-weight:bold;text-align:left;width:12%;">
+                	      <div style="float:left;width:100%;">流失天數：</div>
+               		    </td>
+               		    <td style="font-weight:bold;text-align:left;">
+                	      <div style="float:left;width:8%;">
+                          <select id="sel_dayloss">
+                            <script>
+                              for(var i=1;i<=60;i++)
+                                document.write("<option value="+i+">"+i+"</option>");
+                            </script>
+                          </select>
+               		      </div>
+               		    </td>
+               		  </tr>
+               		</table>
+                </td>
+              </tr>
+            </table>
+          </div>
+        <br />
+        </div>
+      </li>
+    </ul>
+    <!------------------------------------------ Show Simple Query Result Begin ------------------------------------------------------>
+    <div>
+      <div id="div_query" style="padding-right:18px">
+        <table>
+        	<tr>
+        		<td style='border:0'>
+        	     <div id="sformModal" style="width:20%;float:left;text-align:left"><a href="#" class="wrapper" onclick="SimpleQueryResult()"><span class="t1">查詢</span><img id='img1' src='/images/button_2green.png'></a></div>
+        	     <div id="sformModal_str" style="width:80%;float:left;line-height:36px;text-align:right;">請按下查詢；或進行[欄位清單]或[篩選條件]設定後再進行查詢。</div>
             </td>
-        </tr>
-    </tbody>
-  </table>
-  <br />
+          </tr>
+        </table>
+        <div id='div_searchresult'></div>
+      </div>
+    </div>
+    <!------------------------------------------ Show Simple Query Result End --------------------------------------------------------->
+    <!--<div id="div_querymore" style="display:none;">
+      <div id="querymore" style="padding-right:18px"></div>
+    </div>-->
+    <!------------------------------------------ Show Query Subject Result Begin ------------------------------------------------------>
+<% include query_table.html %>
+    <!------------------------------------------ Show Query Subject Result End -------------------------------------------------------->
+  <br/>
   </div>
  </div>
 </div>
 
 <!-- ================================= bottom =========================================================== -->
 <% include footer.html %>
+<!--<script src="/js/filesaver.min.js"></script>
+<script src="/js/tableexport.min.js"></script>-->
+<!--<script src="/js/accounting.min.js"></script>-->
+<script src="/js/jquery.tabletoCSV.js"></script>
+<script src="/js/selectbox.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/numberloss.js"></script>
 </body>
 </html>
