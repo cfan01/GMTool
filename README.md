@@ -1,5 +1,5 @@
 # GMTool
-demo a web page use vue.js and express.js
+demo a web page using vue.js and express.js
 
 ## Required
 - [Bower](http://bower.io/)(Web browser package management)
